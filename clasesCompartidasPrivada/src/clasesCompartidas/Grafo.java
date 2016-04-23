@@ -76,9 +76,26 @@ public class Grafo
 		
 	}
 		
-	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> getRelaciones(String R)
+	public HashMap<Integer,ArrayList<Integer>> getRelaciones(String R)
 	{
-		return null;
+		if (rel.equals("AP")){
+			return this.PA.consultar_OtherPaper();
+		}
+		else if (rel.equals("PA")){
+			return this.PA.consultar_PaperOther();
+		}
+		else if (rel.equals("CP")){
+			return this.PC.consultar_OtherPaper();
+		}
+		else if (rel.equals("PC")){
+			return this.PC.consultar_PaperOther();
+		}
+		else if (rel.equals("TP")){
+			return this.PT.consultar_OtherPaper();
+		}
+		else if (rel.equals("PT")){
+			return this.PT.consultar_PaperOther();
+		}
 		
 	}
 }
