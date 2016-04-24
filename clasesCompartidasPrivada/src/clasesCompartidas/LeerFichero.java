@@ -111,4 +111,13 @@ public class LeerFichero
 		v.setSecond(n);
 		return v;
 	}
+	
+	public static int idMax(HashMap<Integer,String> a)
+	{
+		int idMax = -1;
+		for(int i = 0; i < a.size(); i++){
+			if(Integer.parseInt(a.get(i)) > idMax)idMax = Integer.parseInt(a.get(i));
+		}
+		return idMax;
+	}
 }
