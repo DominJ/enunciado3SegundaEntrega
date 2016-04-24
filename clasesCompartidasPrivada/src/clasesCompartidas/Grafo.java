@@ -76,7 +76,7 @@ public class Grafo
 		
 	}
 		
-	public HashMap<Integer,ArrayList<Integer>> getRelaciones(String R)
+	public HashMap<Integer,ArrayList<Integer>> getRelaciones(String rel)
 	{
 		if (rel.equals("AP")){
 			return this.PA.consultar_OtherPaper();
@@ -93,9 +93,13 @@ public class Grafo
 		else if (rel.equals("TP")){
 			return this.PT.consultar_OtherPaper();
 		}
-		else if (rel.equals("PT")){
+		/*else if (rel.equals("PT")){
+			return this.PT.consultar_PaperOther();
+		}*/
+		else
+		{
+			System.out.println("es el último else podría no ser correcto");
 			return this.PT.consultar_PaperOther();
 		}
-		
 	}
 }
