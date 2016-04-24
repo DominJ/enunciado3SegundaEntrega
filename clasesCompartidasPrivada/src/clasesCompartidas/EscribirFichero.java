@@ -17,9 +17,9 @@ public class EscribirFichero {
 	public static void ReescribirFicheroRelaciones(HashMap<Integer,ArrayList<Integer>> n, int Tipus){
 		try{
 			FileWriter fw;
-			if (Tipus == 0) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_author.txt",false);
-			else if (Tipus == 1) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_conf.txt",false);
-			else  fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper_term.txt",false);
+			if (Tipus == 0) fw = new FileWriter("Set1/paper_author.txt",false);
+			else if (Tipus == 1) fw = new FileWriter("Set1/paper_conf.txt",false);
+			else  fw = new FileWriter("Set1/paper_term.txt",false);
 		    Iterator<Entry<Integer, ArrayList<Integer>>> it = n.entrySet().iterator();
 		    while (it.hasNext()) {
 				Map.Entry<Integer, ArrayList<Integer>> e = it.next();
@@ -39,10 +39,10 @@ public class EscribirFichero {
 	public static void ReescribirFicheroNodos(HashMap<Integer,String> n, int Tipus){
 		try{
 			FileWriter fw;
-			if (Tipus == 0) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/paper.txt",false);
-			else if (Tipus == 1) fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/author.txt",false);
-			else if (Tipus == 2)  fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/conf.txt",false);
-			else fw = new FileWriter("/home2/users/alumnes/1193773/dades/DBLP_four_area/term.txt",false);
+			if (Tipus == 0) fw = new FileWriter("Set1/paper.txt",false);
+			else if (Tipus == 1) fw = new FileWriter("Set1/author.txt",false);
+			else if (Tipus == 2)  fw = new FileWriter("Set1/conf.txt",false);
+			else fw = new FileWriter("Set1/term.txt",false);
 		    Iterator<Entry<Integer,String>> it = n.entrySet().iterator();
 		    while (it.hasNext()) {
 				Map.Entry<Integer, String> e = it.next();
