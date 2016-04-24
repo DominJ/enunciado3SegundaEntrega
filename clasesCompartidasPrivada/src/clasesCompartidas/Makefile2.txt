@@ -1,0 +1,44 @@
+
+
+    all: ConjuntoNodos.class ConjuntoResultados.class CtrlDominio.class CtrlHetesim.class LeerFichero.class EscribirFicheros.class Relaciones.class Grafo.class Pair.class
+
+    ConjuntoNodos.class: ConjuntoNodos.java
+
+        javac -d . -classpath . ConjuntoNodos.java
+
+    ConjuntoResultadps.class: ConjuntoResultados.java
+
+        javac -d . -classpath . ConjuntoResultados.java
+
+    CtrlHetesim.class: CtrlHetesim.java
+
+        javac -d . -classpath . CtrlHetesim.java
+
+    CtrlDominio.class: CtrlDominio.java
+
+        javac -d . -classpath . CtrlDominio.java
+
+    LeerFichero.class: LeerFichero.java
+
+        javac -d . -classpath . LeerFichero.java
+	
+    EscribirFichero.class: 	EscribirFichero.java
+
+        javac -d . -classpath . EscribirFichero.java
+
+    Relaciones.class: Relaciones.java
+
+        javac -d . -classpath . Relaciones.java
+
+
+    Grafo.class: Grafo.java
+
+        javac -d . -classpath . Grafo.java
+
+    Pair.class: Pair.java
+
+        javac -d . -classpath . Pair.java
+
+    clean:
+
+        rm -f *.class 
