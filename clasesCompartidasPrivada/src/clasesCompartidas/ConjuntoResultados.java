@@ -15,7 +15,7 @@ public class ConjuntoResultados {
 	
 	public ConjuntoResultados() {
 		resultados=new HashMap<String, HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
-		IR= new Pair<Double,Double>((double) 0, 1.01);
+		IR= new Pair<Double,Double>((double) 0,(double)1);
 	}
 	
 	public void setIntervalo(Double b, Double e) {
@@ -44,7 +44,7 @@ public class ConjuntoResultados {
 
 	//Pre: Se han anadido los filtros insertados por el usuario a la clase
 	//Post: Devuelve un map ordenado preparado para imprimir, donde la key es la relevancia del nodo j, y el valor es el id de j
-	public ArrayList<Pair <Double, Integer>> getResultadoAutor(String path, int id){
+	public ArrayList<Pair <Double, Integer>> getResultadoNodo(String path, int id){
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> M=resultados.get(path);
 		ArrayList<Pair<Integer,Double>> m1= M.get(id);
 		ArrayList <Pair<Double, Integer>> R = new ArrayList<Pair<Double, Integer>>();
@@ -62,6 +62,8 @@ public class ConjuntoResultados {
 			}
 			
 		});
+		IR.setFirst((double)0);
+		IR.setSecond((double)1);
 		return R;
 	}
 	

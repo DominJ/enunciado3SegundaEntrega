@@ -12,10 +12,33 @@ import Pair.Pair;
 
 public class CtrlDominio
 { 
+	private static void escribir_resultado(ArrayList<Pair <Double,Integer>> a, Grafo gh, int type) {
+		System.out.println("Rank		Nodo		Relevancia");
+		for (int i=0; i<a.size(); ++i) {
+			Pair<Double, Integer> pa=a.get(i);
+			System.out.print(i+1 +"		"+ gh.consultarNodo(type, pa.getSecond())+ "		");
+			System.out.printf("%2f\n", pa.getFirst());
+		}
+		System.out.println();
+	}
+	
+	private static int TypePosPath(String path, int pos) {
+		if (path.charAt(pos)=='P') return 0;
+		else if (path.charAt(pos)=='A') return 1;
+		else if (path.charAt(pos)=='C') return 2;
+		else  return 3;
+	}
+	
 	public static void main(String args[] )throws IOException
 	{ 
 		Grafo gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
 		ConjuntoResultados cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
+		cr.anadirResultado("AP", CtrlHetesim.HeteSim("AP", gh));
+		cr.anadirResultado("PA", CtrlHetesim.HeteSim("PA", gh));
+		cr.anadirResultado("PC", CtrlHetesim.HeteSim("PC", gh));
+		cr.anadirResultado("CP", CtrlHetesim.HeteSim("CP", gh));
+		cr.anadirResultado("TP", CtrlHetesim.HeteSim("TP", gh));
+		cr.anadirResultado("PT", CtrlHetesim.HeteSim("PT", gh));
 		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); 
 
@@ -31,7 +54,6 @@ do{
 		System.out.print("2.- Realizar una consulta\n" ); 
 		System.out.print("3.- Buscar en el historial\n" );
 		System.out.print("4.- Salir\n" );
-	
 		//Obtenemos la opci√≥n seleccionada por el user
 		op=Integer.parseInt(in.readLine());
 	
@@ -158,12 +180,23 @@ do{
 						String path;
 						System.out.println("Introduce path:");
 						path = sc.nextLine();
-						System.out.println("path leido");
 						if(!cr.existeResultado(path)) //Si no est· ya almacenado se calcula y almacena
 						{
 							cr.anadirResultado(path, CtrlHetesim.HeteSim(path, gh));
-							cr.printa_matriz1(path);
 						}
+						int typeb=TypePosPath(path,0);
+						System.out.print("4.- Introduce nombre del nodo\n" );
+						String name = in.readLine();
+						int pos=gh.consultarNodo(typeb, name);
+						System.out.println("Introduce el extremo menor del intervalo de relevancia" );
+						double x1,x2;
+						x1=Double.parseDouble(in.readLine());
+						System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
+						x2=Double.parseDouble(in.readLine());
+						cr.setIntervalo(x1, x2);
+						System.out.println("Relevancia de "+ name +" en el camino "+ path +":");
+						int typee=TypePosPath(path, path.length()-1);
+						escribir_resultado(cr.getResultadoNodo(path, pos), gh, typee);
 					break;
 				//default:
 				}
@@ -174,17 +207,34 @@ do{
 				System.out.print("Elige el camino que quieres consultar del historial:\n" );
 				//TODO lista de caminos guardados y usuario elige uno y lo consulta
 				Set<String> a = cr.consultarCaminosAlmacenados();
-				
-				//ES UNA PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-				String[] b = (String[]) a.toArray();
-				for(int i= 0 ; i< b.length ; i++)
+				System.out.println("----------");
+				for(String i: a)
 				{
-					System.out.println(b[i]);
+					System.out.println(i);
 				}
+				System.out.println("----------\n");
+				System.out.println("Introduce path:");
+				String path = sc.nextLine();
+				if (a.contains(path)) {
+					int typeb=TypePosPath(path,0);
+					System.out.print("4.- Introduce nombre del nodo\n" );
+					String name = in.readLine();
+					int pos=gh.consultarNodo(typeb, name);
+					double x1, x2;
+					System.out.println("Introduce el extremo menor del intervalo de relevancia" );
+					x1=Double.parseDouble(in.readLine());
+					System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
+					x2=Double.parseDouble(in.readLine());
+					cr.setIntervalo(x1, x2);
+					System.out.println("Relevancia de "+ name +" en el camino "+ path +":");
+					int typee=TypePosPath(path, path.length()-1);
+					escribir_resultado(cr.getResultadoNodo(path, pos), gh, typee);
+				}
+				else System.out.println("El camino no esta en el historial");
 				//------------
-				int historialpath = sc.nextInt();
-			
+				
 			break;
+			default: System.out.println("Comando incorrecto");
 		//case 4://salir del programa
 		//	System.exit(0); 
 		}

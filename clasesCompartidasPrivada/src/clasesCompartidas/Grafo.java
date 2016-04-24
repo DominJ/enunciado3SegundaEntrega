@@ -137,6 +137,21 @@ public class Grafo
 		}
 	}
 	
+	public String consultarNodo(int type, int id)
+	{
+		//(0 = P, 1 = A, 2 = C, 3 = T)
+		switch(type)
+		{
+			case 0	:	return this.papers.consultar_nodo(id);
+			
+			case 1	:	return this.authors.consultar_nodo(id);
+			
+			case 2	:	return this.conferences.consultar_nodo(id);
+			
+			default	:	return this.therms.consultar_nodo(id);
+		}
+	}
+	
 	public void eliminarNodo(int type, int id) throws NullPointerException
 	{
 		//(0 = P, 1 = A, 2 = C, 3 = T)
