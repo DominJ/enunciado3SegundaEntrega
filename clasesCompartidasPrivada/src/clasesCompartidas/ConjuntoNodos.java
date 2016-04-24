@@ -56,7 +56,7 @@ public class ConjuntoNodos
 		}
 		else //no existe
 		{
-			System.out.println("No existe ningÃºn nodo con este nombre.");
+			System.out.println("No existe ning�n nodo con este nombre.");
 		}
 
 	}

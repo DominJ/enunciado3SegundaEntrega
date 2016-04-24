@@ -22,9 +22,9 @@ public class LeerFichero
 		//Aquest metode llegeix el fitxer
 		Integer vb = 0;
 		String archivo = null;
-		if (c == 1) archivo = "C:/Users/USUARIO/Documents/PROP 2a/Set1/paper_author.txt";
-		else if (c == 2) archivo = "C:/Users/USUARIO/Documents/PROP 2a/Set1/paper_conf.txt";
-		else archivo = "C:/Users/USUARIO/Documents/PROP 2a/Set1/paper_term.txt";
+		if (c == 1) archivo = "C:/Users/1184784/Desktop/Set1/paper_author.txt";
+		else if (c == 2) archivo = "C:/Users/1184784/Desktop/Set1/paper_conf.txt";
+		else archivo = "C:/Users/1184784/Desktop/Set1/paper_term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,ArrayList<Integer>> m = new HashMap<Integer,ArrayList<Integer>>();
@@ -80,10 +80,10 @@ public class LeerFichero
 		String cadena;
 		//Aquest mÃ¨tode llegeix el fitxer
 		String archivo = null;
-		if (c == 0) archivo = "C:/Users/USUARIO/Documents/PROP 2a/Set1/paper.txt";
-		else if (c == 1) archivo = "C:/Users/USUARIO/Documents/PROP 2a/Set1/author.txt";
-		else if (c == 2) archivo = "C:/Users/USUARIO/Documents/PROP 2a/Set1/conf.txt";
-		else archivo = "C:/Users/USUARIO/Documents/PROP 2a/Set1/term.txt";
+		if (c == 0) archivo = "C:/Users/1184784/Desktop/Set1/paper.txt";
+		else if (c == 1) archivo = "C:/Users/1184784/Desktop/Set1/author.txt";
+		else if (c == 2) archivo = "C:/Users/1184784/Desktop/Set1/conf.txt";
+		else archivo = "C:/Users/1184784/Desktop/Set1/term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,String> m = new HashMap<Integer,String>();

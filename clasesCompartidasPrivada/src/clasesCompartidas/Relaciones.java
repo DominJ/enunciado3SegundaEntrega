@@ -102,7 +102,8 @@ public class Relaciones
 	{
 		if (this.paperOther.containsKey(a)){ //borramos relación
 			int index = -1;
-			for (int i = 0; i < paperOther.get(a).size(); ++i){
+			for (int i = 0; i < paperOther.get(a).size(); ++i)
+			{
 				if (b == paperOther.get(a).get(i)) index = i;
 			}
 			if (index >= 0) {
@@ -145,5 +146,32 @@ public class Relaciones
 				anadir_PaperOther(entry.getKey(), oth.get(i).getFirst());
 			}
 		}
+	}
+	
+	public void pinta_matriz() {
+		System.out.println("Relacion PaperOther:\n");
+		HashMap<Integer,ArrayList<Integer>> a=this.paperOther;
+		for (int i: a.keySet()) {
+			ArrayList<Integer> l= a.get(i);
+			System.out.print(i +": ");
+			for(int j=0; j<l.size(); ++j) {
+				int n = l.get(j);
+				System.out.print(n +" "); 
+			}
+			System.out.print("\n");
+		}
+		System.out.print("\n");
+		System.out.println("Relacion OtherPaper:\n");
+		a=this.otherPaper;
+		for (int i: a.keySet()) {
+			ArrayList<Integer> l= a.get(i);
+			System.out.print(i +": ");
+			for(int j=0; j<l.size(); ++j) {
+				int n = l.get(j);
+				System.out.print(n +" "); 
+			}
+			System.out.print("\n");
+		}
+		System.out.print("\n");
 	}
 }

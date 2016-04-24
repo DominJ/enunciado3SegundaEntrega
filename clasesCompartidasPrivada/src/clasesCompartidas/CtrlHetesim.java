@@ -5,17 +5,17 @@ import java.util.HashMap;
 import Pair.Pair;
 
 public class CtrlHetesim {
-	Grafo g;
+
 	public CtrlHetesim(){
 		//constructura por defecto
-		g= new Grafo();
+
 	}
 	
 	/*
 	Pre: a es una matriz de adyacencia de una relacion AB entre dos nodos cualquiera
 	Post Devuelve la matriz a normalizada por filas
 	 */
-	public static HashMap<Integer,ArrayList<Pair<Integer,Double>>> normalizar_por_filas(HashMap<Integer,ArrayList<Integer>> a) {
+	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> normalizar_por_filas(HashMap<Integer,ArrayList<Integer>> a) {
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> R = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();	
 		for (int id: a.keySet()){																						//Iteramos sobre a
 			ArrayList<Pair<Integer,Double>> Rfila = new ArrayList<Pair<Integer,Double>>();
@@ -36,7 +36,7 @@ public class CtrlHetesim {
 	  Post: Devuelve la matriz transpuesta de a	
 	 */
 	
-	public static HashMap<Integer,ArrayList<Pair<Integer,Double>>> transpuesta(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a) {
+	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> transpuesta(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a) {
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> R = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		int ncol=0;																				//Para empezar a transponer, necesitamos saber el numero de columnas de a			
 		for(int i: a.keySet()) {																//Iteramos sobre el numero de filas de a;
@@ -71,7 +71,7 @@ public class CtrlHetesim {
 		Pre: Num columnas de a = Num filas de b
 		Post: Devuelve el producto matricial a*b
 	*/
-	public static HashMap<Integer,ArrayList<Pair<Integer,Double>>> producto_mat(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b) {
+	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> producto_mat(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b) {
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> R = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>(); 
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>>b2=transpuesta(b);
 		for(int i: a.keySet()) {																//Iteramos sobre el numero de filas de a
@@ -107,7 +107,7 @@ public class CtrlHetesim {
 		Post Devuelve la matriz normalizada del hetesim, donde cada elemento ij corresponde a el valor hetesim del elemento i sobre el j;
 	 */
 	
-	public static HashMap<Integer,ArrayList<Pair<Integer,Double>>> producto_norm_mat(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b) {
+	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> producto_norm_mat(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b) {
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>>b2 =transpuesta(b);
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> R = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>(); 
 		for(int i: a.keySet()) {																//Iteramos sobre el numero de filas de a
@@ -115,7 +115,7 @@ public class CtrlHetesim {
 			ArrayList<Pair<Integer,Double>> afila = a.get(i);
 			for (int j: b2.keySet()){															//Iteramos sobre el numero de columnas de b
 				ArrayList<Pair<Integer,Double>> b2col = b2.get(j);
-				Pair<Integer,Double> Rval = new Pair<Integer, Double>(j,(double)0);
+				Pair<Integer,Double> rVal = new Pair<Integer, Double>(j,(double)0);
 				for (int k=0; k<b2col.size(); ++k) {												//Iteramos sobre la columna j de b;
 					Pair<Integer,Double> b2val=b2col.get(k);										
 					int l=b2val.getFirst();														//Obtenemos el valor b[l][j];
@@ -123,14 +123,14 @@ public class CtrlHetesim {
 					for(int x=0;!found && x<afila.size(); ++x) {											//Buscamos en la fila correspondiente de a, si su indice l contiene algun valor
 						Pair<Integer,Double>aval = afila.get(x);
 						if (aval.getFirst()==l) {												// En caso afirmativo, sumamos a el valor de la celda final, el producto entre las dos celdas de a y b
-							double d=Rval.getSecond();
+							double d=rVal.getSecond();
 							d += (aval.getSecond() * b2val.getSecond());
-							Rval.setSecond(d);
+							rVal.setSecond(d);
 							found=true;
 						}
 					}
 				}
-				if (Rval.getSecond()!=0) {
+				if (rVal.getSecond()!=0) {
 					double mod,  mod1=0, mod2=0;													//Ahora necesitamos dividir cada elemento por el producto de los modulos de su fila y columna respectiva
 					for (int x=0; x<afila.size(); ++x){												//Calculamos el modulo de la fila
 						Pair<Integer,Double> p=afila.get(x);
@@ -145,10 +145,10 @@ public class CtrlHetesim {
 					}
 					mod2=Math.sqrt(mod2);															
 					mod=mod1*mod2;
-					Double d=Rval.getSecond();					
+					Double d=rVal.getSecond();					
 					d=d/mod;																		//Y dividimos el elemento por el producto de los modulos
-					Rval.setSecond(d);
-					Rfila.add(Rval);
+					rVal.setSecond(d);
+					Rfila.add(rVal);
 				}
 			}
 			R.put(i, Rfila);
@@ -160,17 +160,17 @@ public class CtrlHetesim {
 	  Pre: R es la matriz de una relación AB entre cualquier par de nodos
 	  Post: Devuelve la matriz correspondiente a la relacion AE.
 	 */
-	public static HashMap<Integer,ArrayList<Integer>> Relacion_Dummy(HashMap<Integer,ArrayList<Integer>> RE){		//Obtencion de la matriz RL
+	private static HashMap<Integer,ArrayList<Integer>> Relacion_Dummy(HashMap<Integer,ArrayList<Integer>> RE){		//Obtencion de la matriz RL
 		HashMap<Integer,ArrayList<Integer>> R = new HashMap<Integer,ArrayList<Integer>>();
 		int etiqueta=0;
 		for (int id: RE.keySet()){ //iteramos sobre R
-			ArrayList<Integer> REfila = RE.get(id); 											//fila[id] de R
-			ArrayList<Integer> Rfila = new ArrayList<Integer>(); 			//futura fila[id] de RE
-			for (int j=0; j< REfila.size(); ++j) {	
-				Rfila.add(etiqueta);
+			ArrayList<Integer> reFila = RE.get(id); 											//fila[id] de R
+			ArrayList<Integer> rFila = new ArrayList<Integer>(); 			//futura fila[id] de RE
+			for (int j=0; j< reFila.size(); ++j) {	
+				rFila.add(etiqueta);
 				++etiqueta;
 			}
-			R.put(id, Rfila);
+			R.put(id, rFila);
 		}
 		return R;
 	}
@@ -179,7 +179,7 @@ public class CtrlHetesim {
 	 Pre: path es un camino valido 
 	 Post: devuelve la matriz normalizada de aplicar hete sim en el camino p. En la fila i-esima se encuentran la relevancia de el elemento j sobre i;
 	 */
-	public  HashMap<Integer,ArrayList<Pair<Integer,Double>>> HeteSim(String p){
+	public static HashMap<Integer,ArrayList<Pair<Integer,Double>>> HeteSim(String p, Grafo g){
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> R=new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> PL = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> PR = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();

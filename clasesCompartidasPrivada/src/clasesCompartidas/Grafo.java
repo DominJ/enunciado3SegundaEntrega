@@ -61,19 +61,14 @@ public class Grafo
 		}
 	}
 	
-	private void leerDataSet()
-	{
-		
-	}
-	
 	private void escribirDataSet()
 	{
-		
+		//TODO
 	}
 	
 	private void escribirRelaciones()
 	{
-		
+		//TODO
 	}
 		
 	public HashMap<Integer,ArrayList<Integer>> getRelaciones(String rel)
@@ -100,6 +95,119 @@ public class Grafo
 		{
 			System.out.println("es el último else podría no ser correcto");
 			return this.PT.consultar_PaperOther();
+		}
+	}
+	
+	public void anadirNodo(Integer type, String name)
+	{
+		//(0 = P, 1 = A, 2 = C, 3 = T)
+		switch(type)
+		{
+			case 0	:	this.papers.anadir_nodo(name);
+						break;
+			
+			case 1	:	this.authors.anadir_nodo(name);
+						break;
+			
+			case 2	:	this.conferences.anadir_nodo(name);
+						break;
+			
+			case 3	:	this.therms.anadir_nodo(name);
+						break;
+		}
+	}
+	
+	public int consultarNodo(int type, String name)
+	{
+		//(0 = P, 1 = A, 2 = C, 3 = T)
+		switch(type)
+		{
+			case 0	:	return this.papers.consultar_nodo(name);
+			
+			case 1	:	return this.authors.consultar_nodo(name);
+			
+			case 2	:	return this.conferences.consultar_nodo(name);
+			
+			default	:	return this.therms.consultar_nodo(name);
+		}
+	}
+	
+	public void eliminarNodo(int type, int id) throws NullPointerException
+	{
+		//(0 = P, 1 = A, 2 = C, 3 = T)
+		ArrayList<Integer> conjunto;
+		int tam;
+		switch(type)
+		{
+			case 0	:	//--------------------
+						conjunto = this.PA.consultar_RelacionPaper(id);
+						System.out.println("papers" + conjunto);
+						tam = conjunto.size();
+						for(int i=0; i< tam; i++)
+						{
+							this.PA.eliminar_PaperOther(id, conjunto.get(0));
+						}
+						
+						conjunto = this.PC.consultar_RelacionPaper(id);
+						if(conjunto != null)
+						{
+							tam = conjunto.size();
+							for(int i=0; i< tam; i++)
+							{
+								this.PC.eliminar_PaperOther(id, conjunto.get(0));
+							}
+						}
+						
+						conjunto = this.PT.consultar_RelacionPaper(id);
+						tam = conjunto.size();
+						for(int i=0; i< tam; i++)
+						{
+							this.PT.eliminar_PaperOther(id, conjunto.get(0));
+						}
+						
+						this.papers.eliminar_nodo(id);
+						//--------------------
+						break;
+			
+			case 1	:	//--------------------
+						conjunto = this.PA.consultar_RelacionOther(id);
+						tam = conjunto.size();
+						for(int i=0; i< tam; i++)
+						{
+							this.PA.eliminar_PaperOther(conjunto.get(0), id);
+						}
+						this.authors.eliminar_nodo(id);
+						//--------------------
+						break;
+			 
+			case 2	:	//--------------------
+						conjunto = this.PC.consultar_RelacionOther(id);
+						System.out.println(conjunto);
+						System.out.println("ANTES DE ELIMINAR");
+						this.PC.pinta_matriz();
+						System.out.println("----------------------------");
+						tam = conjunto.size();
+						for(int i=0; i< tam; i++)
+						{
+							this.PC.eliminar_PaperOther(conjunto.get(0), id);
+						}
+						this.conferences.eliminar_nodo(id);
+						System.out.println("DESPUES DE ELIMINAR");
+						this.PC.pinta_matriz();
+						System.out.println("----------------------------");
+						//--------------------
+						break;
+			
+			default	:	//--------------------
+						conjunto = this.PT.consultar_RelacionOther(id);
+						tam = conjunto.size();
+						for(int i=0; i< tam; i++)
+						{
+							this.PT.eliminar_PaperOther(conjunto.get(0), id);
+						}
+						this.therms.eliminar_nodo(id);
+						//--------------------
+						break;
 		}
 	}
 }
