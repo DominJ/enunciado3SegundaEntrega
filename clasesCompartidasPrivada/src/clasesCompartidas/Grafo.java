@@ -68,12 +68,19 @@ public class Grafo
 	
 	private void escribirDataSet()
 	{
-		//TODO
+		//(0->P  1->A  2->C 3->T)
+		EscribirFichero.ReescribirFicheroNodos(papers.getConjuntoEscritura(), 0);
+		EscribirFichero.ReescribirFicheroNodos(authors.getConjuntoEscritura(), 1);
+		EscribirFichero.ReescribirFicheroNodos(conferences.getConjuntoEscritura(), 2);
+		EscribirFichero.ReescribirFicheroNodos(therms.getConjuntoEscritura(), 3);
 	}
 	
 	private void escribirRelaciones()
 	{
-		//TODO
+		//(0->PA  1->PC  2->PT)
+		EscribirFichero.ReescribirFicheroRelaciones(PA.getRelacionesEscritura(), 0);
+		EscribirFichero.ReescribirFicheroRelaciones(PC.getRelacionesEscritura(), 1);
+		EscribirFichero.ReescribirFicheroRelaciones(PT.getRelacionesEscritura(), 2);
 	}
 		
 	public HashMap<Integer,ArrayList<Integer>> getRelaciones(String rel)
@@ -229,5 +236,10 @@ public class Grafo
 						//--------------------
 						break;
 		}
+	}
+	public void escribirDatos()
+	{
+		this.escribirDataSet();
+		this.escribirRelaciones();
 	}
 }

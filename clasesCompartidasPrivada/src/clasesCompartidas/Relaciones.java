@@ -174,4 +174,9 @@ public class Relaciones
 		}
 		System.out.print("\n");
 	}
+	
+	public HashMap<Integer,ArrayList<Integer>> getRelacionesEscritura()
+	{
+		return paperOther;
+	}
 }

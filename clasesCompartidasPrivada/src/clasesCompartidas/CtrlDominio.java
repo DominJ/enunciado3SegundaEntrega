@@ -2,11 +2,8 @@ package clasesCompartidas;
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 import Pair.Pair;
 
@@ -171,6 +168,7 @@ do{
 						//TODO usuario elige un camino de la lista de caminos predetermidos
 						System.out.print("Seleccion camino predeterminado:\n");
 						int numpath = sc.nextInt();
+						System.out.println("Has seleccionado el path "+numpath+" Pero aún no está implementado");
 						//Dejamos los precalculos para mas adelante
 						
 					break;
@@ -235,8 +233,15 @@ do{
 				
 			break;
 			default: System.out.println("Comando incorrecto");
-		//case 4://salir del programa
-		//	System.exit(0); 
+			
+			case 4://salir del programa
+				int option;
+				System.out.println("Quieres guardar los cambios de forma permanente?");
+				System.out.println("1 -> Si");
+				System.out.println("2 -> No");
+				option=Integer.parseInt(in.readLine());
+				if(option == 1) gh.escribirDatos();
+				sc.close();
 		}
 	}while (op != 4);
 }

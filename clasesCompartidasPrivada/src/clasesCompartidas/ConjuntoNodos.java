@@ -124,5 +124,10 @@ public class ConjuntoNodos
 	public HashMap<Integer, String> devolver_conjunto()
 	{
 		return nodos;
-	}	
+	}
+	
+	public HashMap<Integer,String> getConjuntoEscritura()
+	{
+		return nodos;
+	}
 }
