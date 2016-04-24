@@ -6,6 +6,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 import Pair.Pair;
+/**
+ * @author Xavi Campos Navarro
+ *
+ */
 
 public class CtrlDominio
 { 

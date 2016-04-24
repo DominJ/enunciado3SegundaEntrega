@@ -2,6 +2,11 @@ package clasesCompartidas;
 
 import java.util.*;
 
+/**
+ * @author Daniel sattler (Clase Compartida)
+ *
+ */
+
 public class ConjuntoNodos 
 {
 	private int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.

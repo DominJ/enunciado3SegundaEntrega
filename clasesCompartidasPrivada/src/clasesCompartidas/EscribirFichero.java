@@ -8,8 +8,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-//Aquesta classe simplement li passes un HashMap<Integer,<ArrayList<Integer>>> i et reescriu el document
-
+/**
+ * @author Xavi Campos Navarro
+ *
+ */
 public class EscribirFichero {
 	
 	//a == 1 és un fitxer on la primera en ordre és la clau i la segona les relacionades amb ella
@@ -56,12 +58,6 @@ public class EscribirFichero {
 			System.out.println("Error de:"+e);
 		}
 	}
-	
-	
-	
-	public static void main(String[] args){
-		HashMap<Integer,ArrayList<Integer>> r = new HashMap<Integer,ArrayList<Integer>>();
-		ReescribirFicheroRelaciones(r,2);
-	}
+
 }
 

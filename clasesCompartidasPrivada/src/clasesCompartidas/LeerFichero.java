@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
-
+/**
+ * @author Daniel Pulido Sánchez-Carnerero
+ *
+ */
 public class LeerFichero 
 {
 	
@@ -44,9 +45,7 @@ public class LeerFichero
 	    	String s = copy.substring(0,i);
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
-	    	System.out.println("ja hi som " + vb + "\n");
 	    	codi2 = Integer.parseInt(s1);
-	    	System.out.println("ja hi som aqui " + vb + "\n");
 	    	//Segon Hashmap del pair
 	    	if (n.get(codi2) == null) n.put(codi2, new ArrayList<Integer>());
 	    	n.get(codi2).add(codi);

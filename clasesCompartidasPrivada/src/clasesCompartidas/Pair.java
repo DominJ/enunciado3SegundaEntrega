@@ -1,5 +1,9 @@
 package clasesCompartidas;
 
+/**
+ * @author unknown (Clase Compartida)
+ *
+ */
 public class Pair<A, B> {
     private A first;
     private B second;

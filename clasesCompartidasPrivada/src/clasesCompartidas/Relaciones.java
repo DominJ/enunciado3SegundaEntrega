@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-
-
+/**
+ * @author August Boza (Clase Compartida)
+ *
+ */
 public class Relaciones 
 {
 	private HashMap<Integer,ArrayList<Integer>> paperOther;

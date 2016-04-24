@@ -8,6 +8,11 @@ import java.util.Set;
 
 import Pair.Pair;
 
+/**
+ * @author Pablo Navarro Izquierdo
+ *
+ */
+
 public class ConjuntoResultados {
 	HashMap<String, HashMap<Integer,ArrayList<Pair<Integer,Double>>>> resultados; //Estructura donde guardamos los resultados, accedemos a un resultado poniendo el path como key
 	Pair<Double,Double> IR;							//variable para filtrar resultados mediante un intervalo de relevancia

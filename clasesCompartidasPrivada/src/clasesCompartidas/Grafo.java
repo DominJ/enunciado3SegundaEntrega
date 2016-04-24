@@ -3,7 +3,14 @@ package clasesCompartidas;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+/*
+author: 
+*/
 
+/**
+ * @author Domingo Jesús de la Mata Garcia
+ *
+ */
 public class Grafo 
 {
 	ConjuntoNodos authors;
@@ -105,7 +112,6 @@ public class Grafo
 		}*/
 		else
 		{
-			System.out.println("es el último else podría no ser correcto");
 			return this.PT.consultar_PaperOther();
 		}
 	}
@@ -209,19 +215,13 @@ public class Grafo
 			 
 			case 2	:	//--------------------
 						conjunto = this.PC.consultar_RelacionOther(id);
-						System.out.println(conjunto);
-						System.out.println("ANTES DE ELIMINAR");
-						this.PC.pinta_matriz();
-						System.out.println("----------------------------");
 						tam = conjunto.size();
 						for(int i=0; i< tam; i++)
 						{
 							this.PC.eliminar_PaperOther(conjunto.get(0), id);
 						}
 						this.conferences.eliminar_nodo(id);
-						System.out.println("DESPUES DE ELIMINAR");
 						this.PC.pinta_matriz();
-						System.out.println("----------------------------");
 						//--------------------
 						break;
 			

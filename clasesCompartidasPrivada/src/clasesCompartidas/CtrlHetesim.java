@@ -3,8 +3,15 @@ package clasesCompartidas;
 import java.util.ArrayList;
 import java.util.HashMap;
 import Pair.Pair;
+/*
+ @author: 
+*/
 
-public class CtrlHetesim {
+/**
+ * @author Pablo Navarro Izquierdo
+ *
+ */
+public class CtrlHetesim{
 
 	public CtrlHetesim(){
 		//constructura por defecto
