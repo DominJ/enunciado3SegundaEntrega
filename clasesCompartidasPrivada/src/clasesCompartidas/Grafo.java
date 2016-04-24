@@ -24,22 +24,27 @@ public class Grafo
 		{
 			Pair<HashMap<Integer,String>,HashMap<String,Integer>> conjunto;
 			Pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> relacion;
+			int idMax;
 			
 			//Instanciamos papers
 			conjunto = LeerFichero.crear_nodo_primitivo(0);
-			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),0);
+			idMax = LeerFichero.idMax(conjunto.getFirst());
+			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
 			
 			//Instanciamos autor
 			conjunto = LeerFichero.crear_nodo_primitivo(1);
-			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),0);
+			idMax = LeerFichero.idMax(conjunto.getFirst());
+			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
 			
 			//Instanciamos conferences
 			conjunto = LeerFichero.crear_nodo_primitivo(2);
-			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),0);
+			idMax = LeerFichero.idMax(conjunto.getFirst());
+			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
 			
 			//Instanciamos terms
 			conjunto = LeerFichero.crear_nodo_primitivo(3);
-			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),0);
+			idMax = LeerFichero.idMax(conjunto.getFirst());
+			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
 			
 			//Instanciamos Relacion PA
 			relacion = LeerFichero.crear_relacion(1);
