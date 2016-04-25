@@ -1,9 +1,11 @@
-package clasesCompartidas;
+package clasesPrivadas;
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
+
+import clasesCompartidas.Pair;
 /**
  * @author Xavi Campos Navarro
  *

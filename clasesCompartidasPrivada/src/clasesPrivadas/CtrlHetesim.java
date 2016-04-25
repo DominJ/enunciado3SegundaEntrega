@@ -1,11 +1,13 @@
-package clasesCompartidas;
+package clasesPrivadas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import Pair.Pair;
 /*
  @author: 
 */
+
+
+import clasesCompartidas.Pair;
 
 /**
  * @author Pablo Navarro Izquierdo

@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 
-import Pair.Pair;
+import clasesCompartidas.Pair;
 
 /**
  * @author Pablo Navarro Izquierdo

@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,8 +7,14 @@ import java.util.HashMap;
 author: 
 */
 
+
+import clasesCompartidas.ConjuntoNodos;
+import clasesCompartidas.EscribirFichero;
+import clasesCompartidas.LeerFichero;
+import clasesCompartidas.Pair;
+
 /**
- * @author Domingo Jesús de la Mata Garcia
+ * @author Domingo Jesï¿½s de la Mata Garcia
  *
  */
 public class Grafo 
