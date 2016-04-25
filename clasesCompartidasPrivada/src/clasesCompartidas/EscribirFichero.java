@@ -14,8 +14,9 @@ import java.util.Map.Entry;
  */
 public class EscribirFichero {
 	
-	//a == 1 és un fitxer on la primera en ordre és la clau i la segona les relacionades amb ella
-	//i si a == 0 és la inversa
+	
+	/*PRE: Existeix el HashMap que li passem */
+	/*POST: Escibim sobre el fitxer corresponent segons el tipus el Hashmap de Relacions*/
 	public static void ReescribirFicheroRelaciones(HashMap<Integer,ArrayList<Integer>> n, int Tipus){
 		try{
 			FileWriter fw;
@@ -38,6 +39,8 @@ public class EscribirFichero {
 		}
 	}
 	
+	/*PRE: Existeix el HashMap que li passem */
+	/*POST: Escibim sobre el fitxer corresponent segons el tipus el Hashmap de Node Primitiu*/
 	public static void ReescribirFicheroNodos(HashMap<Integer,String> n, int Tipus){
 		try{
 			FileWriter fw;
