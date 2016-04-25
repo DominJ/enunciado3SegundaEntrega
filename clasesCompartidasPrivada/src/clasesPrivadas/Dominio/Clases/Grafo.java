@@ -1,4 +1,4 @@
-package clasesPrivadas.Dominio;
+package clasesPrivadas.Dominio.Clases;
 
 import java.io.IOException;
 import java.util.ArrayList;

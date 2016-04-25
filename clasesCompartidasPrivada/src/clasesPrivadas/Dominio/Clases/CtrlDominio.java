@@ -1,4 +1,4 @@
-package clasesPrivadas.Dominio;
+package clasesPrivadas.Dominio.Clases;
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
