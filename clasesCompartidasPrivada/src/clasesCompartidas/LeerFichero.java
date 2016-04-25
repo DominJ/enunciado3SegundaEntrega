@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @author Daniel Pulido S�nchez-Carnerero
+ * @author Daniel Pulido Sánchez-Carnerero
  *
  */
 public class LeerFichero 
 {
 	
-	//C serveix per discriminar el tipus de relaciÃ³ amb paper, utilitzarem la c de la segÃ¼ent manera (1 = PA, 2 = PC, 3 = PT)  
-	
-	//Aquest metode retorna un pair amb un HashMap original de relacions a la primera posiciÃ³ i un HashMap transposat a
-	// la segona posiciÃ³ de la relaciÃ³ de dos tipus de node
+	/*PRE: c es un integer que discrimina el tipus*/
+	/*POST: Es crea un pair de dos HashMaps, amb la relacio P-NodePrimitiu al First i NodePrimitiu-P al Second*/
 	public static Pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> crear_relacion(int c) throws IOException {
 		String cadena;
 		//Aquest metode llegeix el fitxer
@@ -73,11 +71,13 @@ public class LeerFichero
 		return v;
 	}
 
-	//Aquest mÃ¨tode retorna un pair amb un HashMap original de node primitiu a la primera posiciÃ³ i un HashMap transposat a
-	// la segona posiciÃ³. Els codis dels tipus sÃ³n (0 = P, 1 = A, 2 = C, 3 = T) 
+	//Aquest mÃƒÂ¨tode retorna un pair amb un HashMap original de node primitiu a la primera posiciÃƒÂ³ i un HashMap transposat a
+	// la segona posiciÃƒÂ³. Els codis dels tipus sÃƒÂ³n (0 = P, 1 = A, 2 = C, 3 = T) 
+	/*PRE: c es un integer que discrimina el tipus*/
+	/*POST: Es crea un pair de dos HashMaps, amb la relacio dels dos atributs del NodePrimitiu*/
 	public static Pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(int c) throws IOException {
 		String cadena;
-		//Aquest mÃ¨tode llegeix el fitxer
+		//Aquest mÃƒÂ¨tode llegeix el fitxer
 		String archivo = null;
 		if (c == 0) archivo = "Set1/paper.txt";
 		else if (c == 1) archivo = "Set1/author.txt";
@@ -97,9 +97,9 @@ public class LeerFichero
 	    	String s = copy.substring(0,i);
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
-	    	//IntroduÃ¯m els elements al HashMap primer
+	    	//IntroduÃƒÂ¯m els elements al HashMap primer
 	    	m.put(codi, s1);
-	        //IntroduÃ¯m els elements al HashMap segon ja invertits
+	        //IntroduÃƒÂ¯m els elements al HashMap segon ja invertits
 	    	n.put(s1,codi);
 		}
 		//Tanquem el buffer
@@ -111,6 +111,8 @@ public class LeerFichero
 		return v;
 	}
 	
+	/*PRE: Existeix el Hashmap que li passem*/
+	/*POST: Et retorna l'id més gran disponible*/
 	public static int idMax(HashMap<Integer,String> a)
 	{
 		int idMax = -1;
