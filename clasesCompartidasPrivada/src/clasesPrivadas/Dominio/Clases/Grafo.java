@@ -46,22 +46,22 @@ public class Grafo
 			//Instanciamos papers
 			conjunto = LeerFichero.crear_nodo_primitivo(0);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
+			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
 			
 			//Instanciamos autor
 			conjunto = LeerFichero.crear_nodo_primitivo(1);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
+			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
 			
 			//Instanciamos conferences
 			conjunto = LeerFichero.crear_nodo_primitivo(2);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
+			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
 			
 			//Instanciamos terms
 			conjunto = LeerFichero.crear_nodo_primitivo(3);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax);
+			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
 			
 			//Instanciamos Relacion PA
 			relacion = LeerFichero.crear_relacion(1);
