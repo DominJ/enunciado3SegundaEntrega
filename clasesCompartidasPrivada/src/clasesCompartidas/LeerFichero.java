@@ -18,7 +18,6 @@ public class LeerFichero
 	/*POST: Es crea un pair de dos HashMaps, amb la relacio P-NodePrimitiu al First i NodePrimitiu-P al Second*/
 	public static Pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> crear_relacion(int c) throws IOException {
 		String cadena;
-		//Aquest metode llegeix el fitxer
 		Integer vb = 0;
 		String archivo = null;
 		if (c == 1) archivo = "Set1/paper_author.txt";
@@ -44,10 +43,8 @@ public class LeerFichero
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
 	    	codi2 = Integer.parseInt(s1);
-	    	//Segon Hashmap del pair
 	    	if (n.get(codi2) == null) n.put(codi2, new ArrayList<Integer>());
 	    	n.get(codi2).add(codi);
-	    	//Primer HashMap del pair
 	    	if(primer){
 	    		s2 = copy.substring(0,i);
 	    		codi_antic = codi;
@@ -62,22 +59,18 @@ public class LeerFichero
 	    	s2 = copy.substring(0,i);
 		}
 		m.put(codi_antic, l);
-		//Tanquem el buffer
 		b.close();
-		//Omplim el pair amb els dos HashMaps obtinguts
 		Pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> v = new Pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>>();
 		v.setFirst(m);
 		v.setSecond(n);
 		return v;
 	}
 
-	//Aquest mÃƒÂ¨tode retorna un pair amb un HashMap original de node primitiu a la primera posiciÃƒÂ³ i un HashMap transposat a
-	// la segona posiciÃƒÂ³. Els codis dels tipus sÃƒÂ³n (0 = P, 1 = A, 2 = C, 3 = T) 
+	//(0 = P, 1 = A, 2 = C, 3 = T) 
 	/*PRE: c es un integer que discrimina el tipus*/
 	/*POST: Es crea un pair de dos HashMaps, amb la relacio dels dos atributs del NodePrimitiu*/
 	public static Pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(int c) throws IOException {
 		String cadena;
-		//Aquest mÃƒÂ¨tode llegeix el fitxer
 		String archivo = null;
 		if (c == 0) archivo = "Set1/paper.txt";
 		else if (c == 1) archivo = "Set1/author.txt";
@@ -97,14 +90,10 @@ public class LeerFichero
 	    	String s = copy.substring(0,i);
 	    	codi = Integer.parseInt(s);
 	    	String s1 = copy.substring(i+1,copy.length());
-	    	//IntroduÃƒÂ¯m els elements al HashMap primer
 	    	m.put(codi, s1);
-	        //IntroduÃƒÂ¯m els elements al HashMap segon ja invertits
 	    	n.put(s1,codi);
 		}
-		//Tanquem el buffer
 		b.close();
-		//Omplim el pair amb els dos HashMaps obtinguts
 		Pair<HashMap<Integer,String>,HashMap<String,Integer>> v = new Pair<HashMap<Integer,String>,HashMap<String,Integer>>();
 		v.setFirst(m);
 		v.setSecond(n);
