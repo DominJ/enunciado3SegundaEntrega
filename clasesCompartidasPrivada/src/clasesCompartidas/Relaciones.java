@@ -1,10 +1,8 @@
-package clasesPrivadas;
+package clasesCompartidas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
-import clasesCompartidas.Pair;
 
 /**
  * @author August Boza (Clase Compartida)

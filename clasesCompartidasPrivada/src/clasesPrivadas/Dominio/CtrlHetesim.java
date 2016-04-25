@@ -1,10 +1,12 @@
-package clasesPrivadas;
+package clasesPrivadas.Dominio;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 /*
  @author: 
 */
+
+
 
 
 import clasesCompartidas.Pair;

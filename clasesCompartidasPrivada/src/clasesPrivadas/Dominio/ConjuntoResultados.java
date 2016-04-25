@@ -1,4 +1,4 @@
-package clasesPrivadas;
+package clasesPrivadas.Dominio;
 
 import java.util.ArrayList;
 import java.util.Collections;

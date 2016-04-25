@@ -1,4 +1,4 @@
-package clasesPrivadas;
+package clasesPrivadas.Dominio;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,10 +8,14 @@ author:
 */
 
 
+
+
+
 import clasesCompartidas.ConjuntoNodos;
 import clasesCompartidas.EscribirFichero;
 import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
+import clasesCompartidas.Relaciones;
 
 /**
  * @author Domingo Jes�s de la Mata Garcia
