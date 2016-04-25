@@ -20,9 +20,9 @@ public class LeerFichero
 		String cadena;
 		Integer vb = 0;
 		String archivo = null;
-		if (c == 1) archivo = "Set1/paper_author.txt";
-		else if (c == 2) archivo = "Set1/paper_conf.txt";
-		else archivo = "Set1/paper_term.txt";
+		if (c == 1) archivo = "../Set1/paper_author.txt";
+		else if (c == 2) archivo = "../Set1/paper_conf.txt";
+		else archivo = "../Set1/paper_term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,ArrayList<Integer>> m = new HashMap<Integer,ArrayList<Integer>>();
@@ -72,10 +72,10 @@ public class LeerFichero
 	public static Pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(int c) throws IOException {
 		String cadena;
 		String archivo = null;
-		if (c == 0) archivo = "Set1/paper.txt";
-		else if (c == 1) archivo = "Set1/author.txt";
-		else if (c == 2) archivo = "Set1/conf.txt";
-		else archivo = "Set1/term.txt";
+		if (c == 0) archivo = "../Set1/paper.txt";
+		else if (c == 1) archivo = "../Set1/author.txt";
+		else if (c == 2) archivo = "../Set1/conf.txt";
+		else archivo = "../Set1/term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,String> m = new HashMap<Integer,String>();
