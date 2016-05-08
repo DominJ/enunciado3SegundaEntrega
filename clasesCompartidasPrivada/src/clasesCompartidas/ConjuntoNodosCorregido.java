@@ -7,7 +7,7 @@ import java.util.*;
  *
  */
 
-public class ConjuntoNodos 
+public class ConjuntoNodosCorregido 
 {
 	private int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.
 	private HashMap<Integer,String> nodos;
@@ -15,7 +15,7 @@ public class ConjuntoNodos
 	
 	/*PRE: Cierto*/
 	/*POST: Se crea un conjunto de nodos vacio*/
-	public ConjuntoNodos() //constructor por defecto
+	public ConjuntoNodosCorregido() //constructor por defecto
 	{
 		nodos = new HashMap<Integer, String>();
 		nombres_nodos = new HashMap<String, Integer>();
@@ -24,7 +24,7 @@ public class ConjuntoNodos
 	
 	/*PRE: los hashmaps no son vacÃios e ID_libre es un numero entero positivo.*/
 	/*POST: Se crea un conjunto de nodos con los valores de los atributos indicados por los parametros.*/
-	public ConjuntoNodos(HashMap<Integer, String> nodos, HashMap<String, Integer> nombres_nodos, int ID_libre)
+	public ConjuntoNodosCorregido(HashMap<Integer, String> nodos, HashMap<String, Integer> nombres_nodos, int ID_libre)
 	{
 		this.nodos = nodos;
 		this.nombres_nodos = nombres_nodos;

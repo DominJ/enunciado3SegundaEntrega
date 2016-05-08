@@ -9,7 +9,7 @@ import java.util.Set;
  *
  */
 
-public class CtrlDominio
+public class CtrlDominioCorregido
 { 
 	private static void escribir_resultado(ArrayList<Pair <Double,Integer>> a, Grafo gh, int type) {
 		System.out.println("Rank		Nodo		Relevancia");

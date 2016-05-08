@@ -11,12 +11,12 @@ import java.util.Set;
  *
  */
 
-public class ConjuntoResultados {
+public class ConjuntoResultadosCorregido {
 	HashMap<String, HashMap<Integer,ArrayList<Pair<Integer,Double>>>> resultados; //Estructura donde guardamos los resultados, accedemos a un resultado poniendo el path como key
 	Pair<Double,Double> IR;							//variable para filtrar resultados mediante un intervalo de relevancia
 	final int max_res=20;									//Numero maximo de resultados que guardamos en el hashmap
 	
-	public ConjuntoResultados() {
+	public ConjuntoResultadosCorregido() {
 		resultados=new HashMap<String, HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
 		IR= new Pair<Double,Double>((double) 0,(double)1);
 	}
