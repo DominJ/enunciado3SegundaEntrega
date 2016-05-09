@@ -23,11 +23,19 @@ public class RelacionesPri extends Relaciones
 		//this.otherPaper = relacionesVuelta;
 	}
 	
-	public void NormFilas(){
+	/*public RelacionesPri clone()
+	{
+		RelacionesPri c = new RelacionesPri();
+		c.otherPaper = this.otherPaper.clone();
+		
+		
+	}*/
+	
+	public void normFilas(){
 		
 	}
 	
-	public void NormColumnas(){
+	public void normColumnas(){
 		
 	}
 	

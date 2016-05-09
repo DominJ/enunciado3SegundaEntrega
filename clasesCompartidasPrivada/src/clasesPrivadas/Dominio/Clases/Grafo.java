@@ -28,9 +28,12 @@ public class Grafo
 	ConjuntoNodos conferences;
 	ConjuntoNodos papers;
 	
-	RelacionesPri PA;
-	RelacionesPri PC;
-	RelacionesPri PT;
+	RelacionesPri PAF;
+	RelacionesPri PAC;
+	RelacionesPri PCF;
+	RelacionesPri PCC;
+	RelacionesPri PTF;
+	RelacionesPri PTC;
 	
 	public Grafo()
 	{
@@ -65,15 +68,25 @@ public class Grafo
 			
 			//Instanciamos Relacion PA
 			relacion = LeerFichero.crear_relacion(1);
-			this.PA = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			this.PAF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			//this.PAC = (RelacionesPri)PAF.clone();
+			this.PAF.normFilas();
+			this.PAC.normColumnas();
+			
 			
 			//Instanciamos Relacion PC
 			relacion = LeerFichero.crear_relacion(2);
-			this.PC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			this.PCF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			//this.PCC = (RelacionesPri)PAF.clone();
+			this.PCF.normFilas();
+			this.PCC.normColumnas();
 			
 			//Instanciamos Relacion PT
 			relacion = LeerFichero.crear_relacion(3);
-			this.PT = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			this.PTF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			//this.PTC = (RelacionesPri)PAF.clone();
+			this.PTF.normFilas();
+			this.PTC.normColumnas();
 			
 		} 
 		catch (IOException e) 
