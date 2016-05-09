@@ -4,46 +4,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-/**
- * @author August Boza (Clase Compartida)
- *
- */
+
+
 public class Relaciones 
 {
-	private HashMap<Integer,ArrayList<Integer>> paperOther;
-	private HashMap<Integer,ArrayList<Integer>> otherPaper;
+	protected HashMap<Integer, ArrayList<Pair<Integer,Double>>> paperOther;
+	protected HashMap<Integer, ArrayList<Pair<Integer,Double>>> otherPaper;
 	
 	public Relaciones()
 	{
 		//contructor por defecto
-		paperOther = new HashMap<Integer, ArrayList<Integer>>();
-		otherPaper = new HashMap<Integer, ArrayList<Integer>>();
+		paperOther = new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
+		otherPaper = new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
 	}
 	
-	public Relaciones(HashMap<Integer, ArrayList<Integer>> relacionesIda, HashMap<Integer, ArrayList<Integer>> relacionesVuelta)
+	public Relaciones(HashMap<Integer, ArrayList<Pair<Integer,Double>>> relacionesIda, HashMap<Integer, ArrayList<Pair<Integer,Double>>> relacionesVuelta)
 	{
 		this.paperOther = relacionesIda;
 		this.otherPaper = relacionesVuelta;
 	}
 	
 	//CONSULTORAS
-	public HashMap<Integer, ArrayList<Integer>> consultar_PaperOther() {
+	public HashMap<Integer, ArrayList<Pair<Integer,Double>>> consultar_PaperOther() {
 		return paperOther;
 	}
 	
-	public HashMap<Integer, ArrayList<Integer>> consultar_OtherPaper() {
+	public HashMap<Integer, ArrayList<Pair<Integer,Double>>> consultar_OtherPaper() {
 		return otherPaper;
 	}
 	
 	//PRE: a -> id_Paper, b -> id_Other
-	public Boolean existe_relacion(int a, int b) 
-	{
+	public Boolean existe_relacion(int a, int b) {
 		if (!paperOther.containsKey(a))return false;
-		else 
-		{
-			for (int i = 0; i < paperOther.get(a).size(); ++i) 
-			{
-				if (paperOther.get(a).get(i) == a) return true;
+		else {
+			for (int i = 0; i < paperOther.get(a).size(); ++i) {
+				if (paperOther.get(a).get(i).getFirst() == a) return true;
 			}
 			return false;
 		}
@@ -51,13 +46,11 @@ public class Relaciones
 	
 	//PRE: i != NULL, i es un id de Paper
 	//POST: Devuelve ArrayList con los "Others" relacionados con el Paper con id = i
-	public ArrayList<Integer> consultar_RelacionPaper(Integer i) {
-		if (paperOther.containsKey(i)) 
-		{
+	public ArrayList<Pair<Integer, Double>> consultar_RelacionPaper(Integer i) {
+		if (paperOther.containsKey(i)) {
 			return paperOther.get(i);
 		}
-		else 
-		{
+		else {
 			System.out.println("Caught NullPointerException: consultar_Relacion");
 			return null;
 		}
@@ -65,9 +58,8 @@ public class Relaciones
 	
 	//PRE: i != NULL, i es un id de Other
 	//POST: Devuelve ArrayList con los Papers relacionados con el Other con id = i
-	public ArrayList<Integer> consultar_RelacionOther(Integer i) {
-		try 
-		{
+	public ArrayList<Pair<Integer,Double>> consultar_RelacionOther(Integer i) {
+		try {
 			return otherPaper.get(i);
 		}
 		catch (NullPointerException e) {
@@ -81,10 +73,10 @@ public class Relaciones
 	public void anadir_PaperOther(int a, int b)
 	{
 		if (!this.paperOther.containsKey(a)){ //si no existe, creamos entrada iniciando arrayList
-			this.paperOther.put(a, new ArrayList<Integer>());
+			this.paperOther.put(a, new ArrayList<Pair<Integer,Double>>());
 		}
 		//Añadir ordenadamente
-		paperOther.get(a).add(new Integer(b));
+		paperOther.get(a).add(new Pair<Integer, Double>(b,1.0));
 		anadir_OtherPaper(b,a);
 	}
 
@@ -93,9 +85,9 @@ public class Relaciones
 	private void anadir_OtherPaper(int a, int b)
 	{
 		if (!this.otherPaper.containsKey(a)){ //si no existe, creamos entrada iniciando arrayList
-			this.otherPaper.put(a,new ArrayList<Integer>());
+			this.otherPaper.put(a,new ArrayList<Pair<Integer,Double>>());
 		}
-		otherPaper.get(a).add(new Integer(b));
+		otherPaper.get(a).add(new Pair<Integer, Double>(b,1.0));
 	}
 
   	//ELIMINAR
@@ -104,9 +96,8 @@ public class Relaciones
 	{
 		if (this.paperOther.containsKey(a)){ //borramos relación
 			int index = -1;
-			for (int i = 0; i < paperOther.get(a).size(); ++i)
-			{
-				if (b == paperOther.get(a).get(i)) index = i;
+			for (int i = 0; i < paperOther.get(a).size(); ++i){
+				if (b == paperOther.get(a).get(i).getFirst()) index = i;
 			}
 			if (index >= 0) {
 				paperOther.get(a).remove(index);
@@ -126,7 +117,7 @@ public class Relaciones
 		if (this.otherPaper.containsKey(a)){ //borramos relación
 			int index = -1;
 			for (int i = 0; i < otherPaper.get(a).size(); ++i){
-				if (b == otherPaper.get(a).get(i)) index = i;
+				if (b == otherPaper.get(a).get(i).getFirst()) index = i;
 			}
 			if (index >= 0) {
 				otherPaper.get(a).remove(index);
@@ -148,37 +139,5 @@ public class Relaciones
 				anadir_PaperOther(entry.getKey(), oth.get(i).getFirst());
 			}
 		}
-	}
-	
-	public void pinta_matriz() {
-		System.out.println("Relacion PaperOther:\n");
-		HashMap<Integer,ArrayList<Integer>> a=this.paperOther;
-		for (int i: a.keySet()) {
-			ArrayList<Integer> l= a.get(i);
-			System.out.print(i +": ");
-			for(int j=0; j<l.size(); ++j) {
-				int n = l.get(j);
-				System.out.print(n +" "); 
-			}
-			System.out.print("\n");
-		}
-		System.out.print("\n");
-		System.out.println("Relacion OtherPaper:\n");
-		a=this.otherPaper;
-		for (int i: a.keySet()) {
-			ArrayList<Integer> l= a.get(i);
-			System.out.print(i +": ");
-			for(int j=0; j<l.size(); ++j) {
-				int n = l.get(j);
-				System.out.print(n +" "); 
-			}
-			System.out.print("\n");
-		}
-		System.out.print("\n");
-	}
-	
-	public HashMap<Integer,ArrayList<Integer>> getRelacionesEscritura()
-	{
-		return paperOther;
 	}
 }
