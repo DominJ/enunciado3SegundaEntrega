@@ -49,27 +49,27 @@ public class Grafo
 			//Instanciamos papers
 			conjunto = LeerFichero.crear_nodo_primitivo(0);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
+			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos autor
 			conjunto = LeerFichero.crear_nodo_primitivo(1);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
+			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos conferences
 			conjunto = LeerFichero.crear_nodo_primitivo(2);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
+			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos terms
 			conjunto = LeerFichero.crear_nodo_primitivo(3);
 			idMax = LeerFichero.idMax(conjunto.getFirst());
-			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond(),idMax+1);
+			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos Relacion PA
 			relacion = LeerFichero.crear_relacion(1);
 			this.PAF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			//this.PAC = (RelacionesPri)PAF.clone();
+			this.PAC = PAF.clone();
 			this.PAF.normFilas();
 			this.PAC.normColumnas();
 			
@@ -77,14 +77,14 @@ public class Grafo
 			//Instanciamos Relacion PC
 			relacion = LeerFichero.crear_relacion(2);
 			this.PCF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			//this.PCC = (RelacionesPri)PAF.clone();
+			this.PCC = (RelacionesPri)PAF.clone();
 			this.PCF.normFilas();
 			this.PCC.normColumnas();
 			
 			//Instanciamos Relacion PT
 			relacion = LeerFichero.crear_relacion(3);
 			this.PTF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			//this.PTC = (RelacionesPri)PAF.clone();
+			this.PTC = (RelacionesPri)PAF.clone();
 			this.PTF.normFilas();
 			this.PTC.normColumnas();
 			
@@ -108,34 +108,42 @@ public class Grafo
 	private void escribirRelaciones()
 	{
 		//(0->PA  1->PC  2->PT)
-		EscribirFichero.ReescribirFicheroRelaciones(PA.getRelacionesEscritura(), 0);
-		EscribirFichero.ReescribirFicheroRelaciones(PC.getRelacionesEscritura(), 1);
-		EscribirFichero.ReescribirFicheroRelaciones(PT.getRelacionesEscritura(), 2);
+		EscribirFichero.ReescribirFicheroRelaciones(PAF.getRelacionesEscritura(), 0);
+		EscribirFichero.ReescribirFicheroRelaciones(PCF.getRelacionesEscritura(), 1);
+		EscribirFichero.ReescribirFicheroRelaciones(PTF.getRelacionesEscritura(), 2);
 	}
 		
-	public HashMap<Integer,ArrayList<Integer>> getRelaciones(String rel)
+	//TODO
+	//Hay que modificar implementacion
+	//b indica si devuelve la matriz por filas o por columnas
+	//b = true -> filas
+	//b = false -> columnas
+	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> getRelaciones(String rel, boolean b)
 	{
 		if (rel.equals("AP")){
-			return this.PA.consultar_OtherPaper();
+			if (b) return this.PAF.consultar_OtherPaper();
+			else return this.PAC.consultar_OtherPaper();
 		}
 		else if (rel.equals("PA")){
-			return this.PA.consultar_PaperOther();
+			if(b) return this.PAF.consultar_PaperOther();
+			else return this.PAC.consultar_PaperOther();
 		}
 		else if (rel.equals("CP")){
-			return this.PC.consultar_OtherPaper();
+			if (b) return this.PCF.consultar_OtherPaper();
+			else return this.PCC.consultar_OtherPaper();
 		}
 		else if (rel.equals("PC")){
-			return this.PC.consultar_PaperOther();
+			if(b) return this.PCF.consultar_PaperOther();
+			else return this.PCC.consultar_PaperOther();
 		}
 		else if (rel.equals("TP")){
-			return this.PT.consultar_OtherPaper();
+			if (b) return this.PTF.consultar_OtherPaper();
+			else return this.PTC.consultar_OtherPaper();
 		}
-		/*else if (rel.equals("PT")){
-			return this.PT.consultar_PaperOther();
-		}*/
 		else
 		{
-			return this.PT.consultar_PaperOther();
+			if(b) return this.PTF.consultar_PaperOther();
+			else return this.PTC.consultar_PaperOther();
 		}
 	}
 	
@@ -191,71 +199,96 @@ public class Grafo
 	public void eliminarNodo(int type, int id) throws NullPointerException
 	{
 		//(0 = P, 1 = A, 2 = C, 3 = T)
-		ArrayList<Integer> conjunto;
+		ArrayList<Pair<Integer,Double>> conjunto;
 		int tam;
 		switch(type)
 		{
 			case 0	:	//--------------------
-						conjunto = this.PA.consultar_RelacionPaper(id);
-						System.out.println("papers" + conjunto);
-						tam = conjunto.size();
-						for(int i=0; i< tam; i++)
-						{
-							this.PA.eliminar_PaperOther(id, conjunto.get(0));
-						}
-						
-						conjunto = this.PC.consultar_RelacionPaper(id);
+						conjunto = this.PAF.consultar_RelacionPaper(id);
+						//System.out.println("papers" + conjunto);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
-								this.PC.eliminar_PaperOther(id, conjunto.get(0));
+								this.PAF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PAC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
 							}
 						}
 						
-						conjunto = this.PT.consultar_RelacionPaper(id);
-						tam = conjunto.size();
-						for(int i=0; i< tam; i++)
+						//TODO
+						//REVISAR
+						conjunto = this.PCF.consultar_RelacionPaper(id);
+						if(conjunto != null)
 						{
-							this.PT.eliminar_PaperOther(id, conjunto.get(0));
+							tam = conjunto.size();
+							for(int i=0; i< tam; i++)
+							{
+								this.PCF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PCC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+							}
 						}
 						
-						this.papers.eliminar_nodo(id);
+						conjunto = this.PTF.consultar_RelacionPaper(id);
+						if(conjunto != null)
+						{
+							tam = conjunto.size();
+							for(int i=0; i< tam; i++)
+							{
+								this.PTF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PTC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+							}
+						}
+						//TODO
+						//REVISAR
+						this.papers.eliminar_nodo(Integer.toString(id));
+						
 						//--------------------
 						break;
 			
 			case 1	:	//--------------------
-						conjunto = this.PA.consultar_RelacionOther(id);
-						tam = conjunto.size();
-						for(int i=0; i< tam; i++)
+						conjunto = this.PAF.consultar_RelacionOther(id);
+						if(conjunto != null)
 						{
-							this.PA.eliminar_PaperOther(conjunto.get(0), id);
+							tam = conjunto.size();
+							for(int i=0; i< tam; i++)
+							{
+								this.PAF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PAC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+							}
 						}
-						this.authors.eliminar_nodo(id);
+						this.authors.eliminar_nodo(Integer.toString(id));
 						//--------------------
 						break;
 			 
 			case 2	:	//--------------------
-						conjunto = this.PC.consultar_RelacionOther(id);
-						tam = conjunto.size();
-						for(int i=0; i< tam; i++)
+						conjunto = this.PCF.consultar_RelacionOther(id);
+						if(conjunto != null)
 						{
-							this.PC.eliminar_PaperOther(conjunto.get(0), id);
+							tam = conjunto.size();
+							for(int i=0; i< tam; i++)
+							{
+								this.PCF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PCC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+							}
 						}
-						this.conferences.eliminar_nodo(id);
-						this.PC.pinta_matriz();
+						this.conferences.eliminar_nodo(Integer.toString(id));
+						this.PCF.pinta_matriz();
 						//--------------------
 						break;
 			
 			default	:	//--------------------
-						conjunto = this.PT.consultar_RelacionOther(id);
-						tam = conjunto.size();
-						for(int i=0; i< tam; i++)
+						conjunto = this.PTF.consultar_RelacionOther(id);
+						if(conjunto != null)
 						{
-							this.PT.eliminar_PaperOther(conjunto.get(0), id);
+							tam = conjunto.size();
+							for(int i=0; i< tam; i++)
+							{
+								this.PTF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PTC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+							}
 						}
-						this.therms.eliminar_nodo(id);
+						this.therms.eliminar_nodo(Integer.toString(id));
 						//--------------------
 						break;
 		}

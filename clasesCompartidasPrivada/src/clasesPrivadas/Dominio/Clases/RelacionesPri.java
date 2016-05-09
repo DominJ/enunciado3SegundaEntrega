@@ -23,13 +23,10 @@ public class RelacionesPri extends Relaciones
 		//this.otherPaper = relacionesVuelta;
 	}
 	
-	/*public RelacionesPri clone()
+	public RelacionesPri clone()
 	{
-		RelacionesPri c = new RelacionesPri();
-		c.otherPaper = this.otherPaper.clone();
-		
-		
-	}*/
+		return this.clone();
+	}
 	
 	public void normFilas(){
 		

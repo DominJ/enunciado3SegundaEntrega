@@ -2,16 +2,11 @@ package clasesCompartidas;
 
 import java.util.*;
 
-/**
- * @author Daniel sattler (Clase Compartida)
- *
- */
-
 public class ConjuntoNodos 
 {
 	private int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.
-	private HashMap<Integer,String> nodos;
-	private HashMap<String,Integer> nombres_nodos;
+	private HashMap<Integer, String > nodos;
+	private HashMap<String, Integer> nombres_nodos;
 	
 	/*PRE: Cierto*/
 	/*POST: Se crea un conjunto de nodos vacio*/
@@ -22,13 +17,19 @@ public class ConjuntoNodos
 		ID_libre = 1;
 	}
 	
-	/*PRE: los hashmaps no son vacÃios e ID_libre es un numero entero positivo.*/
+	/*PRE: los hashmaps no son vacios e ID_libre es un numero entero positivo.*/
 	/*POST: Se crea un conjunto de nodos con los valores de los atributos indicados por los parametros.*/
-	public ConjuntoNodos(HashMap<Integer, String> nodos, HashMap<String, Integer> nombres_nodos, int ID_libre)
+	public ConjuntoNodos(HashMap<Integer, String> nodos, HashMap<String, Integer> nombres_nodos)
 	{
 		this.nodos = nodos;
 		this.nombres_nodos = nombres_nodos;
-		this.ID_libre = ID_libre;
+		int aux = 0;
+		for(Integer id: nodos.keySet())
+		{	
+			if(id > aux)
+				aux = id;
+		}
+		this.ID_libre = aux + 1;
 	}
 	
 	/*PRE: No existe ningun nodo con ese nombre en el grafo*/
@@ -37,10 +38,10 @@ public class ConjuntoNodos
 	{
 		if(nombres_nodos.containsKey(nombre_nodo)) //compruebas que no exista POR NOMBRE
 		{
-			//no se puede anadir, se envia un mensaje diciendo que ya existe.
+			//no se puede añadir, se envia un mensaje diciendo que ya existe.
 			System.out.println("Ya existe un nodo con este nombre");
 		}
-		else //no existe,se anade.
+		else //no existe,se añade.
 		{
 			int id = ID_libre;
 			++ID_libre;
@@ -52,12 +53,12 @@ public class ConjuntoNodos
 	
 	/*PRE: El nodo identificado por id existe previamente en el grafo*/
 	/*POST:El nodo identificado por id es eliminado del grafo*/
-	public void eliminar_nodo(int id)
+	public void eliminar_nodo(String id)
 	{
-		if(nodos.containsKey(id))//si existe
+		if(nombres_nodos.containsKey(id))//si existe
 		{
-			nombres_nodos.remove(nodos.get(id)); //lo borro de nombres_nodos
-			nodos.remove(id); //lo borro de nodos
+			nodos.remove(nombres_nodos.get(id)); //lo borro de nombres_nodos
+			nombres_nodos.remove(id); //lo borro de nodos
 		}
 		else //no existe
 		{
@@ -72,7 +73,7 @@ public class ConjuntoNodos
 	public boolean existe_nodo(String nombre_nodo)
 	{
 		boolean existe = false;
-		if(nombres_nodos.get(nombre_nodo)!= null) existe = true;
+		if(nombres_nodos.containsKey(nombre_nodo)) existe = true;
 		return existe;
 	}
 	
@@ -81,7 +82,7 @@ public class ConjuntoNodos
 	public boolean existe_nodo(int id_nodo)
 	{
 		boolean existe = false;
-		if(nodos.get(id_nodo)!= null) existe = true;
+		if(nodos.containsKey(id_nodo)) existe = true;
 		return existe;
 	}
 
@@ -90,10 +91,11 @@ public class ConjuntoNodos
 	public boolean modificar_nodo(String nombre_nodo, String nuevo_nombre)
 	{	
 		boolean modificado = false;
-		Integer id = nombres_nodos.get(nombre_nodo);
-		if(id != null)//si existe
+		if(nombres_nodos.containsKey(nombre_nodo))
 		{
-			if(nombres_nodos.get(nuevo_nombre) == null) //si no existe.
+			int id = nombres_nodos.get(nombre_nodo);
+		
+			if(!nombres_nodos.containsKey(nuevo_nombre)) //si no existe.
 			{
 				modificado = true;
 				nodos.remove(id);//borras el nodo para agregarlo con el nuevo nombre
@@ -123,16 +125,12 @@ public class ConjuntoNodos
 
 	
 	/*PRE:Cierto*/
-	/*POST: Devuelve el conjunto de nodos entero del parametro impli­cito*/
-	/*Nota: Esta funcion esta pensada para pasar la informacion necesaria para poder guardar los datos en un fichero al final de la 
+	/*POST: Devuelve el conjunto de nodos entero del parametro implicito*/
+	/*Nota: esta funcion esta pensada para pasar la informacion necesaria para poder guardar los datos en un fichero al final de la 
 	 * ejecucion del programa.*/
 	public HashMap<Integer, String> devolver_conjunto()
 	{
 		return nodos;
-	}
-	
-	public HashMap<Integer,String> getConjuntoEscritura()
-	{
-		return nodos;
-	}
+	}	
 }
+
