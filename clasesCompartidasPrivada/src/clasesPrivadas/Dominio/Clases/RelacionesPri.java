@@ -29,11 +29,41 @@ public class RelacionesPri extends Relaciones
 	}
 	
 	public void normFilas(){
-		
+		for (int idi: paperOther.keySet()) {
+			ArrayList<Pair<Integer,Double>> a=paperOther.get(idi);
+			for (int idj=0; idj<a.size(); ++idj) {
+				Pair<Integer,Double> p = a.get(idj);
+				p.setSecond(1.0/a.size());
+				a.set(idj,p);
+			}
+		}
+		for (int idi: otherPaper.keySet()) {
+			ArrayList<Pair<Integer,Double>> a=otherPaper.get(idi);
+			for (int idj=0; idj<a.size(); ++idj) {
+				Pair<Integer,Double> p = a.get(idj);
+				p.setSecond(1.0/a.size());
+				a.set(idj,p);
+			}
+		}
 	}
 	
 	public void normColumnas(){
-		
+		for (int idi: paperOther.keySet()) {
+			ArrayList<Pair<Integer,Double>> a=paperOther.get(idi);
+			for (int idj=0; idj<a.size(); ++idj) {
+				Pair<Integer,Double> p = a.get(idj);
+				p.setSecond(1.0/otherPaper.get(idj).size());
+				a.set(idj,p);
+			}
+		}
+		for (int idi: otherPaper.keySet()) {
+			ArrayList<Pair<Integer,Double>> a=otherPaper.get(idi);
+			for (int idj=0; idj<a.size(); ++idj) {
+				Pair<Integer,Double> p = a.get(idj);
+				p.setSecond(1.0/paperOther.get(idj).size());
+				a.set(idj,p);
+			}
+		}
 	}
 	
 	public void pinta_matriz() {

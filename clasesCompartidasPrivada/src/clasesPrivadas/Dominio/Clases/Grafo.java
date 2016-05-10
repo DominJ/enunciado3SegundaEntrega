@@ -115,7 +115,7 @@ public class Grafo
 		
 	//TODO
 	//Hay que modificar implementacion
-	//b indica si devuelve la matriz por filas o por columnas
+	//b indica si devuelve la matriz normalizada por filas o por columnas
 	//b = true -> filas
 	//b = false -> columnas
 	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> getRelaciones(String rel, boolean b)
