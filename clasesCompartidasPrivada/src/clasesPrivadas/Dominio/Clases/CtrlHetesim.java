@@ -118,19 +118,22 @@ public class CtrlHetesim{
 	  Pre: R es la matriz de una relación AB entre cualquier par de nodos
 	  Post: Devuelve la matriz correspondiente a la relacion AE.
 	 */
-	private static HashMap<Integer,ArrayList<Integer>> Relacion_Dummy(HashMap<Integer,ArrayList<Integer>> a){		//Obtencion de la matriz RL
-		HashMap<Integer,ArrayList<Integer>> R = new HashMap<Integer,ArrayList<Integer>>();
+	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> Relacion_Dummy(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a){		//Obtencion de la matriz RL
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		int etiqueta=0;
 		for (int id: a.keySet()){ //iteramos sobre R
-			ArrayList<Integer> reFila = a.get(id); 											//fila[id] de R
-			ArrayList<Integer> rFila = new ArrayList<Integer>(); 			//futura fila[id] de RE
-			for (int j=0; j< reFila.size(); ++j) {	
-				rFila.add(etiqueta);
+			ArrayList<Pair<Integer,Double>> afila = a.get(id); 											//fila[id] de R
+			ArrayList<Pair<Integer,Double>> rfila = new ArrayList<Pair<Integer,Double>>(); 			//futura fila[id] de RE
+			for (int j=0; j< afila.size(); ++j) {
+				Pair<Integer,Double> p= new Pair<Integer,Double>();
+				p.setFirst(etiqueta);
+				p.setSecond(1.0);
+				rfila.add(p);
 				++etiqueta;
 			}
-			R.put(id, rFila);
+			r.put(id, rfila);
 		}
-		return R;
+		return r;
 	}
 	
 	/*
@@ -138,11 +141,11 @@ public class CtrlHetesim{
 	 Post: devuelve la matriz normalizada de aplicar hete sim en el camino p. En la fila i-esima se encuentran la relevancia de el elemento j sobre i;
 	 */
 	public static HashMap<Integer,ArrayList<Pair<Integer,Double>>> HeteSim(String p, Grafo g){
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> R=new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> PL = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> PR = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> OPL = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> OPR = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r=new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> pl = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> pr = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> opl = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> opr = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		String path=p;
 		boolean first=true;
 		if (path.length()%2==0) path=path.substring(0, path.length()/2) + "E" + path.substring(path.length()/2);			//Si el camino es par, le añadimos el caracter 'E' en la posicion central
@@ -151,19 +154,19 @@ public class CtrlHetesim{
 				String rel=path.substring(i,i+2);							//Miramos la primera relacion;
 				if (path.charAt(i+1)=='E') {								//Si contiene el elemento E
 					rel=path.substring(i,i+1) + path.substring(i+2, i+3);									//obtenemos el string de la relacion cambiando el elemento E por el contiguo
-					PL=Relacion_Dummy(g.getRelaciones(rel));
+					pl=Relacion_Dummy(g.getRelaciones(rel,true));
 				}	
-				else PL=g.getRelaciones(rel);
+				else pl=g.getRelaciones(rel, true);
 				first=false;												//Marcamos que ya hemos completado la primera iteracion
 			}
 			else  {															//En una iteracion cualquiera
-				String rel=path.substring(i,i+2);							//Miramos la relacion i-esima
+				String rel=path.substring(i+1,i+2) + path.substring(i,i+1);							//Miramos la relacion i-esima inversa
 				if (path.charAt(i+1)=='E') {								//Si contiene el elemento E
 					rel=path.substring(i,i+1) + path.substring(i+2, i+3);								//obtenemos el string de la relacion cambiando el elemento E por el contiguo
-					OPL=Relacion_Dummy(g.getRelaciones(rel));							//Y normalizamos por filas
+					opl=Relacion_Dummy(g.getRelaciones(rel,false));							//Y normalizamos por filas
 				}
-				else OPL=g.getRelaciones(rel);
-				PL=producto_mat(PL, OPL);									//Hacemos el producto matricial entre los dos operandos
+				else opl=g.getRelaciones(rel,false);
+				pl=producto_mat(pl, opl);									//Hacemos el producto matricial entre los dos operandos
 			}
 			
 		}
@@ -173,24 +176,24 @@ public class CtrlHetesim{
 				String rel=path.substring(i,i+1)+path.substring(i-1, i);	//Obtenemos el string de la relacion inverso de la posicion i-esima
 				if (path.charAt(i-1)=='E') {								//Si contiene el elemento E
 					rel=path.substring(i,i+1)+path.substring(i-2, i-1);		//obtenemos el string de la relacion cambiando el elemento E por el contiguo
-					PR=Relacion_Dummy(g.getRelaciones(rel));								//Y normalizamos por filas
+					pr=Relacion_Dummy(g.getRelaciones(rel,true));								//Y normalizamos por filas
 				}
-				else  PR=g.getRelaciones(rel);							//Y normalizamos por filas
+				else  pr=g.getRelaciones(rel,true);							//Y normalizamos por filas
 				first=false;												//Marcamos que ya hemos completado la primera iteracion
 			}
 			else  {															//En una iteracion cualquiera
-				String rel=path.substring(i,i+1)+path.substring(i-1, i);	//Obtenemos el string de la relacion inverso de la posicion i-esima
+				String rel=path.substring(i-1, i)+path.substring(i,i+1);	//Obtenemos el string de la relacion inverso de la posicion i-esima
 				if (path.charAt(i-1)=='E') {								//Si contiene el elemento E
 					rel=path.substring(i,i+1)+path.substring(i-2, i-1);			//obtenemos el string de la relacion cambiando el elemento E por el contiguo
-					OPR=Relacion_Dummy(g.getRelaciones(rel));								//Y normalizamos por filas
+					opr=Relacion_Dummy(g.getRelaciones(rel,false));								//Y normalizamos por filas
 				}
-				else OPR=g.getRelaciones(rel);						//Y normalizamos por filas
-				PR=producto_mat(PR, OPR);									//Hacemos el producto matricial entre los dos operandos
+				else opr=g.getRelaciones(rel,false);						//Y normalizamos por filas
+				pr=producto_mat(pr, opr);									//Hacemos el producto matricial entre los dos operandos
 			}
 			
 		}												//Hacemos la transpuesta de la matriz correspondiene al camino derecho
-		R=producto_norm_mat(PL,PR);											//Y finalmente hacemos el producto matricial normalizado entre las dos matrices de los caminos
+		r=producto_norm_mat(pl,pr);											//Y finalmente hacemos el producto matricial normalizado entre las dos matrices de los caminos
 		
-		return R;
+		return r;
 	}
 }
