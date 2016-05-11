@@ -80,6 +80,45 @@ public class LeerFichero
 		return v;
 	}
 	
+	
+	//Aquest mÃƒÂ¨tode retorna un pair amb un HashMap original de node primitiu a la primera posiciÃƒÂ³ i un HashMap transposat a
+	// la segona posiciÃƒÂ³. Els codis dels tipus sÃƒÂ³n (0 = P, 1 = A, 2 = C, 3 = T) 
+	public static Pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(int c) throws IOException {
+		String cadena;
+		//Aquest mÃƒÂ¨tode llegeix el fitxer
+		String archivo = null;
+		if (c == 0) archivo = "Set1/paper.txt";
+		else if (c == 1) archivo = "Set1/author.txt";
+		else if (c == 2) archivo = "Set1/conf.txt";
+		else archivo = "Set1/term.txt";
+		FileReader f = new FileReader(archivo); 
+		BufferedReader b = new BufferedReader(f); 
+		HashMap<Integer,String> m = new HashMap<Integer,String>();
+		HashMap<String,Integer> n = new HashMap<String,Integer>();
+		Integer codi = 0;
+		while(((cadena = b.readLine())!=null)){
+	    	int i = 0;
+	    	String copy = cadena;
+	    	while(!(Character.isWhitespace(cadena.charAt(i)))) {
+	    		++i;
+	    	}
+	    	String s = copy.substring(0,i);
+	    	codi = Integer.parseInt(s);
+	    	String s1 = copy.substring(i+1,copy.length());
+	    	//IntroduÃƒÂ¯m els elements al HashMap primer
+	    	m.put(codi, s1);
+	        //IntroduÃƒÂ¯m els elements al HashMap segon ja invertits
+	    	n.put(s1,codi);
+		}
+		//Tanquem el buffer
+		b.close();
+		//Omplim el pair amb els dos HashMaps obtinguts
+		Pair<HashMap<Integer,String>,HashMap<String,Integer>> v = new Pair<HashMap<Integer,String>,HashMap<String,Integer>>();
+		v.setFirst(m);
+		v.setSecond(n);
+		return v;
+	}
+	
 	public static void main(String [] args) throws IOException{
 		Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> a = new Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
 		a = crear_relacion(1);
