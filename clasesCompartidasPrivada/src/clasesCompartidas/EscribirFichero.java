@@ -17,20 +17,20 @@ public class EscribirFichero {
 	
 	/*PRE: Existeix el HashMap que li passem */
 	/*POST: Escibim sobre el fitxer corresponent segons el tipus el Hashmap de Relacions*/
-	public static void ReescribirFicheroRelaciones(HashMap<Integer,ArrayList<Integer>> n, int Tipus){
+	public static void ReescribirFicheroRelaciones(HashMap<Integer,ArrayList<Pair<Integer,Double>>> n, int Tipus){
 		try{
 			FileWriter fw;
 			if (Tipus == 0) fw = new FileWriter("../Set1/paper_author.txt",false);
 			else if (Tipus == 1) fw = new FileWriter("../Set1/paper_conf.txt",false);
 			else  fw = new FileWriter("../Set1/paper_term.txt",false);
-		    Iterator<Entry<Integer, ArrayList<Integer>>> it = n.entrySet().iterator();
+		    Iterator<Entry<Integer, ArrayList<Pair<Integer,Double>>>> it = n.entrySet().iterator();
 		    while (it.hasNext()) {
-				Map.Entry<Integer, ArrayList<Integer>> e = it.next();
-				ArrayList<Integer> b = new ArrayList<Integer>();
+				Map.Entry<Integer, ArrayList<Pair<Integer,Double>>> e = it.next();
+				ArrayList<Pair<Integer,Double>> b = new ArrayList<Pair<Integer,Double>>();
 				int a = e.getKey();
 				b = e.getValue();
 				for (int j = 0; j < b.size(); j++){
-					fw.write(a + "\t"+ b.get(j) + "\r\n");
+					fw.write(a + "\t"+ b.get(j).getFirst() + "\r\n");
 				}
 			}
 			fw.close();
