@@ -1,10 +1,11 @@
 package clasesCompartidas;
+import java.io.Serializable;
 
 /**
  * @author unknown (Clase Compartida)
  *
  */
-public class Pair<A, B> {
+public class Pair<A, B> implements Serializable {
     private A first;
     private B second;
 
