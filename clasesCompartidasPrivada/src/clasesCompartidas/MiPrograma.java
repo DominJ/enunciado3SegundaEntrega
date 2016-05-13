@@ -15,9 +15,9 @@ public class MiPrograma {
 	public static void main (String[] args) {
 		javax.swing.SwingUtilities.invokeLater (new Runnable() {
 			public void run() {
-					//CtrlPresentacion ctrlPresentacion = new CtrlPresentacion();
-					//ctrlPresentacion.inicializarPresentacion();
-					
+					CtrlPresentacion ctrlPresentacion = new CtrlPresentacion();
+					ctrlPresentacion.inicializarPresentacion();
+				/*	
 					JFrame ventana = new JFrame("MENU PRINCIPAL");
 				    ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					
@@ -80,10 +80,10 @@ public class MiPrograma {
 				  // END
 				     ventana.setSize(800, 200);
 				     ventana.setVisible(true);
-				 
-			}
+				 */
+			} 
 		});
-	}
+	} 
 }
 
 
