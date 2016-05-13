@@ -43,27 +43,26 @@ public class Grafo
 		try 
 		{
 			Pair<HashMap<Integer,String>,HashMap<String,Integer>> conjunto;
-			Pair<HashMap<Integer,ArrayList<Integer>>,HashMap<Integer,ArrayList<Integer>>> relacion;
-			int idMax;
+			Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> relacion;
 			
 			//Instanciamos papers
 			conjunto = LeerFichero.crear_nodo_primitivo(0);
-			idMax = LeerFichero.idMax(conjunto.getFirst());
+			
 			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos autor
 			conjunto = LeerFichero.crear_nodo_primitivo(1);
-			idMax = LeerFichero.idMax(conjunto.getFirst());
+			
 			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos conferences
 			conjunto = LeerFichero.crear_nodo_primitivo(2);
-			idMax = LeerFichero.idMax(conjunto.getFirst());
+			
 			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos terms
 			conjunto = LeerFichero.crear_nodo_primitivo(3);
-			idMax = LeerFichero.idMax(conjunto.getFirst());
+			
 			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos Relacion PA
