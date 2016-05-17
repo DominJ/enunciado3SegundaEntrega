@@ -58,7 +58,7 @@ public class RelacionesPri extends Relaciones
 			ArrayList<Pair<Integer,Double>> a=paperOther.get(idi);
 			for (int idj=0; idj<a.size(); ++idj) {
 				Pair<Integer,Double> p = a.get(idj);
-				p.setSecond(1.0/otherPaper.get(idj).size());
+				p.setSecond(1.0/otherPaper.get(p.getFirst()).size());
 				a.set(idj,p);
 			}
 		}
@@ -66,7 +66,7 @@ public class RelacionesPri extends Relaciones
 			ArrayList<Pair<Integer,Double>> a=otherPaper.get(idi);
 			for (int idj=0; idj<a.size(); ++idj) {
 				Pair<Integer,Double> p = a.get(idj);
-				p.setSecond(1.0/paperOther.get(idj).size());
+				p.setSecond(1.0/paperOther.get(p.getFirst()).size());
 				a.set(idj,p);
 			}
 		}

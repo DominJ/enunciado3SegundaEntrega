@@ -68,6 +68,7 @@ public class Grafo
 			relacion = LeerFichero.crear_relacion(1);
 			//Debemos encontrar una forma mejor de hacer esto
 			this.PAF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			relacion = LeerFichero.crear_relacion(1);
 			this.PAC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PAC = (RelacionesPri)PAF.clone();
 			//this.PAC = new RelacionesPri(PAF);
@@ -78,6 +79,7 @@ public class Grafo
 			//Instanciamos Relacion PC
 			relacion = LeerFichero.crear_relacion(2);
 			this.PCF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			relacion = LeerFichero.crear_relacion(2);
 			this.PCC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PCC = (RelacionesPri)PAF.clone();
 			//this.PCC = new RelacionesPri(PAF);
@@ -87,6 +89,7 @@ public class Grafo
 			//Instanciamos Relacion PT
 			relacion = LeerFichero.crear_relacion(3);
 			this.PTF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
+			relacion = LeerFichero.crear_relacion(3);
 			this.PTC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PTC = (RelacionesPri)PAF.clone();
 			//this.PTC = new RelacionesPri(PAF);

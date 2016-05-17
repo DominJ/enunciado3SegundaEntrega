@@ -153,7 +153,7 @@ public class CtrlHetesim{
 				String rel=path.substring(i,i+2);							//Miramos la primera relacion;
 				if (path.charAt(i+1)=='E') {								//Si contiene el elemento E
 					rel=path.substring(i,i+1) + path.substring(i+2, i+3);									//obtenemos el string de la relacion cambiando el elemento E por el contiguo
-					pl=Relacion_Dummy(g.getRelaciones(rel,true));
+					return g.getRelaciones(rel,true);
 				}	
 				else pl=g.getRelaciones(rel, true);
 				first=false;												//Marcamos que ya hemos completado la primera iteracion
@@ -173,11 +173,7 @@ public class CtrlHetesim{
 		for (int i=path.length()-1; i>=(path.length()/2)+1; --i) {			//Iteramos la parte derecha del camino desde la posicion final a la central
 			if (first) {													//En caso de primera iteracion
 				String rel=path.substring(i,i+1)+path.substring(i-1, i);	//Obtenemos el string de la relacion inverso de la posicion i-esima
-				if (path.charAt(i-1)=='E') {								//Si contiene el elemento E
-					rel=path.substring(i,i+1)+path.substring(i-2, i-1);		//obtenemos el string de la relacion cambiando el elemento E por el contiguo
-					pr=Relacion_Dummy(g.getRelaciones(rel,true));								//Y normalizamos por filas
-				}
-				else  pr=g.getRelaciones(rel,true);							//Y normalizamos por filas
+				pr=g.getRelaciones(rel,true);							//Y normalizamos por filas
 				first=false;												//Marcamos que ya hemos completado la primera iteracion
 			}
 			else  {															//En una iteracion cualquiera
