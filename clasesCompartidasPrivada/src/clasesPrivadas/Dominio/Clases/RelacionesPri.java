@@ -23,9 +23,16 @@ public class RelacionesPri extends Relaciones
 		//this.otherPaper = relacionesVuelta;
 	}
 	
-	public RelacionesPri clone()
+	@SuppressWarnings("unchecked")
+	//Esto es para evitar los warning de cast sin garantia, lo garantizo yo como programador
+	public RelacionesPri(RelacionesPri a)
 	{
-		return this.clone();
+		HashMap<Integer, ArrayList<Pair<Integer, Double>>> relacionesInternas; 
+		relacionesInternas = a.getRelacionesEscritura();
+		this.paperOther = (HashMap<Integer, ArrayList<Pair<Integer, Double>>>) relacionesInternas.clone();
+		
+		relacionesInternas = a.getRelacionesInversa();
+		this.otherPaper = (HashMap<Integer, ArrayList<Pair<Integer, Double>>>) relacionesInternas.clone();
 	}
 	
 	public void normFilas(){
@@ -95,6 +102,11 @@ public class RelacionesPri extends Relaciones
 	
 	public HashMap<Integer, ArrayList<Pair<Integer, Double>>> getRelacionesEscritura()
 	{
-		return paperOther;
+		return this.paperOther;
+	}
+	
+	public HashMap<Integer, ArrayList<Pair<Integer, Double>>> getRelacionesInversa()
+	{
+		return this.otherPaper;
 	}
 }

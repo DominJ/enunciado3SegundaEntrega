@@ -15,7 +15,6 @@ import clasesCompartidas.ConjuntoNodos;
 import clasesCompartidas.EscribirFichero;
 import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
-import clasesCompartidas.Relaciones;
 
 /**
  * @author Domingo Jes�s de la Mata Garcia
@@ -68,7 +67,8 @@ public class Grafo
 			//Instanciamos Relacion PA
 			relacion = LeerFichero.crear_relacion(1);
 			this.PAF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			this.PAC = PAF.clone();
+			//this.PAC = (RelacionesPri)PAF.clone();
+			this.PAC = new RelacionesPri(PAF);
 			this.PAF.normFilas();
 			this.PAC.normColumnas();
 			
@@ -76,14 +76,16 @@ public class Grafo
 			//Instanciamos Relacion PC
 			relacion = LeerFichero.crear_relacion(2);
 			this.PCF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			this.PCC = (RelacionesPri)PAF.clone();
+			//this.PCC = (RelacionesPri)PAF.clone();
+			this.PCC = new RelacionesPri(PAF);
 			this.PCF.normFilas();
 			this.PCC.normColumnas();
 			
 			//Instanciamos Relacion PT
 			relacion = LeerFichero.crear_relacion(3);
 			this.PTF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			this.PTC = (RelacionesPri)PAF.clone();
+			//this.PTC = (RelacionesPri)PAF.clone();
+			this.PTC = new RelacionesPri(PAF);
 			this.PTF.normFilas();
 			this.PTC.normColumnas();
 			
@@ -98,10 +100,10 @@ public class Grafo
 	private void escribirDataSet()
 	{
 		//(0->P  1->A  2->C 3->T)
-		EscribirFichero.ReescribirFicheroNodos(papers.getConjuntoEscritura(), 0);
-		EscribirFichero.ReescribirFicheroNodos(authors.getConjuntoEscritura(), 1);
-		EscribirFichero.ReescribirFicheroNodos(conferences.getConjuntoEscritura(), 2);
-		EscribirFichero.ReescribirFicheroNodos(therms.getConjuntoEscritura(), 3);
+		EscribirFichero.ReescribirFicheroNodos(papers.devolver_conjunto(), 0);
+		EscribirFichero.ReescribirFicheroNodos(authors.devolver_conjunto(), 1);
+		EscribirFichero.ReescribirFicheroNodos(conferences.devolver_conjunto(), 2);
+		EscribirFichero.ReescribirFicheroNodos(therms.devolver_conjunto(), 3);
 	}
 	
 	private void escribirRelaciones()
