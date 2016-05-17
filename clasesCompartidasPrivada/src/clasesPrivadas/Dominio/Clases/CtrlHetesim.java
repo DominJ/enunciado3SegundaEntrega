@@ -49,7 +49,7 @@ public class CtrlHetesim{
 						++z;																	//Y augmentamos las dos variables
 						++y;
 					}
-					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas peque�a
+					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas pequeña
 					else ++y;
 				}
 				if (rval.getSecond()!= 0)rfila.add(rval);				
@@ -85,7 +85,7 @@ public class CtrlHetesim{
 						++z;																	//Y augmentamos las dos variables
 						++y;
 					}
-					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas peque�a
+					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas pequeña
 					else ++y;
 				}
 				if (rval.getSecond()!=0) {
@@ -115,24 +115,23 @@ public class CtrlHetesim{
 	}
 	
 	/*
-	  Pre: R es la matriz de una relación AB entre cualquier par de nodos
+	  Pre: R es la matriz de una relaciÃ³n AB entre cualquier par de nodos
 	  Post: Devuelve la matriz correspondiente a la relacion AE.
 	 */
 	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> Relacion_Dummy(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a){		//Obtencion de la matriz RL
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		int etiqueta=0;
 		for (int id: a.keySet()){ //iteramos sobre R
-			ArrayList<Pair<Integer,Double>> afila = a.get(id); 											//fila[id] de R
-			ArrayList<Pair<Integer,Double>> rfila = new ArrayList<Pair<Integer,Double>>(); 			//futura fila[id] de RE
+			ArrayList<Pair<Integer,Double>> afila = a.get(id); 											//fila[id] de a
 			for (int j=0; j< afila.size(); ++j) {
-				Pair<Integer,Double> p= new Pair<Integer,Double>();
-				p.setFirst(etiqueta);
-				p.setSecond(1.0);
+				ArrayList<Pair<Integer,Double>> rfila = new ArrayList<Pair<Integer,Double>>(); 			//futura fila[id] de r1
+				Pair<Integer,Double> p=new Pair<Integer,Double>(id, 1.0/afila.size());
 				rfila.add(p);
 				++etiqueta;
+				r.put(etiqueta, rfila);
 			}
-			r.put(id, rfila);
 		}
+		
 		return r;
 	}
 	
@@ -148,7 +147,7 @@ public class CtrlHetesim{
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> opr = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		String path=p;
 		boolean first=true;
-		if (path.length()%2==0) path=path.substring(0, path.length()/2) + "E" + path.substring(path.length()/2);			//Si el camino es par, le añadimos el caracter 'E' en la posicion central
+		if (path.length()%2==0) path=path.substring(0, path.length()/2) + "E" + path.substring(path.length()/2);			//Si el camino es par, le aÃ±adimos el caracter 'E' en la posicion central
 		for (int i=0; i<path.length()/2; ++i) {								//Recorremos la parte izquierda del camino
 			if (first) {													//En caso de primera iteracion
 				String rel=path.substring(i,i+2);							//Miramos la primera relacion;
