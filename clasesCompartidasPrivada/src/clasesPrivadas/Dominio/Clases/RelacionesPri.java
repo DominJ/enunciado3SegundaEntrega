@@ -23,8 +23,8 @@ public class RelacionesPri extends Relaciones
 		//this.otherPaper = relacionesVuelta;
 	}
 	
-	//Esto es para evitar los warning de cast sin garantia, lo garantizo yo como programador
-	public RelacionesPri(RelacionesPri a)
+	//temporalmente deshabilitado
+	/*public RelacionesPri(RelacionesPri a)
 	{
 		HashMap<Integer, ArrayList<Pair<Integer, Double>>> relacionesInternas; 
 		relacionesInternas = a.getRelacionesEscritura();
@@ -32,7 +32,7 @@ public class RelacionesPri extends Relaciones
 		
 		relacionesInternas = a.getRelacionesInversa();
 		this.otherPaper = (HashMap<Integer, ArrayList<Pair<Integer, Double>>>) relacionesInternas.clone();
-	}
+	}*/
 	
 	public void normFilas(){
 		for (int idi: paperOther.keySet()) {
