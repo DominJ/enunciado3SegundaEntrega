@@ -23,7 +23,6 @@ public class RelacionesPri extends Relaciones
 		//this.otherPaper = relacionesVuelta;
 	}
 	
-	@SuppressWarnings("unchecked")
 	//Esto es para evitar los warning de cast sin garantia, lo garantizo yo como programador
 	public RelacionesPri(RelacionesPri a)
 	{
