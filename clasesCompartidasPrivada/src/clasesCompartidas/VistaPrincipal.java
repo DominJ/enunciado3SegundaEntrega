@@ -7,6 +7,7 @@ import java.util.*;
 
 public class VistaPrincipal {
 	
+// Vista Principal //
 private CtrlPresentacion iCtrlPresentacion;
 private JFrame frameVista = new JFrame("Camins de cerca de rellevància");
 private JPanel panelContenidos = new JPanel();
@@ -16,6 +17,7 @@ private JButton buttonRC = new JButton("Realizar Consulta");
 private JButton buttonBH = new JButton("Busca Historial");
 private JButton buttonSalir = new JButton("Salir");
 
+//Modificar base de datos //
 private JFrame frameVista1 = new JFrame("Opcions");
 private JPanel panelContenidos1 = new JPanel();
 private JPanel panelBotones1 = new JPanel();
@@ -23,6 +25,18 @@ private JButton buttonA = new JButton("Anadir");
 private JButton buttonAR = new JButton("Actualizar");
 private JButton buttonLH = new JButton("Limpiar Historial");
 private JButton buttonE = new JButton("Eliminar");
+
+
+// Anadir //
+private JPanel panelAnadir = new JPanel();
+private JFrame frameVistaAnadir = new JFrame("Añadir");
+private CheckboxGroup Tipos = new CheckboxGroup();
+private Checkbox chkPaper = new Checkbox("Paper",Tipos,true);
+private Checkbox chkAuthor = new Checkbox("Author",Tipos,false);
+private Checkbox chkConf = new Checkbox("Conference",Tipos,false);
+private Checkbox chkTerm = new Checkbox("Term",Tipos,false);
+TextField tf1 = new TextField("",20);
+
 
 
 
@@ -140,7 +154,41 @@ private void inicializar_panelBotones1() {
 
 public void actionPerformed_buttonA (ActionEvent event) {
 	
-}
+	frameVistaAnadir.setMinimumSize(new Dimension(450,100));
+	frameVistaAnadir.setPreferredSize(frameVista.getMinimumSize());
+	frameVistaAnadir.setResizable(false);
+	frameVistaAnadir.setLocationRelativeTo(null);
+	frameVistaAnadir.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    JPanel contentPaneAnadir = (JPanel) frameVistaAnadir.getContentPane();
+    contentPaneAnadir.add(panelAnadir);
+    
+    //frameVistaAnadir.add(panelAnadir);
+	
+	FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
+	//cambiao ventana -> frameVista
+    frameVistaAnadir.setLayout(layout);
+    panelAnadir.setLayout(new FlowLayout());
+	
+    
+
+   /* Checkbox chkPaper = new Checkbox("Paper",Tipos,true);
+    Checkbox chkAuthor = new Checkbox("Author",Tipos,false);
+    Checkbox chkConf = new Checkbox("Conference",Tipos,false);
+    Checkbox chkTerm = new Checkbox("Term",Tipos,false); */
+
+    tf1 = new TextField("Añade el valor", 20);
+    tf1.setLocation(30, 30);
+    panelAnadir.add(chkPaper);
+    panelAnadir.add(chkAuthor);   
+    panelAnadir.add(chkConf);       
+    panelAnadir.add(chkTerm); 
+    panelAnadir.add(tf1);
+
+    
+    frameVistaAnadir.setVisible(true);
+    panelAnadir.setVisible(true);
+
+	}
 
 public void actionPerformed_buttonAR(ActionEvent event) {
 
