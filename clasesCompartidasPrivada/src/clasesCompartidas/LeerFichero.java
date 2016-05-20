@@ -119,6 +119,29 @@ public class LeerFichero
 		return v;
 	}
 	
+	public static Boolean correcto() throws FileNotFoundException, IOException {  
+	    String sDirectorio = "Set1";
+	    File f = new File(sDirectorio);
+	    File[] ficheros = f.listFiles();
+	    Boolean comp = true;
+	    String aux = "Set1/";
+	    String cadena;
+	    for(int i = 0; i < ficheros.length & comp; i++) {
+	    	String a = ficheros[i].getName();
+	    	cadena = aux+""+a;
+			//System.out.println(cadena+"\n");
+			//System.out.println(i+"\n");
+	    	FileReader c = new FileReader(cadena); 
+			BufferedReader d = new BufferedReader(c); 
+			if(d.readLine() == null) {
+				comp = false; 
+				d.close();
+			}
+	    }
+	    
+	    return comp;
+	}
+	
 	public static void main(String [] args) throws IOException{
 		Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> a = new Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
 		a = crear_relacion(1);
@@ -139,6 +162,10 @@ public class LeerFichero
 		//d1 = c1.get(0);
 		//System.out.println("Number0 = " + d0.getFirst() + "\n");
 		//System.out.println("Number1 = " + d1.getFirst() + "\n");
+		boolean b = correcto(); 
+		System.out.println("Todo correcto: ");
+		if(b)System.out.println("Sí\n");
+		else System.out.println("No\n");
 	}
 	
 }
