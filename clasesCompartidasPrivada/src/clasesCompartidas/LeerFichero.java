@@ -18,14 +18,14 @@ public class LeerFichero
 	
 	/*PRE: c es un integer que discrimina el tipus*/
 	/*POST: Es crea un pair de dos HashMaps, amb la relacio P-NodePrimitiu al First i NodePrimitiu-P al Second*/
-	public static Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> crear_relacion(int c) throws IOException {
+	public static Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> crear_relacion(String ruta, int c) throws IOException {
 		String cadena;
 		//Aquest metode llegeix el fitxer
 		Integer vb = 0;
 		String archivo = null;
-		if (c == 1) archivo = "Set1/paper_author.txt";
-		else if (c == 2) archivo = "Set1/paper_conf.txt";
-		else archivo = "Set1/paper_term.txt";
+		if (c == 1) archivo = ruta + "/paper_author.txt";
+		else if (c == 2) archivo = ruta + "/paper_conf.txt";
+		else archivo = ruta + "/paper_term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> m = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
@@ -85,14 +85,14 @@ public class LeerFichero
 	
 	//Aquest mÃƒÂ¨tode retorna un pair amb un HashMap original de node primitiu a la primera posiciÃƒÂ³ i un HashMap transposat a
 	// la segona posiciÃƒÂ³. Els codis dels tipus sÃƒÂ³n (0 = P, 1 = A, 2 = C, 3 = T) 
-	public static Pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(int c) throws IOException {
+	public static Pair<HashMap<Integer,String>,HashMap<String,Integer>> crear_nodo_primitivo(String ruta, int c) throws IOException {
 		String cadena;
 		//Aquest mÃƒÂ¨tode llegeix el fitxer
 		String archivo = null;
-		if (c == 0) archivo = "Set1/paper.txt";
-		else if (c == 1) archivo = "Set1/author.txt";
-		else if (c == 2) archivo = "Set1/conf.txt";
-		else archivo = "Set1/term.txt";
+		if (c == 0) archivo = ruta + "/paper.txt";
+		else if (c == 1) archivo = ruta + "/author.txt";
+		else if (c == 2) archivo = ruta + "/conf.txt";
+		else archivo = ruta + "/term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,String> m = new HashMap<Integer,String>();
@@ -121,12 +121,12 @@ public class LeerFichero
 		return v;
 	}
 	
-	public static Boolean correcto() throws FileNotFoundException, IOException {  
-	    String sDirectorio = "Set1";
+	public static boolean correcto(String sDirectorio) throws FileNotFoundException, IOException {  
+	    //String sDirectorio = "Set1";
 	    File f = new File(sDirectorio);
 	    File[] ficheros = f.listFiles();
 	    Boolean comp = true;
-	    String aux = "Set1/";
+	    String aux = sDirectorio + "/";
 	    String cadena;
 	    for(int i = 0; i < ficheros.length & comp; i++) {
 	    	String a = ficheros[i].getName();
@@ -146,7 +146,7 @@ public class LeerFichero
 	
 	public static void main(String [] args) throws IOException{
 		Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> a = new Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
-		a = crear_relacion(1);
+		a = crear_relacion("Set1", 1);
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> b0 = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> b1 = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		b0 = a.getFirst();
@@ -164,7 +164,9 @@ public class LeerFichero
 		//d1 = c1.get(0);
 		//System.out.println("Number0 = " + d0.getFirst() + "\n");
 		//System.out.println("Number1 = " + d1.getFirst() + "\n");
-		boolean b = correcto(); 
+		
+		//Ruta constante, entiendo que esto es una prueba
+		boolean b = correcto("Set1"); 
 		System.out.println("Todo correcto: ");
 		if(b)System.out.println("Sí\n");
 		else System.out.println("No\n");

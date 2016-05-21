@@ -1,20 +1,17 @@
 package clasesPrivadas.Dominio.Clases;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 /*
 author: 
 */
-
-
-
-
-
 import clasesCompartidas.ConjuntoNodos;
 import clasesCompartidas.EscribirFichero;
 import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
+
 
 /**
  * @author Domingo Jes�s de la Mata Garcia
@@ -22,6 +19,9 @@ import clasesCompartidas.Pair;
  */
 public class Grafo 
 {
+	static final String RUTA_INICIAL = "Set1";
+	static final String RUTA_ADD = "AddData";
+	
 	ConjuntoNodos authors;
 	ConjuntoNodos therms;
 	ConjuntoNodos conferences;
@@ -45,30 +45,30 @@ public class Grafo
 			Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> relacion;
 			
 			//Instanciamos papers
-			conjunto = LeerFichero.crear_nodo_primitivo(0);
+			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 0);
 			
 			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos autor
-			conjunto = LeerFichero.crear_nodo_primitivo(1);
+			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 1);
 			
 			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos conferences
-			conjunto = LeerFichero.crear_nodo_primitivo(2);
+			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 2);
 			
 			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos terms
-			conjunto = LeerFichero.crear_nodo_primitivo(3);
+			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 3);
 			
 			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos Relacion PA
-			relacion = LeerFichero.crear_relacion(1);
+			relacion = LeerFichero.crear_relacion(RUTA_INICIAL, 1);
 			//Debemos encontrar una forma mejor de hacer esto
 			this.PAF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			relacion = LeerFichero.crear_relacion(1);
+			relacion = LeerFichero.crear_relacion(RUTA_INICIAL, 1);
 			this.PAC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PAC = (RelacionesPri)PAF.clone();
 			//this.PAC = new RelacionesPri(PAF);
@@ -82,9 +82,9 @@ public class Grafo
 			
 			
 			//Instanciamos Relacion PC
-			relacion = LeerFichero.crear_relacion(2);
+			relacion = LeerFichero.crear_relacion(RUTA_INICIAL, 2);
 			this.PCF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			relacion = LeerFichero.crear_relacion(2);
+			relacion = LeerFichero.crear_relacion(RUTA_INICIAL, 2);
 			this.PCC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PCC = (RelacionesPri)PAF.clone();
 			//this.PCC = new RelacionesPri(PAF);
@@ -97,9 +97,9 @@ public class Grafo
 			this.PCC.normColumnas();
 			
 			//Instanciamos Relacion PT
-			relacion = LeerFichero.crear_relacion(3);
+			relacion = LeerFichero.crear_relacion(RUTA_INICIAL, 3);
 			this.PTF = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
-			relacion = LeerFichero.crear_relacion(3);
+			relacion = LeerFichero.crear_relacion(RUTA_INICIAL, 3);
 			this.PTC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PTC = (RelacionesPri)PAF.clone();
 			//this.PTC = new RelacionesPri(PAF);
@@ -320,5 +320,21 @@ public class Grafo
 	{
 		this.escribirDataSet();
 		this.escribirRelaciones();
+	}
+	
+	public void addDataGraph() throws FileNotFoundException
+	{
+		// ruta definidia -> /AddData
+		// Comprobar existencia de los ficheros
+		//unir hashmaps con hashmap.putall(hashmap)
+		try
+		{
+			LeerFichero.correcto(RUTA_ADD);
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println("Se ha producido un problema ");
+		}
 	}
 }

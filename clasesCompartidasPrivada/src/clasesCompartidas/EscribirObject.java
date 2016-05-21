@@ -29,9 +29,9 @@ public class EscribirObject implements Serializable{
 	
 	public static void main(String [] args) throws IOException {
 		Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> a = new Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
-		a = LeerFichero.crear_relacion(1);
+		a = LeerFichero.crear_relacion("Set1", 1);
 		ReescribirObject1(a);
-		Pair<HashMap<Integer,String>,HashMap<String,Integer>> m = LeerFichero.crear_nodo_primitivo(1);
+		Pair<HashMap<Integer,String>,HashMap<String,Integer>> m = LeerFichero.crear_nodo_primitivo("Set1", 1);
 		ReescribirNodosPrimitivosObject(m);
 	}
 }
