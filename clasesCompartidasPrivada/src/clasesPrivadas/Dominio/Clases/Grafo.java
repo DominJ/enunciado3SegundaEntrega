@@ -72,6 +72,7 @@ public class Grafo
 			this.PAC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PAC = (RelacionesPri)PAF.clone();
 			//this.PAC = new RelacionesPri(PAF);
+			this.PAF.ordenarArray();
 			this.PAF.normFilas();
 			this.PAC.normColumnas();
 			

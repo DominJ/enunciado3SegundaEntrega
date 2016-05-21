@@ -1,7 +1,10 @@
 package clasesPrivadas.Dominio.Clases;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 import clasesCompartidas.Pair;
 import clasesCompartidas.Relaciones;
@@ -33,6 +36,21 @@ public class RelacionesPri extends Relaciones
 		relacionesInternas = a.getRelacionesInversa();
 		this.otherPaper = (HashMap<Integer, ArrayList<Pair<Integer, Double>>>) relacionesInternas.clone();
 	}*/
+
+	public void ordenarArray()
+	{
+		//iteramos sobre los valores
+		for (List<Pair<Integer,Double>> estructura : this.paperOther.values()) {
+		    
+		    Collections.sort(estructura, new Comparator<Pair<Integer,Double>>() {
+		        public int compare(Pair<Integer,Double> p1, Pair<Integer,Double> p2) {
+		            return p1.getFirst() - p2.getFirst();
+		        }
+		    });
+		    //System.out.println("estructura = " + estructura.toString());
+		}
+
+	}
 	
 	public void normFilas(){
 		for (int idi: paperOther.keySet()) {
