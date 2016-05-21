@@ -49,6 +49,16 @@ public class RelacionesPri extends Relaciones
 		    });
 		    //System.out.println("estructura = " + estructura.toString());
 		}
+		
+		for (List<Pair<Integer,Double>> estructura : this.otherPaper.values()) {
+		    
+		    Collections.sort(estructura, new Comparator<Pair<Integer,Double>>() {
+		        public int compare(Pair<Integer,Double> p1, Pair<Integer,Double> p2) {
+		            return p1.getFirst() - p2.getFirst();
+		        }
+		    });
+		    //System.out.println("estructura = " + estructura.toString());
+		}
 
 	}
 	

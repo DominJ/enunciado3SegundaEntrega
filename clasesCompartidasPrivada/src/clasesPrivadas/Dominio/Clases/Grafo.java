@@ -72,7 +72,11 @@ public class Grafo
 			this.PAC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PAC = (RelacionesPri)PAF.clone();
 			//this.PAC = new RelacionesPri(PAF);
+			
+			//Creo que es SUPER ineficiente
 			this.PAF.ordenarArray();
+			this.PAC.ordenarArray();
+			
 			this.PAF.normFilas();
 			this.PAC.normColumnas();
 			
@@ -84,6 +88,11 @@ public class Grafo
 			this.PCC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PCC = (RelacionesPri)PAF.clone();
 			//this.PCC = new RelacionesPri(PAF);
+			
+			//Creo que es SUPER ineficiente
+			this.PCF.ordenarArray();
+			this.PCC.ordenarArray();
+			
 			this.PCF.normFilas();
 			this.PCC.normColumnas();
 			
@@ -94,6 +103,11 @@ public class Grafo
 			this.PTC = new RelacionesPri(relacion.getFirst(),relacion.getSecond());
 			//this.PTC = (RelacionesPri)PAF.clone();
 			//this.PTC = new RelacionesPri(PAF);
+			
+			//Creo que es SUPER ineficiente
+			this.PTF.ordenarArray();
+			this.PTC.ordenarArray();
+			
 			this.PTF.normFilas();
 			this.PTC.normColumnas();
 			
