@@ -17,33 +17,155 @@ private JButton buttonRC = new JButton("Realizar Consulta");
 private JButton buttonBH = new JButton("Busca Historial");
 private JButton buttonSalir = new JButton("Salir");
 
-//Modificar base de datos //
+/* //Modificar base de datos //
 private JFrame frameVista1 = new JFrame("Opcions");
 private JPanel panelContenidos1 = new JPanel();
 private JPanel panelBotones1 = new JPanel();
 private JButton buttonA = new JButton("Anadir");
 private JButton buttonAR = new JButton("Actualizar");
 private JButton buttonLH = new JButton("Limpiar Historial");
-private JButton buttonE = new JButton("Eliminar");
+private JButton buttonE = new JButton("Eliminar");*/
 
 
-// Anadir //
-private JPanel panelAnadir = new JPanel();
-private JFrame frameVistaAnadir = new JFrame("Añadir");
-private CheckboxGroup Tipos = new CheckboxGroup();
-private Checkbox chkPaper = new Checkbox("Paper",Tipos,true);
-private Checkbox chkAuthor = new Checkbox("Author",Tipos,false);
-private Checkbox chkConf = new Checkbox("Conference",Tipos,false);
-private Checkbox chkTerm = new Checkbox("Term",Tipos,false);
-TextField tf1 = new TextField("",20);
+public void activar() {
+    frameVista.setEnabled(true);
+  }
+
+  public void desactivar() {
+    frameVista.setEnabled(false);
+  }
+
+  public void hacerVisible() {
+	    frameVista.pack();
+	    frameVista.setVisible(true);
+	  }
+
+	  public void hacerInvisible() {
+	    frameVista.setVisible(false);
+	  }
+
+private void inicializar_frameVista() {
+    // Tamanyo
+    frameVista.setMinimumSize(new Dimension(700,400));
+    frameVista.setPreferredSize(frameVista.getMinimumSize());
+    frameVista.setResizable(false);
+    frameVista.setLocationRelativeTo(null);
+    frameVista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    JPanel contentPane = (JPanel) frameVista.getContentPane();
+    contentPane.add(panelContenidos);
+	FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
+    frameVista.setLayout(layout);
+  
+    
+    JLabel etiqueta = new JLabel("MENU PRINCIPAL");
+    etiqueta.setForeground(Color.RED);
+    frameVista.add(etiqueta);
+ 
+  }
 
 
+private void inicializar_panelContenidos() {
+    // Layout
+    panelContenidos.setLayout(new BorderLayout());
+    // Paneles
+    panelContenidos.add(panelBotones,BorderLayout.NORTH);
+  }
+
+private void inicializar_panelBotones() {
+    // Layout
+    panelBotones.setLayout(new GridLayout());
+    // Componentes
+    panelBotones.add(buttonMBD);
+    panelBotones.add(buttonRC);
+    panelBotones.add(buttonBH);
+    panelBotones.add(buttonSalir);
+    // Tooltips
+    buttonMBD.setToolTipText("Llama al controlador de dominio con la informacion del ComboBox");
+   buttonRC.setToolTipText("Abre una nueva ventana sincronizada");
+    buttonBH.setToolTipText("Cambia el panel de informacion");
+    buttonSalir.setToolTipText("Abre un Dialogo modal simple"); 
+  }
 
 
-public VistaPrincipal() {
-		
+public void actionPerformed_buttonMBD (ActionEvent event) {
+	iCtrlPresentacion.sincronizacionVistaPrincipal_a_MBD();
+	/*
+	    inicializar_frameMBD();
+	    inicializar_panelContenidos1();
+	    inicializar_panelBotones1();
+	    asignar_listenersComponentes1();
+	    System.out.println
+	      ("isEventDispatchThread1: " + SwingUtilities.isEventDispatchThread());
+	    frameVista1.pack();
+	    frameVista1.setVisible(true);
+	    */
+	  	
+	  
+  }
+
+private void asignar_listenersComponentes() {
+
+    // Listeners para los botones
+
+    buttonMBD.addActionListener
+      (new ActionListener() {
+        public void actionPerformed (ActionEvent event) {
+          String texto = ((JButton) event.getSource()).getText();
+          System.out.println("Has clickado el boton con texto: " + texto);
+          actionPerformed_buttonMBD(event);
+        }
+      });
+
+    buttonRC.addActionListener
+      (new ActionListener() {
+        public void actionPerformed (ActionEvent event) {
+          String texto = ((JButton) event.getSource()).getText();
+          System.out.println("Has clickado el boton con texto: " + texto);
+          VistaRC.actionPerformed_buttonRC(event);
+        }
+      });
+
+    buttonBH.addActionListener
+      (new ActionListener() {
+        public void actionPerformed (ActionEvent event) {
+          String texto = ((JButton) event.getSource()).getText();
+          System.out.println("Has clickado el boton con texto: " + texto);
+          actionPerformed_buttonBH(event);
+        }
+      });
+
+    buttonSalir.addActionListener
+      (new ActionListener() {
+        public void actionPerformed (ActionEvent event) {
+          String texto = ((JButton) event.getSource()).getText();
+          System.out.println("Has clickado el boton con texto: " + texto);
+          actionPerformed_buttonSalir(event);
+        }
+      });
+
+    
+
+
+  }
+
+
+protected void inicializarComponentes() {
+    inicializar_frameVista();
+    inicializar_panelContenidos();
+    inicializar_panelBotones();
+    asignar_listenersComponentes();
+ }
+
+public VistaPrincipal (CtrlPresentacion pCtrlPresentacion) {
+    System.out.println
+      ("isEventDispatchThread: " + SwingUtilities.isEventDispatchThread());
+    iCtrlPresentacion = pCtrlPresentacion;
+    inicializarComponentes();
+  }
 }
 
+
+/*
 
 ////////////////////////////////////// VISTA PRINCIPAL /////////////////////////////////////////
 private void inicializar_frameVista() {
@@ -106,8 +228,8 @@ private void inicializar_panelBotones() {
 
 
 private void inicializar_frameMBD() {
-	System.out.println("Hola\n");
-	frameVista1.setMinimumSize(new Dimension(500,400));
+	System.out.println("No existeix\n");
+	frameVista1.setMinimumSize(new Dimension(530,200));
     frameVista1.setPreferredSize(frameVista1.getMinimumSize());
     frameVista1.setResizable(false);
     // Posicion y operaciones por defecto
@@ -132,8 +254,8 @@ private void inicializar_frameMBD() {
 	//cambiao ventana -> frameVista
     frameVista1.setLayout(layout1);
     
+	}
 
-}
 
 private void inicializar_panelContenidos1() {
     // Layout
@@ -152,43 +274,8 @@ private void inicializar_panelBotones1() {
     panelBotones1.add(buttonE);
   }
 
-public void actionPerformed_buttonA (ActionEvent event) {
-	
-	frameVistaAnadir.setMinimumSize(new Dimension(450,100));
-	frameVistaAnadir.setPreferredSize(frameVista.getMinimumSize());
-	frameVistaAnadir.setResizable(false);
-	frameVistaAnadir.setLocationRelativeTo(null);
-	frameVistaAnadir.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-    JPanel contentPaneAnadir = (JPanel) frameVistaAnadir.getContentPane();
-    contentPaneAnadir.add(panelAnadir);
-    
-    //frameVistaAnadir.add(panelAnadir);
-	
-	FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
-	//cambiao ventana -> frameVista
-    frameVistaAnadir.setLayout(layout);
-    panelAnadir.setLayout(new FlowLayout());
-	
-    
 
-   /* Checkbox chkPaper = new Checkbox("Paper",Tipos,true);
-    Checkbox chkAuthor = new Checkbox("Author",Tipos,false);
-    Checkbox chkConf = new Checkbox("Conference",Tipos,false);
-    Checkbox chkTerm = new Checkbox("Term",Tipos,false); */
 
-    tf1 = new TextField("Añade el valor", 20);
-    tf1.setLocation(30, 30);
-    panelAnadir.add(chkPaper);
-    panelAnadir.add(chkAuthor);   
-    panelAnadir.add(chkConf);       
-    panelAnadir.add(chkTerm); 
-    panelAnadir.add(tf1);
-
-    
-    frameVistaAnadir.setVisible(true);
-    panelAnadir.setVisible(true);
-
-	}
 
 public void actionPerformed_buttonAR(ActionEvent event) {
 
@@ -198,19 +285,16 @@ public void actionPerformed_buttonLH(ActionEvent event) {
 
 }
 
-public void actionPerformed_buttonE(ActionEvent event) {
-}
-
-private void asignar_listenersComponentes1() {
+public void asignar_listenersComponentes1() {
 
     // Listeners para los botones
-
+	
     buttonA.addActionListener
       (new ActionListener() {
         public void actionPerformed (ActionEvent event) {
           String texto = ((JButton) event.getSource()).getText();
           System.out.println("Has clickado el boton con texto: " + texto);
-          actionPerformed_buttonA(event);
+          iCtrlPresentacion.actionPerformed_buttonA(event);
         }
       });
 
@@ -236,12 +320,11 @@ private void asignar_listenersComponentes1() {
       public void actionPerformed (ActionEvent event) {
         String texto = ((JButton) event.getSource()).getText();
         System.out.println("Has clickado el boton con texto: " + texto);
-        actionPerformed_buttonE(event);
-      }
+        VistaEliminar.actionPerformed_buttonE(event);
+        }
     });
 
     
-
 
   }
 
@@ -263,9 +346,6 @@ public void actionPerformed_buttonMBD (ActionEvent event) {
 	  
   }
 
-public void actionPerformed_buttonRC(ActionEvent event) {
-	
-}
 
 public void actionPerformed_buttonBH(ActionEvent event) {
 	
@@ -292,7 +372,7 @@ private void asignar_listenersComponentes() {
         public void actionPerformed (ActionEvent event) {
           String texto = ((JButton) event.getSource()).getText();
           System.out.println("Has clickado el boton con texto: " + texto);
-          actionPerformed_buttonRC(event);
+          VistaRC.actionPerformed_buttonRC(event);
         }
       });
 
@@ -349,3 +429,5 @@ public VistaPrincipal (CtrlPresentacion pCtrlPresentacion) {
 
 	
 }
+
+*/
