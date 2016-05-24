@@ -183,14 +183,11 @@ do{
 						String path;
 						System.out.println("Introduce path:");
 						path = sc.nextLine();
-						if(!cr.existeResultado(path)) //Si no esta ya almacenado se calcula y almacena
-						{
-							cr.anadirResultado(path, ch.HeteSim(path));
-						}
 						int typeb=TypePosPath(path,0);
 						System.out.print("4.- Introduce nombre del nodo\n" );
 						String name = in.readLine();
 						int pos=gh.consultarNodo(typeb, name);
+						cr.anadirResultado(path, ch.HeteSim(path, pos),pos);
 						System.out.println("Introduce el extremo menor del intervalo de relevancia" );
 						double x1,x2;
 						x1=Double.parseDouble(in.readLine());

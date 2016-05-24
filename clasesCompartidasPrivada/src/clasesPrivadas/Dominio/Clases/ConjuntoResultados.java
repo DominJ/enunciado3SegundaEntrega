@@ -62,15 +62,17 @@ public class ConjuntoResultados {
 	//Post: Devuelve un map ordenado preparado para imprimir, donde la key es la relevancia del nodo j, y el valor es el id de j
 	public ArrayList<Pair <Double, Integer>> getResultadoNodo(String path, int id){
 		ArrayList<Pair<Integer,Double>> m1;
-		if (existeResultado(path, id)){
-			HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados_parciales.get(path);
-			m1= m.get(id);
-		}
-		else if (existeResultado(path)){
+		if (existeResultado(path)){
 			HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados.get(path);
 			m1= m.get(id);
+			System.out.println("path");
 		}
-		else m1=new ArrayList<Pair<Integer,Double>>();
+		else if (existeResultado(path, id)){
+			HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados_parciales.get(path);
+			m1= m.get(id);
+			System.out.println("Parcial");
+		}
+		else {m1=new ArrayList<Pair<Integer,Double>>();System.out.println("vacio");}
 		ArrayList <Pair<Double, Integer>> r = new ArrayList<Pair<Double, Integer>>();
 		for(int i=0; i<m1.size(); ++i){
 			Pair<Integer, Double> p = m1.get(i);
