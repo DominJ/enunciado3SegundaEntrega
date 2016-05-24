@@ -14,12 +14,13 @@ import clasesCompartidas.Pair;
  */
 
 public class ConjuntoResultados {
-	HashMap<String, HashMap<Integer,ArrayList<Pair<Integer,Double>>>> resultados; //Estructura donde guardamos los resultados, accedemos a un resultado poniendo el path como key
+	HashMap<String, HashMap<Integer, ArrayList<Pair<Integer,Double>>>> resultados; //Estructura donde guardamos los resultados de un path entero, accedemos a un resultado poniendo el path como key
+	HashMap<String, HashMap<Integer, ArrayList<Pair<Integer,Double>>>> resultados_parciales; //Estructura donde guardamos resultados parciales de un path
 	Pair<Double,Double> IR;							//variable para filtrar resultados mediante un intervalo de relevancia
-	final int max_res=20;									//Numero maximo de resultados que guardamos en el hashmap
 	
 	public ConjuntoResultados() {
 		resultados=new HashMap<String, HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
+		resultados_parciales= new HashMap<String, HashMap<Integer, ArrayList<Pair<Integer,Double>>>>();
 		IR= new Pair<Double,Double>((double) 0,(double)1);
 	}
 	
@@ -28,14 +29,15 @@ public class ConjuntoResultados {
 		IR.setSecond(e);
 	}
 	
-	public boolean anadirResultado(String path, HashMap<Integer,ArrayList<Pair<Integer,Double>>> R){
-		boolean b;
-		if (resultados.size() >= 20) b=false;
-		else {
-			resultados.put(path, R);
-			b=true;
-		}
-		return b;
+	public void anadirResultado(String path, HashMap<Integer,ArrayList<Pair<Integer,Double>>> r){
+		resultados.put(path, r);
+	}
+	
+	public void anadirResultado(String path, HashMap<Integer,ArrayList<Pair<Integer,Double>>> r, int id){
+		HashMap<Integer, ArrayList<Pair<Integer,Double>>> a=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
+		ArrayList<Pair<Integer,Double>> rfila=r.get(id);
+		a.put(id, rfila);
+		resultados_parciales.put(path, a);
 	}
 	
 	public void vaciar_resultados(){
@@ -43,24 +45,41 @@ public class ConjuntoResultados {
 	}
 	
 	public boolean existeResultado(String path){
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> M=resultados.get(path);
-		return M!=null;
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados.get(path);
+		return m!=null;
+	}
+	
+	public boolean existeResultado(String path, int id){
+		HashMap<Integer, ArrayList<Pair<Integer,Double>>> m =resultados.get(path);
+		if(m!=null){
+			 ArrayList<Pair<Integer,Double>> a = m.get(id);
+			 return a!=null;
+		}
+		return false;
 	}
 
 	//Pre: Se han anadido los filtros insertados por el usuario a la clase
 	//Post: Devuelve un map ordenado preparado para imprimir, donde la key es la relevancia del nodo j, y el valor es el id de j
 	public ArrayList<Pair <Double, Integer>> getResultadoNodo(String path, int id){
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> M=resultados.get(path);
-		ArrayList<Pair<Integer,Double>> m1= M.get(id);
-		ArrayList <Pair<Double, Integer>> R = new ArrayList<Pair<Double, Integer>>();
+		ArrayList<Pair<Integer,Double>> m1;
+		if (existeResultado(path, id)){
+			HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados_parciales.get(path);
+			m1= m.get(id);
+		}
+		else if (existeResultado(path)){
+			HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados.get(path);
+			m1= m.get(id);
+		}
+		else m1=new ArrayList<Pair<Integer,Double>>();
+		ArrayList <Pair<Double, Integer>> r = new ArrayList<Pair<Double, Integer>>();
 		for(int i=0; i<m1.size(); ++i){
 			Pair<Integer, Double> p = m1.get(i);
 			if (p.getSecond() >=IR.getFirst() && p.getSecond() <= IR.getSecond()){
 				Pair<Double, Integer> p1 = new Pair<Double, Integer>(p.getSecond(), p.getFirst());
-				R.add(p1);	
+				r.add(p1);	
 			}
 		}
-		Collections.sort(R, new Comparator<Pair<Double, Integer>>(){
+		Collections.sort(r, new Comparator<Pair<Double, Integer>>(){
 
 			public int compare(Pair<Double, Integer> P1, Pair<Double, Integer> P2) {
 				return P2.getFirst().compareTo(P1.getFirst());
@@ -69,7 +88,7 @@ public class ConjuntoResultados {
 		});
 		IR.setFirst((double)0);
 		IR.setSecond((double)1);
-		return R;
+		return r;
 	}
 	
 	public void printa_matriz1(String pa) {
