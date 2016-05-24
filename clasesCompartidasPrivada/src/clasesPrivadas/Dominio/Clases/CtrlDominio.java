@@ -34,12 +34,13 @@ public class CtrlDominio
 	{ 
 		Grafo gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
 		ConjuntoResultados cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
-		cr.anadirResultado("AP", CtrlHetesim.HeteSim("AP", gh));
-		cr.anadirResultado("PA", CtrlHetesim.HeteSim("PA", gh));
-		cr.anadirResultado("PC", CtrlHetesim.HeteSim("PC", gh));
-		cr.anadirResultado("CP", CtrlHetesim.HeteSim("CP", gh));
-		cr.anadirResultado("TP", CtrlHetesim.HeteSim("TP", gh));
-		cr.anadirResultado("PT", CtrlHetesim.HeteSim("PT", gh));
+		CtrlHetesim ch= new CtrlHetesim(gh);
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); 
 
@@ -184,7 +185,7 @@ do{
 						path = sc.nextLine();
 						if(!cr.existeResultado(path)) //Si no esta ya almacenado se calcula y almacena
 						{
-							cr.anadirResultado(path, CtrlHetesim.HeteSim(path, gh));
+							cr.anadirResultado(path, ch.HeteSim(path));
 						}
 						int typeb=TypePosPath(path,0);
 						System.out.print("4.- Introduce nombre del nodo\n" );

@@ -18,10 +18,9 @@ import clasesCompartidas.Pair;
  *
  */
 public class CtrlHetesim{
-
-	public CtrlHetesim(){
-		//constructura por defecto
-
+	Grafo g;
+	public CtrlHetesim(Grafo g){
+		this.g=g;
 	}
 	
 
@@ -146,7 +145,7 @@ public class CtrlHetesim{
 	 Pre: path es un camino valido 
 	 Post: devuelve la matriz normalizada de aplicar hete sim en el camino p. En la fila i-esima se encuentran la relevancia de el elemento j sobre i;
 	 */
-	public static HashMap<Integer,ArrayList<Pair<Integer,Double>>> HeteSim(String p, Grafo g){
+	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> HeteSim(String p){
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r=new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> pl = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> pr = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
@@ -171,6 +170,62 @@ public class CtrlHetesim{
 					return g.getRelaciones(rel, true);					//Si contiene el elemento E
 				}
 				else pl=g.getRelaciones(rel, true);
+				first=false;												//Marcamos que ya hemos completado la primera iteracion
+			}
+			else  {															//En una iteracion cualquiera
+				String rel=path.substring(i+1,i+2) + path.substring(i,i+1);							//Miramos la relacion i-esima inversa
+				if (path.charAt(i+1)=='E') opl=dummy.getFirst();								//Si contiene el elemento E
+				else opl=g.getRelaciones(rel,false);
+				pl=producto_mat(pl, opl);									//Hacemos el producto matricial entre los dos operandos
+			}
+			
+		}
+		first=true;
+		for (int i=path.length()-1; i>=(path.length()/2)+1; --i) {			//Iteramos la parte derecha del camino desde la posicion final a la central
+			if (first) {													//En caso de primera iteracion
+				String rel=path.substring(i,i+1)+path.substring(i-1, i);	//Obtenemos el string de la relacion inverso de la posicion i-esima						//Si contiene el elemento E
+				pr=g.getRelaciones(rel,true);							
+				first=false;												//Marcamos que ya hemos completado la primera iteracion
+			}
+			else  {															//En una iteracion cualquiera
+				String rel=path.substring(i-1, i)+path.substring(i,i+1);	//Obtenemos el string de la relacion inverso de la posicion i-esima
+				if (path.charAt(i-1)=='E') opr=dummy.getSecond();					
+				else opr=g.getRelaciones(rel,false);						//Y normalizamos por filas
+				pr=producto_mat(pr, opr);									//Hacemos el producto matricial entre los dos operandos
+			}
+			
+		}												//Hacemos la transpuesta de la matriz correspondiene al camino derecho
+		r=producto_norm_mat(pl,pr);											//Y finalmente hacemos el producto matricial normalizado entre las dos matrices de los caminos
+		
+		return r;
+	}
+	
+	public HashMap<Integer,ArrayList<Pair<Integer,Double>>> HeteSim(String p, int id){
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r=new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> pl = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> pr = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> opl = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer,ArrayList<Pair<Integer,Double>>> opr = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
+		Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>, HashMap<Integer,ArrayList<Pair<Integer,Double>>>> dummy = new Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>, HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
+		String path=p;
+		boolean first=true;
+		if (path.length()%2==0){
+			path=path.substring(0, path.length()/2) + "E" + path.substring(path.length()/2);			//Si el camino es par, le anadimos el caracter 'E' en la posicion central
+			if (path.length()>3){
+				String rel1=path.substring((path.length()/2)-1, path.length()/2) + path.substring((path.length()/2)+ 1, (path.length()/2)+2);
+				String rel2=path.substring((path.length()/2)+1, (path.length()/2)+2) + path.substring((path.length()/2)- 1, (path.length()/2));
+				dummy=relacion_Dummy(g.getRelaciones(rel1,true), g.getRelaciones(rel2, true));
+			}
+		}
+		for (int i=0; i<path.length()/2; ++i) {								//Recorremos la parte izquierda del camino
+			if (first) {													//En caso de primera iteracion
+				String rel=path.substring(i,i+2);							//Miramos la primera relacion;
+				if (path.charAt(i+1)=='E') {
+					rel=path.substring(i,i+1) + path.substring(i+2, i+3); 
+					r.put(id, g.getRelaciones(rel, true).get(id));					//Si contiene el elemento E
+					return r;
+				}
+				else pl.put(id, g.getRelaciones(rel, true).get(id));
 				first=false;												//Marcamos que ya hemos completado la primera iteracion
 			}
 			else  {															//En una iteracion cualquiera
