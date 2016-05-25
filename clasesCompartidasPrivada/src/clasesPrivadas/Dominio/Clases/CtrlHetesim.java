@@ -5,11 +5,8 @@ import java.util.HashMap;
 /*
  @author: 
 */
-
-
-
-
-
+import java.util.Set;
+import java.util.TreeSet;
 
 import clasesCompartidas.Pair;
 
@@ -30,10 +27,10 @@ public class CtrlHetesim{
 	*/
 	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> producto_mat(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b) {
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>(); 
-		for(int i: a.keySet()) {																//Iteramos sobre el numero de filas de a
+		for(int i: ordenarKeySet(a)) {																//Iteramos sobre el numero de filas de a
 			ArrayList<Pair<Integer,Double>> rfila = new ArrayList<Pair<Integer,Double>>();
 			ArrayList<Pair<Integer,Double>> afila = a.get(i);
-			for (int j: b.keySet()){															//Iteramos sobre el numero de columnas de b
+			for (int j: ordenarKeySet(b)){															//Iteramos sobre el numero de columnas de b
 				ArrayList<Pair<Integer,Double>> bfila = b.get(j);
 				Pair<Integer,Double> rval = new Pair<Integer, Double>(j,(double)0);
 				int z=0;																		//variable para interar sobre afila
@@ -48,7 +45,7 @@ public class CtrlHetesim{
 						++z;																	//Y augmentamos las dos variables
 						++y;
 					}
-					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas pequeña
+					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas pequeÃ±a
 					else ++y;
 				}
 				if (rval.getSecond()!= 0)rfila.add(rval);				
@@ -66,10 +63,10 @@ public class CtrlHetesim{
 	
 	private static HashMap<Integer,ArrayList<Pair<Integer,Double>>> producto_norm_mat(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b) {
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>(); 
-		for(int i: a.keySet()) {																//Iteramos sobre el numero de filas de a
+		for(int i: ordenarKeySet(a)) {																//Iteramos sobre el numero de filas de a
 			ArrayList<Pair<Integer,Double>> rfila = new ArrayList<Pair<Integer,Double>>();
 			ArrayList<Pair<Integer,Double>> afila = a.get(i);
-			for (int j: b.keySet()){															//Iteramos sobre el numero de columnas de b
+			for (int j: ordenarKeySet(b)){															//Iteramos sobre el numero de columnas de b
 				ArrayList<Pair<Integer,Double>> bfila = b.get(j);
 				Pair<Integer,Double> rval = new Pair<Integer, Double>(j,(double)0);
 				int z=0;																		//variable para interar sobre afila
@@ -84,7 +81,7 @@ public class CtrlHetesim{
 						++z;																	//Y augmentamos las dos variables
 						++y;
 					}
-					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas pequeña
+					else if (aval.getFirst() < bval.getFirst()) ++z;							//En caso contrario, solo augmentamos la variable mas pequeÃ±a
 					else ++y;
 				}
 				if (rval.getSecond()!=0) {
@@ -114,14 +111,14 @@ public class CtrlHetesim{
 	}
 	
 	/*
-	  Pre: R es la matriz de una relaciÃ³n AB entre cualquier par de nodos
+	  Pre: R es la matriz de una relaciÃƒÂ³n AB entre cualquier par de nodos
 	  Post: Devuelve la matriz correspondiente a la relacion AE.
 	 */
 	private static Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>, HashMap<Integer,ArrayList<Pair<Integer,Double>>>> relacion_Dummy(HashMap<Integer,ArrayList<Pair<Integer,Double>>> a, HashMap<Integer,ArrayList<Pair<Integer,Double>>> b){		//Obtencion de la matriz RL
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r1 = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> r2 = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
 		int etiqueta=0;
-		for (int id: a.keySet()){ //iteramos sobre R
+		for (int id: ordenarKeySet(a)){ //iteramos sobre R
 			ArrayList<Pair<Integer,Double>> afila = a.get(id); 											//fila[id] de a
 			for (int j=0; j< afila.size(); ++j) {
 				ArrayList<Pair<Integer,Double>> r1fila = new ArrayList<Pair<Integer,Double>>(); 			//futura fila[id] de r1
@@ -254,5 +251,10 @@ public class CtrlHetesim{
 		r=producto_norm_mat(pl,pr);											//Y finalmente hacemos el producto matricial normalizado entre las dos matrices de los caminos
 		
 		return r;
+	}
+	
+	private static Set<Integer> ordenarKeySet(HashMap<Integer,ArrayList<Pair<Integer,Double>>> hm)
+	{	
+		return new TreeSet<Integer>(hm.keySet()) ;
 	}
 }
