@@ -13,14 +13,6 @@ import clasesCompartidas.Pair;
 
 public class CtrlDominio
 { 
-	Grafo gh;
-	ConjuntoResultados cr;
-	
-	public CtrlDominio() {
-		gh = new Grafo();
-		cr = new ConjuntoResultados();
-	}
-	
 	private static void escribir_resultado(ArrayList<Pair <Double,Integer>> a, Grafo gh, int type) {
 		System.out.println("Rank		Nodo		Relevancia");
 		for (int i=0; i<a.size(); ++i) {
@@ -31,25 +23,6 @@ public class CtrlDominio
 		System.out.println();
 	}
 	
-	
-	public void eliminarnodoD(int options, String s){
-		gh.eliminarNodo(options, gh.consultarNodo(options, s));
-		cr.vaciar_resultados();
-	}
-	public void /*Pair<Integer,String>*/ anadirnododominio(String s, String n) {
-		//(0 = P, 1 = A, 2 = C, 3 = T)
-		int option = 3;
-		if (s == "Paper") option = 0;
-		else if(s == "Author") option = 1;
-		else if (s == "Conference") option = 2;
-		/* Pair<Integer,String> a = new Pair<Integer,String>();
-		a.setFirst(option);
-		a.setSecond(n);
-		return a; */
-		gh.anadirNodo(option, n);
-	}
-
-	
 	private static int TypePosPath(String path, int pos) {
 		if (path.charAt(pos)=='P') return 0;
 		else if (path.charAt(pos)=='A') return 1;
@@ -59,14 +32,15 @@ public class CtrlDominio
 	
 	public static void main(String args[] )throws IOException
 	{ 
-		//Grafo gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
+		Grafo gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
 		ConjuntoResultados cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
-		cr.anadirResultado("AP", CtrlHetesim.HeteSim("AP", gh));
-		cr.anadirResultado("PA", CtrlHetesim.HeteSim("PA", gh));
-		cr.anadirResultado("PC", CtrlHetesim.HeteSim("PC", gh));
-		cr.anadirResultado("CP", CtrlHetesim.HeteSim("CP", gh));
-		cr.anadirResultado("TP", CtrlHetesim.HeteSim("TP", gh));
-		cr.anadirResultado("PT", CtrlHetesim.HeteSim("PT", gh));
+		CtrlHetesim ch= new CtrlHetesim(gh);
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); 
 
@@ -112,10 +86,30 @@ do{
 				{
 				
 					case 1: //Modificar la base de datos - anadir - dato independiente
+						/*
+							System.out.print("\nIntroduce el dato independiente:\n" );
+							Nodo n = new Nodo();
+							System.out.print("Introduce el tipo de dato y su nombre:\n");
+							String nombre, tipo;
+							//Scanner sc = new Scanner(System.in);
+							nombre = sc.toString();
+							tipo = sc.toString();
+							n.anadir_nombre(nombre);
+							n.anadir_tipo(tipo);
+							//TODO leer dato que usuario anade al sistema
+						 * */ //Reescribiendo esta parte
 						
-							/* String s,n;
-							Pair<Integer,String> a = anadirnododominio(s,n);
-							gh.anadirNodo(a.getFirst(), a.getSecond()); */
+							int option;
+							String name;
+							System.out.println("selecciona tipo de dato:\n");
+							System.out.print("1.- Paper\n" );
+							System.out.print("2.- Author\n" );
+							System.out.print("3.- Conference\n" );
+							System.out.print("4.- Therm\n" );
+							option=Integer.parseInt(in.readLine());
+							System.out.print("4.- Introduce nombre del nodo\n" );
+							name = in.readLine();
+							gh.anadirNodo(option-1, name);
 							
 							break;
 					
@@ -189,14 +183,11 @@ do{
 						String path;
 						System.out.println("Introduce path:");
 						path = sc.nextLine();
-						if(!cr.existeResultado(path)) //Si no esta ya almacenado se calcula y almacena
-						{
-							cr.anadirResultado(path, CtrlHetesim.HeteSim(path, gh));
-						}
 						int typeb=TypePosPath(path,0);
 						System.out.print("4.- Introduce nombre del nodo\n" );
 						String name = in.readLine();
 						int pos=gh.consultarNodo(typeb, name);
+						cr.anadirResultado(path, ch.HeteSim(path, pos),pos);
 						System.out.println("Introduce el extremo menor del intervalo de relevancia" );
 						double x1,x2;
 						x1=Double.parseDouble(in.readLine());
