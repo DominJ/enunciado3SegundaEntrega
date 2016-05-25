@@ -329,7 +329,15 @@ public class Grafo
 		//unir hashmaps con hashmap.putall(hashmap)
 		try
 		{
-			LeerFichero.correcto(RUTA_ADD);
+			LeerFichero.correcto(RUTA_ADD, RUTA_INICIAL);
+			
+			//(0 = P, 1 = A, 2 = C, 3 = T)  
+			this.papers.joinHashMap(LeerFichero.crear_nodo_primitivo(RUTA_ADD, 0));
+			this.authors.joinHashMap(LeerFichero.crear_nodo_primitivo(RUTA_ADD, 1));
+			this.conferences.joinHashMap(LeerFichero.crear_nodo_primitivo(RUTA_ADD, 2));
+			this.therms.joinHashMap(LeerFichero.crear_nodo_primitivo(RUTA_ADD, 3));
+			
+			//HAY QUE HABLAR CON PAU EL TEMA DE LAS NOMALIZACIONES
 			
 		}
 		catch(Exception e)

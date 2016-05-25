@@ -132,5 +132,12 @@ public class ConjuntoNodos
 	{
 		return nodos;
 	}	
+	
+	//NO ESTOY MUY SEGURO DE SI ES COMPARTIDO PROBABLEMENTE TENGA QUE HEREDAR
+		public void joinHashMap(Pair<HashMap<Integer,String>,HashMap<String,Integer>> a)
+		{
+			this.nodos.putAll(a.getFirst());
+			this.nombres_nodos.putAll(a.getSecond());
+		}
 }
 

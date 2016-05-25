@@ -121,27 +121,25 @@ public class LeerFichero
 		return v;
 	}
 	
-	public static boolean correcto(String sDirectorio) throws FileNotFoundException, IOException {  
+	public static void correcto(String sDirectorio, String directorioBase) throws FileNotFoundException, IOException {  
 	    //String sDirectorio = "Set1";
-	    File f = new File(sDirectorio);
+	    File f = new File(directorioBase);
 	    File[] ficheros = f.listFiles();
-	    Boolean comp = true;
+	    //Boolean comp = true;
 	    String aux = sDirectorio + "/";
 	    String cadena;
-	    for(int i = 0; i < ficheros.length & comp; i++) {
+	    
+	    for(int i = 0; i < ficheros.length; i++) {
 	    	String a = ficheros[i].getName();
 	    	cadena = aux+""+a;
 			//System.out.println(cadena+"\n");
 			//System.out.println(i+"\n");
 	    	FileReader c = new FileReader(cadena); 
 			BufferedReader d = new BufferedReader(c); 
-			if(d.readLine() == null) {
-				comp = false; 
-				d.close();
-			}
+			d.readLine();
+			d.close();
 	    }
-	    
-	    return comp;
+	    //d.close();
 	}
 	
 	public static void main(String [] args) throws IOException{
@@ -166,10 +164,10 @@ public class LeerFichero
 		//System.out.println("Number1 = " + d1.getFirst() + "\n");
 		
 		//Ruta constante, entiendo que esto es una prueba
-		boolean b = correcto("Set1"); 
+		//boolean b = correcto("Set1"); 
 		System.out.println("Todo correcto: ");
-		if(b)System.out.println("Sí\n");
-		else System.out.println("No\n");
+		//if(b)System.out.println("Sí\n");
+		//else System.out.println("No\n");
 	}
 	
 }
