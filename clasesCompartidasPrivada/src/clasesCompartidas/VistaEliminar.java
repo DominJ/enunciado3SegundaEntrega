@@ -17,19 +17,44 @@ import clasesPrivadas.Dominio.Clases.ConjuntoResultados;
 import clasesPrivadas.Dominio.Clases.Grafo;
 
 public class VistaEliminar {
-	private static JPanel panelEliminar = new JPanel();
-	private static JFrame frameVistaEliminar = new JFrame("Eliminar");
-	private static CheckboxGroup Tipos = new CheckboxGroup();
-	private static Checkbox chkPaper = new Checkbox("Paper",Tipos,true);
-	private static Checkbox chkAuthor = new Checkbox("Author",Tipos,false);
-	private static Checkbox chkConf = new Checkbox("Conference",Tipos,false);
-	private static Checkbox chkTerm = new Checkbox("Term",Tipos,false);
-	private static TextField tf1 = new TextField("",20);
-	private static JButton buttonOk = new JButton("Ok");
-	static Grafo gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
-	static ConjuntoResultados cr = new ConjuntoResultados();
+	  private CtrlPresentacion iCtrlPresentacion;
+
+	private  JPanel panelEliminar = new JPanel();
+	private  JFrame frameVistaEliminar = new JFrame("Eliminar");
+	private  CheckboxGroup Tipos = new CheckboxGroup();
+	private  Checkbox chkPaper = new Checkbox("Paper",Tipos,true);
+	private  Checkbox chkAuthor = new Checkbox("Author",Tipos,false);
+	private  Checkbox chkConf = new Checkbox("Conference",Tipos,false);
+	private  Checkbox chkTerm = new Checkbox("Term",Tipos,false);
+	private  TextField tf1 = new TextField("",20);
+	private JButton buttonOk = new JButton("Ok");
 	
-	public static void actionPerformed_buttonOk (ActionEvent event) {
+
+	public VistaEliminar(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	  }
+
+public void activar() {
+    frameVistaEliminar.setEnabled(true);
+  }
+
+  public void desactivar() {
+    frameVistaEliminar.setEnabled(false);
+  }
+	
+	  public void hacerVisible() {
+		    frameVistaEliminar.pack();
+		    frameVistaEliminar.setVisible(true);
+		  }
+
+		  public void hacerInvisible() {
+		    frameVistaEliminar.setVisible(false);
+		  }
+	
+	
+	
+	public  void actionPerformed_buttonOk (ActionEvent event) {
 		int a = panelEliminar.getComponentCount();
 		System.out.println("Numberargs:"+a+"\n");
 		//List<JTextField> list = new ArrayLists<JTextField>();
@@ -56,20 +81,10 @@ public class VistaEliminar {
 		if(s == "Author") options = 1;
 		else if(s == "Conference") options = 2;
 		else if(s == "Term") options = 3;
-		try
-		{
-			gh.eliminarNodo(options, gh.consultarNodo(options, n));
-			cr.vaciar_resultados();
-		}
-		catch(NullPointerException e)
-		{
-			System.out.println("Alguna de las relaciones esta vacia");
-		}
-
-
+		iCtrlPresentacion.sincronizacionEliminar_a_MBD(options,n);
 	}
 
-private static void asignar_listenersComponentes2() {
+private  void asignar_listenersComponentes2() {
 	  buttonOk.addActionListener
 	      (new ActionListener() {
 	        public void actionPerformed (ActionEvent event) {
@@ -80,7 +95,7 @@ private static void asignar_listenersComponentes2() {
 	      });
 	}
 
-public static void actionPerformed_buttonE (ActionEvent event) {
+public  void inicializarComponentes () {
 		frameVistaEliminar.setMinimumSize(new Dimension(500,100));
 		frameVistaEliminar.setResizable(false);
 		frameVistaEliminar.setLocationRelativeTo(null);
@@ -106,8 +121,8 @@ public static void actionPerformed_buttonE (ActionEvent event) {
 	    panelEliminar.add(buttonOk);
 	
 	    
-	    //frameVista1.setVisible(false);
 	    asignar_listenersComponentes2();
 	}
+
 	
 }
