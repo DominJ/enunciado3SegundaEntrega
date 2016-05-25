@@ -20,11 +20,12 @@ public class VistaMBD {
 	  private JPanel panelContenidos1 = new JPanel();
 	  private JPanel panelBotones1 = new JPanel();
 	  private JButton buttonA = new JButton("Anadir");
-	  private JButton buttonAR = new JButton("Actualizar");
 	  private JButton buttonLH = new JButton("Limpiar Historial");
 	  private JButton buttonE = new JButton("Eliminar");
 
 	  
+	  
+
 
 public void activar() {
     frameVista1.setEnabled(true);
@@ -44,7 +45,7 @@ public void activar() {
 	  
 	  private void inicializar_frameMBD() {
 			System.out.println("No existeix\n");
-			frameVista1.setMinimumSize(new Dimension(530,200));
+			frameVista1.setMinimumSize(new Dimension(500,200));
 		    frameVista1.setPreferredSize(frameVista1.getMinimumSize());
 		    frameVista1.setResizable(false);
 		    // Posicion y operaciones por defecto
@@ -57,6 +58,7 @@ public void activar() {
 		    frameVista1.add(etiqueta1);
 			FlowLayout layout1 = new FlowLayout(FlowLayout.LEFT, 10, 35);
 		    frameVista1.setLayout(layout1);
+		   
 		    
 			}
 
@@ -73,7 +75,6 @@ public void activar() {
 		    panelBotones1.setLayout(new GridLayout());
 		    // Componentes
 		    panelBotones1.add(buttonA);
-		    panelBotones1.add(buttonAR);
 		    panelBotones1.add(buttonLH);
 		    panelBotones1.add(buttonE);
 		  }
@@ -81,6 +82,14 @@ public void activar() {
 		
 		public void actionPerformed_buttonA (ActionEvent event) {
 			iCtrlPresentacion.sincronizacionMBD_a_Anadir1();
+		}
+		
+		public void actionPerformed_buttonLH (ActionEvent event) {
+			//iCtrlPresentacion.limpiarhistorial();
+		}
+		
+		public void actionPerformed_buttonE (ActionEvent event) {
+			iCtrlPresentacion.sincronizacionMBD_a_Eliminar();
 		}
 		public void asignar_listenersComponentes1() {
 
@@ -92,15 +101,6 @@ public void activar() {
 		          String texto = ((JButton) event.getSource()).getText();
 		          System.out.println("Has clickado el boton con texto: " + texto);
 		          actionPerformed_buttonA(event);
-		        }
-		      });
-
-		    buttonAR.addActionListener
-		      (new ActionListener() {
-		        public void actionPerformed (ActionEvent event) {
-		          String texto = ((JButton) event.getSource()).getText();
-		          System.out.println("Has clickado el boton con texto: " + texto);
-		          actionPerformed_buttonAR(event);
 		        }
 		      });
 
@@ -117,7 +117,7 @@ public void activar() {
 		      public void actionPerformed (ActionEvent event) {
 		        String texto = ((JButton) event.getSource()).getText();
 		        System.out.println("Has clickado el boton con texto: " + texto);
-		        VistaEliminar.actionPerformed_buttonE(event);
+		        actionPerformed_buttonE(event);
 		        }
 		    });
 
