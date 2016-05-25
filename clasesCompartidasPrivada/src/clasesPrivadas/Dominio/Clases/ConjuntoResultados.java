@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.HashSet;
 
 import clasesCompartidas.Pair;
 
@@ -34,7 +35,8 @@ public class ConjuntoResultados {
 	}
 	
 	public void anadirResultado(String path, HashMap<Integer,ArrayList<Pair<Integer,Double>>> r, int id){
-		HashMap<Integer, ArrayList<Pair<Integer,Double>>> a=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
+		HashMap<Integer, ArrayList<Pair<Integer,Double>>> a=resultados_parciales.get(path);
+		if(a==null) a=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
 		ArrayList<Pair<Integer,Double>> rfila=r.get(id);
 		a.put(id, rfila);
 		resultados_parciales.put(path, a);
@@ -50,7 +52,7 @@ public class ConjuntoResultados {
 	}
 	
 	public boolean existeResultado(String path, int id){
-		HashMap<Integer, ArrayList<Pair<Integer,Double>>> m =resultados.get(path);
+		HashMap<Integer, ArrayList<Pair<Integer,Double>>> m =resultados_parciales.get(path);
 		if(m!=null){
 			 ArrayList<Pair<Integer,Double>> a = m.get(id);
 			 return a!=null;
@@ -112,7 +114,14 @@ public class ConjuntoResultados {
 	
 	public Set<String> consultarCaminosAlmacenados()
 	{
-		return resultados.keySet();
+		return resultados_parciales.keySet();
 	}
-
+	public HashMap<String,Set<Integer>> consultarResultadosParciales()
+	{
+		HashMap<String,Set<Integer>> r=new HashMap<String,Set<Integer>>();
+		for(String s: resultados_parciales.keySet()){
+			r.put(s, resultados_parciales.get(s).keySet());
+		}
+		return r;
+	}
 }
