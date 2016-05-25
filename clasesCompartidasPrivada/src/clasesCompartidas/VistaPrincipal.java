@@ -17,22 +17,13 @@ private JButton buttonRC = new JButton("Realizar Consulta");
 private JButton buttonBH = new JButton("Busca Historial");
 private JButton buttonSalir = new JButton("Salir");
 
-/* //Modificar base de datos //
-private JFrame frameVista1 = new JFrame("Opcions");
-private JPanel panelContenidos1 = new JPanel();
-private JPanel panelBotones1 = new JPanel();
-private JButton buttonA = new JButton("Anadir");
-private JButton buttonAR = new JButton("Actualizar");
-private JButton buttonLH = new JButton("Limpiar Historial");
-private JButton buttonE = new JButton("Eliminar");*/
-
-
 public void activar() {
     frameVista.setEnabled(true);
   }
 
   public void desactivar() {
     frameVista.setEnabled(false);
+	  //frameVista.dispose();
   }
 
   public void hacerVisible() {
@@ -46,7 +37,7 @@ public void activar() {
 
 private void inicializar_frameVista() {
     // Tamanyo
-    frameVista.setMinimumSize(new Dimension(700,400));
+    frameVista.setMinimumSize(new Dimension(900,400));
     frameVista.setPreferredSize(frameVista.getMinimumSize());
     frameVista.setResizable(false);
     frameVista.setLocationRelativeTo(null);
@@ -89,17 +80,12 @@ private void inicializar_panelBotones() {
 
 public void actionPerformed_buttonMBD (ActionEvent event) {
 	iCtrlPresentacion.sincronizacionVistaPrincipal_a_MBD();
-	/*
-	    inicializar_frameMBD();
-	    inicializar_panelContenidos1();
-	    inicializar_panelBotones1();
-	    asignar_listenersComponentes1();
-	    System.out.println
-	      ("isEventDispatchThread1: " + SwingUtilities.isEventDispatchThread());
-	    frameVista1.pack();
-	    frameVista1.setVisible(true);
-	    */
 	  	
+	  
+  }
+
+public void actionPerformed_buttonSalir (ActionEvent event) {
+System.exit(0);	  	
 	  
   }
 
@@ -121,7 +107,7 @@ private void asignar_listenersComponentes() {
         public void actionPerformed (ActionEvent event) {
           String texto = ((JButton) event.getSource()).getText();
           System.out.println("Has clickado el boton con texto: " + texto);
-          VistaRC.actionPerformed_buttonRC(event);
+          actionPerformed_buttonRC(event);
         }
       });
 
@@ -154,6 +140,8 @@ protected void inicializarComponentes() {
     inicializar_panelContenidos();
     inicializar_panelBotones();
     asignar_listenersComponentes();
+    activar();
+	hacerVisible();
  }
 
 public VistaPrincipal (CtrlPresentacion pCtrlPresentacion) {
