@@ -55,6 +55,9 @@ public class vistaDI {
 				Component[] components = panelAnadir1.getComponents();
 				String s = "";
 				String n = "";
+				Component z = panelAnadir1.getComponent(1);
+				TextField x = (TextField) z;
+				String j = x.getText();
 				for (Component component : components) {
 				    if (component.getClass().equals(Checkbox.class)) {
 				    	Checkbox b = (Checkbox)component;
@@ -68,10 +71,14 @@ public class vistaDI {
 				    	n = c.getText();
 				    }
 				}
-				System.out.println("Check:"+s+"\n");
-				System.out.println("TextField:"+n+"\n");
+				System.out.println("Se ha añadido un paper:"+j+"\n");
+				System.out.println("relacionado con un tipo de nodo:"+s+"\n");
+				System.out.println("con el valor:"+n+"\n");
 				
+				String s1 = "Paper";
+				iCtrlPresentacion.anadirnodo(s1, j);
 				iCtrlPresentacion.anadirnodo(s,n);
+				//iCtrlPresentacion.crearRelacion(j,n);
 
 
 			}
