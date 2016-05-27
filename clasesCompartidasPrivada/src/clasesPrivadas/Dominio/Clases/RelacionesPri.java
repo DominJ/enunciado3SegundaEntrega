@@ -136,4 +136,10 @@ public class RelacionesPri extends Relaciones
 	{
 		return this.otherPaper;
 	}
+	
+	public void joinHashMap(Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> r)
+	{
+		this.paperOther.putAll(r.getFirst());
+		this.otherPaper.putAll(r.getSecond());
+	}
 }

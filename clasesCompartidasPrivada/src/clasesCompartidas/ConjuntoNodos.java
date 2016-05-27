@@ -134,10 +134,10 @@ public class ConjuntoNodos
 	}	
 	
 	//NO ESTOY MUY SEGURO DE SI ES COMPARTIDO PROBABLEMENTE TENGA QUE HEREDAR
-		public void joinHashMap(Pair<HashMap<Integer,String>,HashMap<String,Integer>> a)
+		public void joinHashMap(Pair<HashMap<Integer,String>,HashMap<String,Integer>> n)
 		{
-			this.nodos.putAll(a.getFirst());
-			this.nombres_nodos.putAll(a.getSecond());
+			this.nodos.putAll(n.getFirst());
+			this.nombres_nodos.putAll(n.getSecond());
 		}
 }
 

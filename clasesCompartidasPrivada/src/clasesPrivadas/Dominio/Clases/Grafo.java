@@ -338,6 +338,28 @@ public class Grafo
 			this.therms.joinHashMap(LeerFichero.crear_nodo_primitivo(RUTA_ADD, 3));
 			
 			//HAY QUE HABLAR CON PAU EL TEMA DE LAS NOMALIZACIONES
+			//SOY CONSCIENTE DE QUE NO ES EFICIENTE PERO CON LE TIEMPO QUE TENEMOS VAMOS A CENTRARNOS EN TERMINAR Y LUEGO OPTIMIZAMOS
+			//(1 = PA, 2 = PC, 3 = PT)  
+			this.PAF.joinHashMap(LeerFichero.crear_relacion(RUTA_ADD, 1));
+			this.PAC.joinHashMap(LeerFichero.crear_relacion(RUTA_ADD, 1));
+			this.PAF.ordenarArray();
+			this.PAC.ordenarArray();
+			this.PAF.normFilas();
+			this.PAC.normColumnas();
+			
+			this.PCF.joinHashMap(LeerFichero.crear_relacion(RUTA_ADD, 2));
+			this.PCC.joinHashMap(LeerFichero.crear_relacion(RUTA_ADD, 2));
+			this.PCF.ordenarArray();
+			this.PCC.ordenarArray();
+			this.PCF.normFilas();
+			this.PCC.normColumnas();
+			
+			this.PTF.joinHashMap(LeerFichero.crear_relacion(RUTA_ADD, 3));
+			this.PTC.joinHashMap(LeerFichero.crear_relacion(RUTA_ADD, 3));
+			this.PTF.ordenarArray();
+			this.PTC.ordenarArray();
+			this.PTF.normFilas();
+			this.PTC.normColumnas();
 			
 		}
 		catch(Exception e)
