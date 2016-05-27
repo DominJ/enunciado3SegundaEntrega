@@ -1,6 +1,7 @@
 package clasesCompartidas;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import clasesPrivadas.Dominio.Clases.CtrlDominio;
 
@@ -10,11 +11,12 @@ public class CtrlPresentacion {
 	private VistaMBD vistaMBD = null;
 	private VistaAnadir1 vistaAnadir = null;
 	private vistaDI vistaDI = null;
-	private vistaCD vistaCD = null;
+	//private vistaCD vistaCD = null;
 	private VistaEliminar vistaEliminar = null;
 	private VistaRC vistaRC = null;
 	private VistaCP vistaCP = null;
 	private VistaCCN vistaCCN = null;
+	private FileSamplePanel a = null;
 	//private VistaBH vistaBH = null;
 
 	
@@ -48,6 +50,7 @@ public class CtrlPresentacion {
 	  }
 	
 	public void sincronizacionCCN_a_RC1(String a, int b, int c) {
+		//CtrlDominio.crearcaminonuevo(a,b,c);
 		sincronizacionCCN_a_RC();	
 	}
 	
@@ -68,6 +71,12 @@ public class CtrlPresentacion {
 	    }
 	    vistaCP.hacerVisible();
 	  }
+	
+	public void sincronizacionCP_a_RC1(String s) {
+		//CtrlDominio.caminopredeterminado(s);
+		sincronizacionCP_a_RC();
+	}
+
 	
 	public void sincronizacionCP_a_RC() {
 		 vistaCP.hacerInvisible();
@@ -126,16 +135,20 @@ public class CtrlPresentacion {
 	//----------------------Anadir1-A-CD--------------------------------------//
 	 public void sincronizacionAnadir1_a_CD() {
 		 vistaAnadir.desactivar();
-		    // Solo se crea una vista secundaria (podria crearse una nueva cada vez)
-		    if (vistaCD == null){
-		    	vistaCD = new vistaCD(this);
-		    }
-		    vistaCD.hacerVisible();
-		 
+		   if(a == null){
+			   a = new FileSamplePanel(this);
+		   }
+		    a.activar();
 	 }
 	 
+	 public void sincronizacionCD_a_Anadir11(String a) {
+		 //iCtrlDominio.anadirconjunto(a);
+		 sincronizacionCD_a_Anadir1();
+	 }
+
+	 
 	 public void sincronizacionCD_a_Anadir1() {
-		 vistaCD.hacerInvisible();
+		 a.desactivar();
 		 vistaAnadir.activar();
 		 
 	 }
@@ -187,7 +200,7 @@ public class CtrlPresentacion {
 	  public void sincronizacionMBD_a_Principal() {
 	    // Se hace invisible la vista secundaria (podria anularse)
 	    vistaMBD.hacerInvisible();
-	    vistaPrincipal.inicializarComponentes();
+	    vistaPrincipal.activar();
 	  }
 
 	
