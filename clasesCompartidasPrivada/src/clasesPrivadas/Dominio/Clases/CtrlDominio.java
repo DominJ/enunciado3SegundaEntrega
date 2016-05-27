@@ -199,7 +199,7 @@ do{
 							int typee=TypePosPath(path, path.length()-1);
 							escribir_resultado(cr.getResultadoNodo(path, pos), gh, typee);
 						}
-						else System.out.println("El camino no esta en el historial");
+						else System.out.println("El camino dado no es predeterminado");
 						
 					break;
 				

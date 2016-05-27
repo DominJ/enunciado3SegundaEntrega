@@ -114,7 +114,7 @@ public class ConjuntoResultados {
 	
 	public Set<String> consultarCaminosAlmacenados()
 	{
-		return resultados_parciales.keySet();
+		return resultados.keySet();
 	}
 	public HashMap<String,Set<Integer>> consultarResultadosParciales()
 	{
