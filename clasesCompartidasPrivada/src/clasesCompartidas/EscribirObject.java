@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.ObjectOutputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 
@@ -13,16 +14,16 @@ public class EscribirObject implements Serializable{
 
 	public static void ReescribirObject1(Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>, HashMap<Integer,ArrayList<Pair<Integer,Double>>>> a) throws IOException {
 	FileOutputStream fos = new FileOutputStream("C:/Users/USUARIO/Documents/PROP def/enunciado3SegundaEntrega/clasesCompartidasPrivada/Set1/t.tmp");
-	ObjectOutputStream oos = new ObjectOutputStream(fos);
-	//int x = 10000;
-	//oos.writeInt(x);
+	BufferedOutputStream z = new BufferedOutputStream(fos);
+	ObjectOutputStream oos = new ObjectOutputStream(z);
 	oos.writeObject(a);
 	oos.close();
 	}
 	
 	public static void ReescribirNodosPrimitivosObject(Pair<HashMap<Integer,String>,HashMap<String,Integer>> ca) throws IOException {
 		FileOutputStream fosi = new FileOutputStream("C:/Users/USUARIO/Documents/PROP def/enunciado3SegundaEntrega/clasesCompartidasPrivada/Set1/t1.tmp");
-		ObjectOutputStream ooos = new ObjectOutputStream(fosi);
+		BufferedOutputStream z = new BufferedOutputStream(fosi);
+		ObjectOutputStream ooos = new ObjectOutputStream(z);
 		ooos.writeObject(ca);
 		ooos.close();
 	}

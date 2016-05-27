@@ -49,6 +49,7 @@ public class CtrlPresentacion {
 		    System.out.println("Hola!\n");
 		  }
 		
+		
 		public void sincronizacionBH_a_Principal1(String s) {
 			//ctrlDominio.caminopredeterminado(s);
 			sincronizacionBH_a_Principal();

@@ -87,6 +87,7 @@ public void actionPerformed_buttonRC (ActionEvent event) {
 	  
   }
 
+
 public void actionPerformed_buttonBH (ActionEvent event) {
 	iCtrlPresentacion.sincronizacionPrincipal_a_BH();
   }
