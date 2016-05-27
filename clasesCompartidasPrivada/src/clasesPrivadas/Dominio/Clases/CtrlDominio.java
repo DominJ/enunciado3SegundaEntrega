@@ -34,6 +34,7 @@ public class CtrlDominio
 		cr.vaciar_resultados();
 	}
 	
+	
 	public void anadirnodoD(int a, String b, int c, String d){
 		gh.anadirNodo(a, b);
 		gh.anadirNodo(c, d);
