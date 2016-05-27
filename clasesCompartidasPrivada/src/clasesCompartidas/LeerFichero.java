@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.HashMap;
 
 /**
@@ -119,6 +121,31 @@ public class LeerFichero
 		v.setFirst(m);
 		v.setSecond(n);
 		return v;
+	}
+	
+	public static Set<String> LeerFiltro(String ruta, int c)throws IOException {
+		String cadena;
+		String archivo = null;
+		if (c == 0) archivo = ruta + "/paper.txt";
+		else if (c == 1) archivo = ruta + "/author.txt";
+		else if (c == 2) archivo = ruta + "/conf.txt";
+		else archivo = ruta + "/term.txt";
+		FileReader f = new FileReader(archivo); 
+		BufferedReader b = new BufferedReader(f); 
+		Set<String> r= new HashSet<String>();
+		while(((cadena = b.readLine())!=null)){
+	    	int i = 0;
+	    	String copy = cadena;
+	    	while(!(Character.isWhitespace(cadena.charAt(i)))) {
+	    		++i;
+	    	}
+	    	String s = copy.substring(0,i);
+	    	r.add(s);
+		}
+		//Tanquem el buffer
+		b.close();
+		return r;
+		
 	}
 	
 	public static void correcto(String sDirectorio, String directorioBase) throws FileNotFoundException, IOException {  
