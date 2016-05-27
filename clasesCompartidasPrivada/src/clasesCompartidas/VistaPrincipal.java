@@ -88,9 +88,7 @@ public void actionPerformed_buttonRC (ActionEvent event) {
   }
 
 public void actionPerformed_buttonBH (ActionEvent event) {
-	iCtrlPresentacion.sincronizacionVistaPrincipal_a_BH();
-	  	
-	  
+	iCtrlPresentacion.sincronizacionPrincipal_a_BH();
   }
 
 public void actionPerformed_buttonSalir (ActionEvent event) {

@@ -1,4 +1,7 @@
 package clasesCompartidas;
+import java.util.HashMap;
+import java.util.Set;
+
 import clasesPrivadas.Dominio.Clases.CtrlDominio;
 
 public class CtrlPresentacion {
@@ -13,7 +16,7 @@ public class CtrlPresentacion {
 	private VistaCP vistaCP = null;
 	private VistaCCN vistaCCN = null;
 	private FileSamplePanel a = null;
-	//private VistaBH vistaBH = null;
+	private vistaBH vistaBH = null;
 
 	
 
@@ -32,6 +35,32 @@ public class CtrlPresentacion {
 	}
 	
 	
+	
+	//----------------------Principal-A-BH--------------------------------------//
+
+	
+		public void sincronizacionPrincipal_a_BH() {
+			vistaPrincipal.desactivar();
+		    if (vistaBH == null){
+		    	vistaBH = new vistaBH(this);
+		    }
+		    HashMap<String, Set<Integer>> a = ctrlDominio.actualizarhistorial();
+		    vistaBH.activar(a);
+		    System.out.println("Hola!\n");
+		  }
+		
+		public void sincronizacionBH_a_Principal1(String s) {
+			//ctrlDominio.caminopredeterminado(s);
+			sincronizacionBH_a_Principal();
+		}
+
+		
+		public void sincronizacionBH_a_Principal() {
+			 vistaBH.desactivar();
+			 vistaPrincipal.activar();
+			
+		}
+		
 	
 	//----------------------RC-A-CCN--------------------------------------//
 
@@ -98,16 +127,6 @@ public class CtrlPresentacion {
 		
 	}
 	
-	//----------------------VistaPrincipal-A-BH--------------------------------------//
-
-
-	public void sincronizacionVistaPrincipal_a_BH(){
-	  }
-	
-	public void sincronizacionBH_a_VistaPrincipal(int options, String n) {
-		
-		
-	}
 	
 	//----------------------MBD-A-Eliminar--------------------------------------//
 
