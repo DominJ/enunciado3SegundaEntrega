@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 /*
 author: 
 */
@@ -21,6 +24,7 @@ public class Grafo
 {
 	static final String RUTA_INICIAL = "Set1";
 	static final String RUTA_ADD = "AddData";
+	static final String FILTROS = "Filtros";
 	
 	ConjuntoNodos authors;
 	ConjuntoNodos therms;
@@ -112,6 +116,70 @@ public class Grafo
 			this.PTC.normColumnas();
 			
 		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public Grafo(Grafo g, Set<Integer> s) {
+		/*s es un set que determina los filtros que se han seleccionado.
+		  Contiene un conjunto de numeros entre 0 y 3 donde :
+			0 - papers
+			1 - authors
+			2 - conferences
+			3 - therms 
+			*/
+		try{
+			//Instanciamos los nodos
+			
+			Set<Integer> a=new HashSet<Integer>();
+			//Generamos un set con los numeros de 0 a 3
+			for (int i=0; i<4; ++i){
+				a.add(i);
+			}
+			//Tratamos primero el set de flitros
+			for (int i:s){
+				Set<String> r=LeerFichero.LeerFiltro(FILTROS, i);
+				HashMap<Integer, String> h1 = new HashMap<Integer, String>();
+				HashMap<String, Integer> h2 = new HashMap<String, Integer>();
+				for (String n:r){
+					h1.put(consultarNodo(i, n), n);
+					h2.put(n, consultarNodo(i, n));
+				}
+				if (i==0) {
+					this.papers=new ConjuntoNodos(h1, h2);
+				}
+				else if (i==1){
+					this.authors=new ConjuntoNodos(h1,h2);
+				}
+				else if (i==2){
+					this.conferences=new ConjuntoNodos(h1,h2);
+				}
+				else{
+					this.therms=new ConjuntoNodos(h1,h2);
+				}
+				//Quitamos del set los casos tratados
+				a.remove(i);
+			}
+			//El resto de casos sin tratar, los cogemos del grafo g
+			for(int i:a){
+				if (i==0) {
+					this.papers=g.papers;
+				}
+				else if (i==1){
+					this.authors=g.authors;
+				}
+				else if (i==2){
+					this.conferences=g.conferences;
+				}
+				else{
+					this.therms=g.therms;
+				}
+			}
+			//Queda instanciar las relaciones. To be continued.
+		}
 		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
