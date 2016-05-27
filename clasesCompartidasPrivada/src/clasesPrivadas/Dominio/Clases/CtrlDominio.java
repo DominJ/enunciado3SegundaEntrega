@@ -2,8 +2,11 @@ package clasesPrivadas.Dominio.Clases;
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 import clasesCompartidas.Pair;
 /**
@@ -172,31 +175,53 @@ do{
 					case 1: //realizar consulta - camino predeterminado
 						//TODO usuario elige un camino de la lista de caminos predetermidos
 						System.out.print("Seleccion camino predeterminado:\n");
-						int numpath = sc.nextInt();
-						System.out.println("Has seleccionado el path "+numpath+" Pero aun no esta implementado");
-						//Dejamos los precalculos para mas adelante
+						Set<String> a = cr.consultarCaminosAlmacenados();
+						System.out.println("----------");
+						for(String i: a)
+						{
+							System.out.println(i);
+						}
+						System.out.println("----------\n");
+						System.out.println("Introduce path:");
+						String path = sc.nextLine();
+						if (a.contains(path)) {
+							int typeb=TypePosPath(path,0);
+							System.out.print("4.- Introduce nombre del nodo\n" );
+							String name = in.readLine();
+							int pos=gh.consultarNodo(typeb, name);
+							double x1, x2;
+							System.out.println("Introduce el extremo menor del intervalo de relevancia" );
+							x1=Double.parseDouble(in.readLine());
+							System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
+							x2=Double.parseDouble(in.readLine());
+							cr.setIntervalo(x1, x2);
+							System.out.println("Relevancia de "+ name +" en el camino "+ path +":");
+							int typee=TypePosPath(path, path.length()-1);
+							escribir_resultado(cr.getResultadoNodo(path, pos), gh, typee);
+						}
+						else System.out.println("El camino no esta en el historial");
 						
 					break;
 				
 					case 2: //realizar consulta - camino nuevo
 						//TODO usuario crea su propio camino 
-						String path;
+						String path1;
 						System.out.println("Introduce path:");
-						path = sc.nextLine();
-						int typeb=TypePosPath(path,0);
+						path1 = sc.nextLine();
+						int typeb=TypePosPath(path1,0);
 						System.out.print("4.- Introduce nombre del nodo\n" );
 						String name = in.readLine();
 						int pos=gh.consultarNodo(typeb, name);
-						cr.anadirResultado(path, ch.HeteSim(path, pos),pos);
+						cr.anadirResultado(path1, ch.HeteSim(path1, pos),pos);
 						System.out.println("Introduce el extremo menor del intervalo de relevancia" );
 						double x1,x2;
 						x1=Double.parseDouble(in.readLine());
 						System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
 						x2=Double.parseDouble(in.readLine());
 						cr.setIntervalo(x1, x2);
-						System.out.println("Relevancia de "+ name +" en el camino "+ path +":");
-						int typee=TypePosPath(path, path.length()-1);
-						escribir_resultado(cr.getResultadoNodo(path, pos), gh, typee);
+						System.out.println("Relevancia de "+ name +" en el camino "+ path1 +":");
+						int typee=TypePosPath(path1, path1.length()-1);
+						escribir_resultado(cr.getResultadoNodo(path1, pos), gh, typee);
 					break;
 				//default:
 				}
@@ -206,29 +231,39 @@ do{
 			case 3://buscar en el historial
 				System.out.print("Elige el camino que quieres consultar del historial:\n" );
 				//TODO lista de caminos guardados y usuario elige uno y lo consulta
-				Set<String> a = cr.consultarCaminosAlmacenados();
+				HashMap<String, Set<Integer>> a = cr.consultarResultadosParciales();
 				System.out.println("----------");
-				for(String i: a)
+				for(String i: a.keySet())
 				{
-					System.out.println(i);
+					System.out.print(i);
+					Set<Integer> s=a.get(i);
+					Set<String> sn= new TreeSet<String>();
+					for (int k: s){
+						int type=TypePosPath(i,0);
+						sn.add(gh.consultarNodo(type, k));
+					}
+					System.out.println(": "+sn.toString());
 				}
 				System.out.println("----------\n");
 				System.out.println("Introduce path:");
 				String path = sc.nextLine();
-				if (a.contains(path)) {
+				if (a.containsKey(path)) {
 					int typeb=TypePosPath(path,0);
 					System.out.print("4.- Introduce nombre del nodo\n" );
 					String name = in.readLine();
 					int pos=gh.consultarNodo(typeb, name);
-					double x1, x2;
-					System.out.println("Introduce el extremo menor del intervalo de relevancia" );
-					x1=Double.parseDouble(in.readLine());
-					System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
-					x2=Double.parseDouble(in.readLine());
-					cr.setIntervalo(x1, x2);
-					System.out.println("Relevancia de "+ name +" en el camino "+ path +":");
-					int typee=TypePosPath(path, path.length()-1);
-					escribir_resultado(cr.getResultadoNodo(path, pos), gh, typee);
+					if (a.get(path).contains(pos)){
+						double x1, x2;
+						System.out.println("Introduce el extremo menor del intervalo de relevancia" );
+						x1=Double.parseDouble(in.readLine());
+						System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
+						x2=Double.parseDouble(in.readLine());
+						cr.setIntervalo(x1, x2);
+						System.out.println("Relevancia de "+ name +" en el camino "+ path +":");
+						int typee=TypePosPath(path, path.length()-1);
+						escribir_resultado(cr.getResultadoNodo(path, pos), gh, typee);
+					}
+					else System.out.println("El nodo no esta calculado en el camino");
 				}
 				else System.out.println("El camino no esta en el historial");
 				//------------
