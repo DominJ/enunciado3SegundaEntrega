@@ -9,7 +9,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +16,6 @@ import javax.swing.JLabel;
 public class FileSamplePanel {
 	  private CtrlPresentacion iCtrlPresentacion;
 	  private JFrame frame;
-	  private JButton Importar;
-	  private JButton Cancelar;
 
 
 

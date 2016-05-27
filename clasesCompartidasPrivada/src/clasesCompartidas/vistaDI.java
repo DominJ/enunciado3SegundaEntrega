@@ -9,6 +9,8 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,10 +31,12 @@ public class vistaDI {
 
 	public void activar() {
 	    frameVistaAnadir1.setEnabled(true);
+	    hacerVisible();
 	  }
 
 	  public void desactivar() {
 	    frameVistaAnadir1.setEnabled(false);
+	    hacerInvisible();
 	  }
 		  public void hacerVisible() {
 		    frameVistaAnadir1.pack();
@@ -76,10 +80,8 @@ public class vistaDI {
 				System.out.println("con el valor:"+n+"\n");
 				
 				String s1 = "Paper";
-				iCtrlPresentacion.anadirnodo(s1, j);
-				iCtrlPresentacion.anadirnodo(s,n);
-				//iCtrlPresentacion.crearRelacion(j,n);
-
+				iCtrlPresentacion.sincronizacionDI_a_Anadir11(s1, j, s, n);
+				
 
 			}
 		  
@@ -101,7 +103,11 @@ public class vistaDI {
 			    JPanel contentPaneAnadir = (JPanel) frameVistaAnadir1.getContentPane();
 			    contentPaneAnadir.add(panelAnadir1);
 			    
-				
+			    frameVistaAnadir1.addWindowListener(new WindowAdapter() {
+			         public void windowClosing(WindowEvent windowEvent){
+			        	 iCtrlPresentacion.sincronizacionDI_a_Anadir1();
+			         }        
+			      });
 				FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
 				//cambiao ventana -> frameVista
 			    frameVistaAnadir1.setLayout(layout);

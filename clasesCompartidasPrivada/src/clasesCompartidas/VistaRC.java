@@ -24,10 +24,12 @@ public class VistaRC {
 
 	public void activar() {
 	    frameVistaRC.setEnabled(true);
+	    hacerVisible();
 	  }
 
 	  public void desactivar() {
 	    frameVistaRC.setEnabled(false);
+	    hacerInvisible();
 	  }
 		  public void hacerVisible() {
 		    frameVistaRC.pack();
@@ -57,11 +59,7 @@ public class VistaRC {
 	        	 iCtrlPresentacion.sincronizacionRC_a_VistaPrincipal();
 	         }        
 	      });  
-	    
-	    
-	    
 		FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
-		//cambiao ventana -> frameVista
 	    frameVistaRC.setLayout(layout);
 	    panelRC.setLayout(new FlowLayout());
 		

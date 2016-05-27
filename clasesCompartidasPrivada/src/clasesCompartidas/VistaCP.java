@@ -30,6 +30,7 @@ public class VistaCP {
 	            String data = "Camino Seleccionado: " 
 	            + camino.getItem(camino.getSelectedIndex());
 	            statusLabel.setText(data);
+	        	 iCtrlPresentacion.sincronizacionCP_a_RC1(camino.getItem(camino.getSelectedIndex()));
 	         }
 	      }); 
 	 }
@@ -39,10 +40,12 @@ public class VistaCP {
 
 	public void activar() {
 	    frameVistaCP.setEnabled(true);
+	    hacerVisible();
 	  }
 
 	  public void desactivar() {
 	    frameVistaCP.setEnabled(false);
+	    hacerInvisible();
 	  }
 		  public void hacerVisible() {
 		    frameVistaCP.pack();
@@ -103,6 +106,5 @@ public class VistaCP {
 
 
 	    asignar_listenersComponentes2();
-	    frameVistaCP.setVisible(true);
 	}
 }

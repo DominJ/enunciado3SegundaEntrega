@@ -1,8 +1,4 @@
 package clasesCompartidas;
-
-import java.awt.event.ActionEvent;
-import java.io.File;
-
 import clasesPrivadas.Dominio.Clases.CtrlDominio;
 
 public class CtrlPresentacion {
@@ -32,7 +28,7 @@ public class CtrlPresentacion {
 	
 	public void inicializarPresentacion() {
 		//ctrlDominio.inicializarCtrlDominio();
-		vistaPrincipal.hacerVisible();
+		vistaPrincipal.activar();
 	}
 	
 	
@@ -46,7 +42,7 @@ public class CtrlPresentacion {
 	    if (vistaCCN == null){
 	    	vistaCCN = new VistaCCN(this);
 	    }
-	    vistaCCN.hacerVisible();
+	    vistaCCN.activar();
 	  }
 	
 	public void sincronizacionCCN_a_RC1(String a, int b, int c) {
@@ -55,7 +51,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void sincronizacionCCN_a_RC() {
-		 vistaCCN.hacerInvisible();
+		 vistaCCN.desactivar();
 		 vistaRC.activar();
 		
 	}
@@ -69,17 +65,17 @@ public class CtrlPresentacion {
 	    if (vistaCP == null){
 	    	vistaCP = new VistaCP(this);
 	    }
-	    vistaCP.hacerVisible();
+	    vistaCP.activar();
 	  }
 	
 	public void sincronizacionCP_a_RC1(String s) {
-		//CtrlDominio.caminopredeterminado(s);
+		ctrlDominio.caminopredeterminado(s);
 		sincronizacionCP_a_RC();
 	}
 
 	
 	public void sincronizacionCP_a_RC() {
-		 vistaCP.hacerInvisible();
+		 vistaCP.desactivar();
 		 vistaRC.activar();
 		
 	}
@@ -93,11 +89,11 @@ public class CtrlPresentacion {
 	    if (vistaRC == null){
 	    	vistaRC = new VistaRC(this);
 	    }
-	    vistaRC.hacerVisible();
+	    vistaRC.activar();
 	  }
 	
 	public void sincronizacionRC_a_VistaPrincipal() {
-		 vistaRC.hacerInvisible();
+		 vistaRC.desactivar();
 		 vistaPrincipal.activar();
 		
 	}
@@ -121,11 +117,16 @@ public class CtrlPresentacion {
 	    if (vistaEliminar == null){
 	    	vistaEliminar = new VistaEliminar(this);
 	    }
-	    vistaEliminar.hacerVisible();
+	    vistaEliminar.activar();
 	}
-	public void sincronizacionEliminar_a_MBD(int options, String n) {
-		ctrlDominio.eliminarnodoD(options,n);
-		 vistaEliminar.hacerInvisible();
+	
+	public void sincronizacionEliminar_a_MBD1(int options, String n) {
+		//ctrlDominio.eliminarnodoD(options,n);
+		sincronizacionEliminar_a_MBD();
+	}
+
+	public void sincronizacionEliminar_a_MBD() {
+		 vistaEliminar.desactivar();
 		 vistaMBD.activar();
 		
 	}
@@ -161,13 +162,27 @@ public class CtrlPresentacion {
 		    if (vistaDI == null){
 		    	vistaDI = new vistaDI(this);
 		    }
-		    vistaDI.hacerVisible();
+		    vistaDI.activar();
 		 
+	 }
+	 
+	 public void sincronizacionDI_a_Anadir11(String a1, String b, String c1, String d){
+		int a,c;
+		if (a1 == "Paper") a = 0;
+		else if(a1 == "Author") a = 1;
+		else if (a1 == "Conference")a = 2;
+		else a = 3;
+		if (c1 == "Paper") c = 0;
+		else if(c1 == "Author") c = 1;
+		else if (c1 == "Conference")c = 2;
+		else c = 3;
+		 ctrlDominio.anadirnodoD(a, b, c, d);
+		 sincronizacionDI_a_Anadir1();
 	 }
 	 
 	 public void sincronizacionDI_a_Anadir1() {
 		    // Se hace invisible la vista secundaria (podria anularse)
-		    vistaDI.hacerInvisible();
+		    vistaDI.desactivar();
 		    vistaAnadir.activar();
 		  }
 
@@ -179,11 +194,11 @@ public class CtrlPresentacion {
 	    if (vistaAnadir == null){
 	    	vistaAnadir = new VistaAnadir1(this);
 	    }
-	    vistaAnadir.hacerVisible();
+	    vistaAnadir.activar();
 	}
 	  public void sincronizacionAnadir1_a_MBD() {
 		    // Se hace invisible la vista secundaria (podria anularse)
-		    vistaAnadir.hacerInvisible();
+		    vistaAnadir.desactivar();
 		    vistaMBD.activar();
 		  }
 
@@ -194,26 +209,13 @@ public class CtrlPresentacion {
 	    // Solo se crea una vista secundaria (podria crearse una nueva cada vez)
 	    if (vistaMBD == null)
 	    	vistaMBD = new VistaMBD(this);
-	    vistaMBD.hacerVisible();
+	    vistaMBD.activar();
 	  }
 
 	  public void sincronizacionMBD_a_Principal() {
 	    // Se hace invisible la vista secundaria (podria anularse)
-	    vistaMBD.hacerInvisible();
+	    vistaMBD.desactivar();
 	    vistaPrincipal.activar();
 	  }
-
-	
-	
-	
-	public void anadirnodo(String s, String n) {
-		ctrlDominio.anadirnododominio(s,n);
-	}
-	
-	/* 
-	public void actionPerformed_buttonA(ActionEvent event) {
-		vA.actionPerformed_buttonA(event);
-	}
-*/
 	
 }

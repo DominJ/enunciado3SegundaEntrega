@@ -8,13 +8,14 @@ import java.awt.FlowLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import clasesPrivadas.Dominio.Clases.ConjuntoResultados;
-import clasesPrivadas.Dominio.Clases.Grafo;
+
 
 public class VistaEliminar {
 	  private CtrlPresentacion iCtrlPresentacion;
@@ -33,14 +34,16 @@ public class VistaEliminar {
 	public VistaEliminar(CtrlPresentacion pCtrlPresentacion) {
 	    iCtrlPresentacion = pCtrlPresentacion;
 	    inicializarComponentes();
-	  }
+	}
 
-public void activar() {
-    frameVistaEliminar.setEnabled(true);
-  }
+	public void activar() {
+		frameVistaEliminar.setEnabled(true);
+		hacerVisible();
+	}
 
   public void desactivar() {
     frameVistaEliminar.setEnabled(false);
+    hacerInvisible();
   }
 	
 	  public void hacerVisible() {
@@ -81,7 +84,7 @@ public void activar() {
 		if(s == "Author") options = 1;
 		else if(s == "Conference") options = 2;
 		else if(s == "Term") options = 3;
-		iCtrlPresentacion.sincronizacionEliminar_a_MBD(options,n);
+		iCtrlPresentacion.sincronizacionEliminar_a_MBD1(options,n);
 	}
 
 private  void asignar_listenersComponentes2() {
@@ -103,7 +106,12 @@ public  void inicializarComponentes () {
 	    JPanel contentPaneAnadir = (JPanel) frameVistaEliminar.getContentPane();
 	    contentPaneAnadir.add(panelEliminar);
 	    
-		
+	    
+	    frameVistaEliminar.addWindowListener(new WindowAdapter() {
+	         public void windowClosing(WindowEvent windowEvent){
+	        	 iCtrlPresentacion.sincronizacionEliminar_a_MBD();
+	         }        
+	      });  
 		FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
 		//cambiao ventana -> frameVista
 	    frameVistaEliminar.setLayout(layout);

@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,10 +31,12 @@ public class VistaMBD {
 
 public void activar() {
     frameVista1.setEnabled(true);
+    hacerVisible();
   }
 
   public void desactivar() {
     frameVista1.setEnabled(false);
+    hacerInvisible();
   }
 	  public void hacerVisible() {
 	    frameVista1.pack();
@@ -48,11 +52,15 @@ public void activar() {
 			frameVista1.setMinimumSize(new Dimension(500,200));
 		    frameVista1.setPreferredSize(frameVista1.getMinimumSize());
 		    frameVista1.setResizable(false);
-		    // Posicion y operaciones por defecto
 		    frameVista1.setLocationRelativeTo(null);
 		    frameVista1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		    JPanel contentPanel = (JPanel) frameVista1.getContentPane();
 		    contentPanel.add(panelContenidos1);
+		    frameVista1.addWindowListener(new WindowAdapter() {
+		         public void windowClosing(WindowEvent windowEvent){
+		        	 iCtrlPresentacion.sincronizacionMBD_a_Principal();
+		         }        
+		      });
 		    JLabel etiqueta1 = new JLabel("MODIFICACIONES");
 		    etiqueta1.setForeground(Color.GREEN);
 		    frameVista1.add(etiqueta1);

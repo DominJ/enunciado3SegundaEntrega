@@ -1,14 +1,10 @@
 package clasesCompartidas;
 
-import java.awt.Button;
-import java.awt.Checkbox;
-import java.awt.CheckboxGroup;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.Label;
-import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,10 +29,12 @@ public class VistaCCN {
 	
 	public void activar() {
 	    frameVistaCCN.setEnabled(true);
+	    hacerVisible();
 	  }
 
 	  public void desactivar() {
 	    frameVistaCCN.setEnabled(false);
+	    hacerInvisible();
 	  }
 		  public void hacerVisible() {
 		    frameVistaCCN.pack();
@@ -113,7 +111,6 @@ public class VistaCCN {
 	    panelCCN.add(buttonOk);
 
 		
-	    frameVistaCCN.setVisible(true);
 	    asignar_listenersComponentes3();
 	}
 	
