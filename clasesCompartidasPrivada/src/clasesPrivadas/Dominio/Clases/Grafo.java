@@ -390,7 +390,9 @@ public class Grafo
 		this.escribirRelaciones();
 	}
 	
-	public void addDataGraph() throws FileNotFoundException
+	//Creo innecesario el throw
+	//public void addDataGraph() throws FileNotFoundException
+	public void addDataGraph()
 	{
 		// ruta definidia -> /AddData
 		// Comprobar existencia de los ficheros

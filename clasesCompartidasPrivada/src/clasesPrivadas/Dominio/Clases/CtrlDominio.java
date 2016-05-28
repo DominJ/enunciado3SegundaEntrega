@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
 /**
  * @author Xavi Campos Navarro
@@ -16,16 +15,18 @@ import clasesCompartidas.Pair;
 
 public class CtrlDominio
 { 
-	LeerFichero LF = new LeerFichero();
+	//LeerFichero LF = new LeerFichero();
 	Grafo gh = new Grafo();
 	ConjuntoResultados cr = new ConjuntoResultados();
 	
-	public HashMap<String, Set<Integer>> actualizarhistorial(){
-	HashMap<String, Set<Integer>> a = cr.consultarResultadosParciales();
-	return a;
+	public HashMap<String, Set<Integer>> actualizarhistorial()
+	{
+		HashMap<String, Set<Integer>> a = cr.consultarResultadosParciales();
+		return a;
 	}
 	
-	public void caminopredeterminado (String a ){
+	public void caminopredeterminado (String a )
+	{
 	}
 	
 	public void eliminarnodoD(int a, String b){
@@ -40,9 +41,11 @@ public class CtrlDominio
 		//gh.anadirRelacion(b,d);
 	}
 	
-	public void anadirconjuntodatos(String a, int s){
+	public void anadirconjuntodatos(String a, int s)
+	{
 		//0 = P, 1 = A, 2 = C, 3 = T, 4 = PA, 5 = PC, 6 = PT, 7 = AP, 8 = AC,
 		//9 = AT, 10 = CP, 11 = CA, 12 = CT, 13 = TP, 14 = TA, 15 = TC
+		gh.addDataGraph();
 	}
 	
 	
