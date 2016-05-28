@@ -36,10 +36,6 @@ public class vistaBH {
 	      }); 
 	 }
 
-	 
-
-	
-
 	public void activar(HashMap<String, Set<Integer>> a) {
 		for (String key : a.keySet()) {
 			camino.add(key);
@@ -69,14 +65,8 @@ public class vistaBH {
 	
 	void inicializarComponentes() {
 		frameVistaBH.setSize(new Dimension(400,400));
-
-	    
-		
 	    frameVistaBH.setLayout(new GridLayout(3, 1));
 	    panelBH.setLayout(new FlowLayout());
-		
-	    
-	    
 	    frameVistaBH.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
 	        	 iCtrlPresentacion.sincronizacionBH_a_Principal();
@@ -92,8 +82,6 @@ public class vistaBH {
 	      frameVistaBH.add(panelBH);
 	      frameVistaBH.add(statusLabel);
 	      frameVistaBH.setVisible(true);
-
-	      
 
 	      headerLabel.setText("Control in action: Choice"); 
 

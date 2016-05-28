@@ -20,7 +20,6 @@ public class CtrlDominio
 	Grafo gh = new Grafo();
 	ConjuntoResultados cr = new ConjuntoResultados();
 	
-	
 	public HashMap<String, Set<Integer>> actualizarhistorial(){
 	HashMap<String, Set<Integer>> a = cr.consultarResultadosParciales();
 	return a;

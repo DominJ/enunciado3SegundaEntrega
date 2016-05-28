@@ -19,9 +19,6 @@ public class CtrlPresentacion {
 	private vistaBH vistaBH = null;
 
 	
-
-
-	
 	public CtrlPresentacion() {
 		 ctrlDominio = new CtrlDominio();
 		 if (vistaPrincipal == null) {  // innecesario
@@ -33,8 +30,6 @@ public class CtrlPresentacion {
 		//ctrlDominio.inicializarCtrlDominio();
 		vistaPrincipal.activar();
 	}
-	
-	
 	
 	//----------------------Principal-A-BH--------------------------------------//
 
@@ -49,13 +44,11 @@ public class CtrlPresentacion {
 		    System.out.println("Hola!\n");
 		  }
 		
-		
 		public void sincronizacionBH_a_Principal1(String s) {
 			//ctrlDominio.caminopredeterminado(s);
 			sincronizacionBH_a_Principal();
 		}
 
-		
 		public void sincronizacionBH_a_Principal() {
 			 vistaBH.desactivar();
 			 vistaPrincipal.activar();
@@ -83,7 +76,6 @@ public class CtrlPresentacion {
 	public void sincronizacionCCN_a_RC() {
 		 vistaCCN.desactivar();
 		 vistaRC.activar();
-		
 	}
 	
 	//----------------------RC-A-CP--------------------------------------//
@@ -107,7 +99,6 @@ public class CtrlPresentacion {
 	public void sincronizacionCP_a_RC() {
 		 vistaCP.desactivar();
 		 vistaRC.activar();
-		
 	}
 	
 	//----------------------VistaPrincipal-A-RC--------------------------------------//
@@ -127,8 +118,7 @@ public class CtrlPresentacion {
 		 vistaPrincipal.activar();
 		
 	}
-	
-	
+
 	//----------------------MBD-A-Eliminar--------------------------------------//
 
 	public void sincronizacionMBD_a_Eliminar(){
@@ -151,8 +141,6 @@ public class CtrlPresentacion {
 		
 	}
 
-
-	
 	//----------------------Anadir1-A-CD--------------------------------------//
 	 public void sincronizacionAnadir1_a_CD() {
 		 vistaAnadir.desactivar();
@@ -167,7 +155,6 @@ public class CtrlPresentacion {
 		 sincronizacionCD_a_Anadir1();
 	 }
 
-	 
 	 public void sincronizacionCD_a_Anadir1() {
 		 a.desactivar();
 		 vistaAnadir.activar();

@@ -77,8 +77,7 @@ private void inicializar_panelBotones() {
 
 public void actionPerformed_buttonMBD (ActionEvent event) {
 	iCtrlPresentacion.sincronizacionVistaPrincipal_a_MBD();
-	  	
-	  
+	  	  
   }
 
 public void actionPerformed_buttonRC (ActionEvent event) {
@@ -86,7 +85,6 @@ public void actionPerformed_buttonRC (ActionEvent event) {
 	  	
 	  
   }
-
 
 public void actionPerformed_buttonBH (ActionEvent event) {
 	iCtrlPresentacion.sincronizacionPrincipal_a_BH();
@@ -98,9 +96,6 @@ System.exit(0);
   }
 
 private void asignar_listenersComponentes() {
-
-    // Listeners para los botones
-
     buttonMBD.addActionListener
       (new ActionListener() {
         public void actionPerformed (ActionEvent event) {
@@ -137,13 +132,9 @@ private void asignar_listenersComponentes() {
         }
       });
 
-    
-
-
   }
 
-
-protected void inicializarComponentes() {
+private void inicializarComponentes() {
     inicializar_frameVista();
     inicializar_panelContenidos();
     inicializar_panelBotones();
