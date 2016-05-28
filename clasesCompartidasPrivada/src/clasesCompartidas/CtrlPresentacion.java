@@ -27,7 +27,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void inicializarPresentacion() {
-		//ctrlDominio.inicializarCtrlDominio();
+		ctrlDominio.inicializarCtrlDominio();
 		vistaPrincipal.activar();
 	}
 	

@@ -11,11 +11,17 @@ import java.io.Serializable;
 
 public class LeerObject implements Serializable{
 
-	public Object LeerObject() {
+	public static Object LeerObject() 
+	{
 		FileInputStream fis = new FileInputStream();
 		BufferedInputStream z = new BufferedInputStream(fis);
 		ObjectInputStream ois = new ObjectInputStream(z);
 	    Object a = ois.readObject();
 	    return a;
-		}
+	}
+	
+	public static void verificarObjects() throws Exception
+	{
+		//Verifica si es primera ejecución
+	}
 }

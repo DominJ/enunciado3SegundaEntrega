@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import clasesCompartidas.LeerObject;
 import clasesCompartidas.Pair;
 /**
  * @author Xavi Campos Navarro
@@ -16,8 +17,27 @@ import clasesCompartidas.Pair;
 public class CtrlDominio
 { 
 	//LeerFichero LF = new LeerFichero();
-	Grafo gh = new Grafo();
-	ConjuntoResultados cr = new ConjuntoResultados();
+	//Grafo gh = new Grafo();
+	//ConjuntoResultados cr = new ConjuntoResultados();
+	Grafo gh;
+	ConjuntoResultados cr;
+	
+	public void inicializarCtrlDominio()
+	{
+		//Debe verificar la correcta ejecuccion.
+		try
+		{
+			LeerObject.verificarObjects();
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+		//Es primera ejecucion?
+			//true > leemos datos texto creamos grafo
+			//false > leemos object
+	}
 	
 	public HashMap<String, Set<Integer>> actualizarhistorial()
 	{
