@@ -36,6 +36,7 @@ public class CtrlDominio
 		catch(NonExistObjectToReadException e)
 		{
 			//Es la primera ejecución
+			System.out.println("Primera ejecucion en este equipo");
 			this.gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
 			this.cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
 		} 
@@ -49,10 +50,6 @@ public class CtrlDominio
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//Es primera ejecucion?
-			//true > leemos datos texto creamos grafo
-			//false > leemos object
 	}
 	
 	public HashMap<String, Set<Integer>> actualizarhistorial()
