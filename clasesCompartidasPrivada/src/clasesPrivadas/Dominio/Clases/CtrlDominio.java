@@ -9,6 +9,7 @@ import java.util.TreeSet;
 
 import clasesCompartidas.LeerObject;
 import clasesCompartidas.Pair;
+import excepciones.NonExistObjectToReadException;
 /**
  * @author Xavi Campos Navarro
  *
@@ -28,10 +29,25 @@ public class CtrlDominio
 		try
 		{
 			LeerObject.verificarObjects();
+			//No es la primera ejecuión
+			this.gh = (Grafo) LeerObject.LeerObjeto("grafo");
+			this.cr = (ConjuntoResultados) LeerObject.LeerObjeto("conjuntoResultados");
 		}
-		catch(Exception e)
+		catch(NonExistObjectToReadException e)
 		{
-			
+			//Es la primera ejecución
+			this.gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
+			this.cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		//Es primera ejecucion?
