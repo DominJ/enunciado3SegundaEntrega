@@ -67,11 +67,23 @@ public class CtrlDominio
 		cr.vaciar_resultados();
 	}
 	
-	
-	public void anadirnodoD(int a, String b, int c, String d){
-		gh.anadirNodo(a, b);
-		gh.anadirNodo(c, d);
-		//gh.anadirRelacion(b,d);
+	//int a e int indican el tipo de nodo
+	public void anadirnodoD(int tipo1, String nombre1, int tipo2, String nombre2)
+	{
+		//Con esta verificación garantizo que el tipo 1 es paper
+		if(tipo1 != 0)//es paper
+		{
+			//Le doy la vuelta
+			int tipoAux = tipo2;
+			String nombreAux = nombre2;
+			tipo2 = tipo1;
+			nombre2 = nombre1;
+			tipo1 = tipoAux;
+			nombre1 =  nombreAux;
+		}
+		gh.anadirNodo(tipo1, nombre1);
+		gh.anadirNodo(tipo2, nombre2);
+		gh.anadirRelacion(gh.consultarNodo(tipo1, nombre1),gh.consultarNodo(tipo2, nombre2),tipo2);
 	}
 	
 	public void anadirconjuntodatos(String a, int s)
