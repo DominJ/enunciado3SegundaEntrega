@@ -1,6 +1,5 @@
 package clasesPrivadas.Dominio.Clases;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -253,6 +252,53 @@ public class Grafo
 						break;
 			
 			case 3	:	this.therms.anadir_nodo(name);
+						break;
+		}
+	}
+	
+	public int consultarNodo(String name, int type)
+	{
+		//(0 = P, 1 = A, 2 = C, 3 = T)
+				switch(type)
+				{
+					case 0	:	return this.papers.consultar_nodo(name);
+					
+					case 1	:	return this.authors.consultar_nodo(name);
+					
+					case 2	:	return this.conferences.consultar_nodo(name);
+					
+					case 3	:	return this.therms.consultar_nodo(name);
+				}
+				return 0;
+	}
+	
+	public void anadirRelacion(int a, int b, int tipo)
+	{
+		 //(1 = PA, 2 = PC, 3 = PT)
+		switch(tipo)
+		{
+			case 1	:	this.PAF.anadir_PaperOther(a, b);
+						this.PAC.anadir_PaperOther(a, b);
+						this.PAF.ordenarArray();
+						this.PAC.ordenarArray();
+						this.PAF.normFilas();
+						this.PAC.normColumnas();
+						break;
+			
+			case 2	:	this.PCF.anadir_PaperOther(a, b);
+						this.PCC.anadir_PaperOther(a, b);
+						this.PCF.ordenarArray();
+						this.PCC.ordenarArray();
+						this.PCF.normFilas();
+						this.PCC.normColumnas();
+						break;
+			
+			case 3	:	this.PTF.anadir_PaperOther(a, b);
+						this.PTC.anadir_PaperOther(a, b);
+						this.PTF.ordenarArray();
+						this.PTC.ordenarArray();
+						this.PTF.normFilas();
+						this.PTC.normColumnas();
 						break;
 		}
 	}
