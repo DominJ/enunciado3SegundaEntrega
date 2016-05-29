@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 
 
 import java.awt.Dimension;
@@ -15,9 +15,7 @@ import javax.swing.JPanel;
 
 public class VistaAnadir1 {
 
-	
-	  private CtrlPresentacion iCtrlPresentacion;
-
+	private CtrlPresentacion iCtrlPresentacion;
 	private JPanel panelAnadir = new JPanel();
 	private JFrame frameVistaAnadir = new JFrame("Anadir");	
 	private JButton buttonDI = new JButton("Dato Independiente");

@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class vistaDI {
 	  private CtrlPresentacion iCtrlPresentacion;
 		private static JPanel panelAnadir1 = new JPanel();;
-		private static JFrame frameVistaAnadir1 = new JFrame("Añadir DI");
+		private static JFrame frameVistaAnadir1 = new JFrame("Anadir DI");
 		private static CheckboxGroup Tipos = new CheckboxGroup();
 		private static Checkbox chkAuthor = new Checkbox("Author",Tipos,false);
 		private static Checkbox chkConf = new Checkbox("Conference",Tipos,false);

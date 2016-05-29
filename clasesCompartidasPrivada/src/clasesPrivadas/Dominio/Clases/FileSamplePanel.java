@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
