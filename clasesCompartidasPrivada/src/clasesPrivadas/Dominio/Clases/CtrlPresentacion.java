@@ -17,7 +17,9 @@ public class CtrlPresentacion {
 	private VistaCCN vistaCCN = null;
 	private FileSamplePanel a = null;
 	private vistaBH vistaBH = null;
-	private vistaGuardar vistaGuardar = null;
+	//private vistaGuardar vistaGuardar = null;
+	private FileChooserTest FCT = null;
+
 
 
 	
@@ -40,10 +42,10 @@ public class CtrlPresentacion {
 	
 	public void sincronizacionPrincipal_a_Guardar() {
 		vistaPrincipal.desactivar();
-	    if (vistaGuardar == null){
-	    	vistaGuardar = new vistaGuardar(this);
+	    if (FCT == null){
+	    	FCT = new FileChooserTest(this);
 	    }
-	    vistaGuardar.activar();
+	    FCT.activar();
 	  }
 	
 	public void sincronizacionGuardar_a_Principal1(String s) {
@@ -52,9 +54,8 @@ public class CtrlPresentacion {
 	}
 
 	public void sincronizacionGuardar_a_Principal() {
-		 vistaGuardar.desactivar();
-		 vistaPrincipal.activar();
-		
+		vistaPrincipal.activar();
+		FCT.desactivar();
 	}
 	
 	//----------------------Principal-A-BH--------------------------------------//
