@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;

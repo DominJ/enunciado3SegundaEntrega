@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,7 +15,7 @@ public class VistaRC {
 	
 	
     private JPanel panelRC = new JPanel();
-	private JFrame frameVistaRC = new JFrame("Añadir");	
+	private JFrame frameVistaRC = new JFrame("Anadir");	
 	private CtrlPresentacion iCtrlPresentacion;
 	private JButton buttonCP = new JButton("Camino Predeterminado");
 	private JButton buttonCCN = new JButton("Crear Camino Nuevo");

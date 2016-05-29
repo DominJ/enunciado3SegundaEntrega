@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -40,15 +40,19 @@ private void inicializar_frameVista() {
     frameVista.setPreferredSize(frameVista.getMinimumSize());
     frameVista.setResizable(false);
     frameVista.setLocationRelativeTo(null);
-    frameVista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JPanel contentPane = (JPanel) frameVista.getContentPane();
     contentPane.add(panelContenidos);
+    frameVista.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent windowEvent){
+        	iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();        
+        	}        
+     });
 	FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
     frameVista.setLayout(layout);
     JLabel etiqueta = new JLabel("MENU PRINCIPAL");
     etiqueta.setForeground(Color.RED);
     frameVista.add(etiqueta);
- 
+    
   }
 
 
@@ -91,8 +95,7 @@ public void actionPerformed_buttonBH (ActionEvent event) {
   }
 
 public void actionPerformed_buttonSalir (ActionEvent event) {
-System.exit(0);	  	
-	  
+iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();	  
   }
 
 private void asignar_listenersComponentes() {

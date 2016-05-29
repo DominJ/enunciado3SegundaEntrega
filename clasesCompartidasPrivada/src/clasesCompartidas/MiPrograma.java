@@ -1,4 +1,5 @@
 package clasesCompartidas;
+import clasesPrivadas.Dominio.Clases.*;
 
 
 public class MiPrograma {

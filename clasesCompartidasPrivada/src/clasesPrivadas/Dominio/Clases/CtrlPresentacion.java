@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -17,6 +17,8 @@ public class CtrlPresentacion {
 	private VistaCCN vistaCCN = null;
 	private FileSamplePanel a = null;
 	private vistaBH vistaBH = null;
+	private vistaGuardar vistaGuardar = null;
+
 
 	
 	public CtrlPresentacion() {
@@ -29,6 +31,30 @@ public class CtrlPresentacion {
 	public void inicializarPresentacion() {
 		ctrlDominio.inicializarCtrlDominio();
 		vistaPrincipal.activar();
+	}
+	
+	
+	
+	//----------------------Principal-A-Guardar--------------------------------------//
+
+	
+	public void sincronizacionPrincipal_a_Guardar() {
+		vistaPrincipal.desactivar();
+	    if (vistaGuardar == null){
+	    	vistaGuardar = new vistaGuardar(this);
+	    }
+	    vistaGuardar.activar();
+	  }
+	
+	public void sincronizacionGuardar_a_Principal1(String s) {
+		//CtrlDominio.guardar(s);
+		System.exit(0);
+	}
+
+	public void sincronizacionGuardar_a_Principal() {
+		 vistaGuardar.desactivar();
+		 vistaPrincipal.activar();
+		
 	}
 	
 	//----------------------Principal-A-BH--------------------------------------//

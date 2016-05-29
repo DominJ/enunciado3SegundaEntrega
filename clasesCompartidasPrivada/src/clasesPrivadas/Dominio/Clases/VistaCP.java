@@ -1,4 +1,4 @@
-package clasesCompartidas;
+package clasesPrivadas.Dominio.Clases;
 
 import java.awt.Button;
 import java.awt.Choice;
