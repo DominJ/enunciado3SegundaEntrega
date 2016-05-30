@@ -65,6 +65,8 @@ public class vistaBH {
 	
 	void inicializarComponentes() {
 		frameVistaBH.setSize(new Dimension(400,400));
+		frameVistaBH.setMinimumSize(new Dimension(700,200));
+		frameVistaBH.setResizable(true);
 	    frameVistaBH.setLayout(new GridLayout(3, 1));
 	    panelBH.setLayout(new FlowLayout());
 	    frameVistaBH.addWindowListener(new WindowAdapter() {
