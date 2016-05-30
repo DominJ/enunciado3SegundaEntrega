@@ -99,8 +99,8 @@ private  void asignar_listenersComponentes2() {
 	}
 
 public  void inicializarComponentes () {
-		frameVistaEliminar.setMinimumSize(new Dimension(500,100));
-		frameVistaEliminar.setResizable(false);
+		frameVistaEliminar.setMinimumSize(new Dimension(520,150));
+		frameVistaEliminar.setResizable(true);
 		frameVistaEliminar.setLocationRelativeTo(null);
 		frameVistaEliminar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	    JPanel contentPaneAnadir = (JPanel) frameVistaEliminar.getContentPane();
