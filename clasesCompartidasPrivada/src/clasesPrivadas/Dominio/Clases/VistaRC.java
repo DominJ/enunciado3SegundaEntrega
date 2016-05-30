@@ -48,7 +48,7 @@ public class VistaRC {
 	
 	void inicializarComponentes() {
 		frameVistaRC.setMinimumSize(new Dimension(330,100));
-		frameVistaRC.setResizable(false);
+		frameVistaRC.setResizable(true);
 		frameVistaRC.setLocationRelativeTo(null);
 		frameVistaRC.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	    JPanel contentPaneAnadir = (JPanel) frameVistaRC.getContentPane();
