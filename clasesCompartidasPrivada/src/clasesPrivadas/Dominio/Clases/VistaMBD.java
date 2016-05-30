@@ -49,24 +49,27 @@ public void activar() {
 	  
 	  private void inicializar_frameMBD() {
 			System.out.println("No existeix\n");
-			frameVista1.setMinimumSize(new Dimension(500,200));
-		    frameVista1.setPreferredSize(frameVista1.getMinimumSize());
-		    frameVista1.setResizable(false);
+			frameVista1.setMinimumSize(new Dimension(550,150));
+		    //frameVista1.setPreferredSize(frameVista1.getMinimumSize());
+		    frameVista1.setResizable(true);
 		    frameVista1.setLocationRelativeTo(null);
 		    frameVista1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		    JPanel contentPanel = (JPanel) frameVista1.getContentPane();
-		    contentPanel.add(panelContenidos1);
-		    frameVista1.addWindowListener(new WindowAdapter() {
-		         public void windowClosing(WindowEvent windowEvent){
-		        	 iCtrlPresentacion.sincronizacionMBD_a_Principal();
-		         }        
-		      });
+		    
 		    JLabel etiqueta1 = new JLabel("MODIFICACIONES");
 		    etiqueta1.setForeground(Color.GREEN);
 		    frameVista1.add(etiqueta1);
 			FlowLayout layout1 = new FlowLayout(FlowLayout.LEFT, 10, 35);
 		    frameVista1.setLayout(layout1);
 		   
+		    JPanel contentPanel = (JPanel) frameVista1.getContentPane();
+		    contentPanel.add(panelContenidos1);
+		    
+		    frameVista1.addWindowListener(new WindowAdapter() {
+		         public void windowClosing(WindowEvent windowEvent){
+		        	 iCtrlPresentacion.sincronizacionMBD_a_Principal();
+		         }  
+		         
+		      });
 		    
 			}
 
