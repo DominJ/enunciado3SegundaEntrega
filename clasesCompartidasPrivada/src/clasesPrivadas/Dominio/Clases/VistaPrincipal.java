@@ -36,10 +36,17 @@ public void activar() {
 	  }
 
 private void inicializar_frameVista() {
-    frameVista.setMinimumSize(new Dimension(900,400));
+    frameVista.setMinimumSize(new Dimension(710,200));
     frameVista.setPreferredSize(frameVista.getMinimumSize());
-    frameVista.setResizable(false);
+    frameVista.setResizable(true);
     frameVista.setLocationRelativeTo(null);
+    
+    FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
+    frameVista.setLayout(layout);
+    JLabel etiqueta = new JLabel("MENU PRINCIPAL");
+    etiqueta.setForeground(Color.RED);
+    frameVista.add(etiqueta);
+    
     JPanel contentPane = (JPanel) frameVista.getContentPane();
     contentPane.add(panelContenidos);
     frameVista.addWindowListener(new WindowAdapter() {
@@ -47,14 +54,7 @@ private void inicializar_frameVista() {
         	iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();        
         	}        
      });
-	FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
-    frameVista.setLayout(layout);
-    JLabel etiqueta = new JLabel("MENU PRINCIPAL");
-    etiqueta.setForeground(Color.RED);
-    frameVista.add(etiqueta);
-    
   }
-
 
 private void inicializar_panelContenidos() {
     // Layout
