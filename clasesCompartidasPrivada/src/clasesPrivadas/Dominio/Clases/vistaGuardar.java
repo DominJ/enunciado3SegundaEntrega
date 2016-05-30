@@ -54,7 +54,7 @@ public void activar() {
 
 	private void inicializarComponentes() {
 		frameVista.setMinimumSize(new Dimension(350,250));
-		frameVista.setResizable(false);
+		frameVista.setResizable(true);
 		frameVista.setLocationRelativeTo(null);
 		frameVista.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	    JPanel contentPaneAnadir = (JPanel) frameVista.getContentPane();
