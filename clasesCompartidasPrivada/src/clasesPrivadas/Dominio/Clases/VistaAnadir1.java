@@ -51,16 +51,12 @@ public void activar() {
 public void actionPerformed_buttonCD (ActionEvent event) {
 	
 	iCtrlPresentacion.sincronizacionAnadir1_a_CD();
-
-
 }
 
 public void actionPerformed_buttonDI (ActionEvent event) {
 	
 	iCtrlPresentacion.sincronizacionAnadir1_a_DI();
 }
-
-
 
 private void asignar_listenersComponentes2() {
 	  buttonDI.addActionListener
@@ -81,11 +77,9 @@ private void asignar_listenersComponentes2() {
       });
 	}
 
-
-
 public void inicializarComponentes () {
-		frameVistaAnadir.setMinimumSize(new Dimension(330,80));
-		frameVistaAnadir.setResizable(false);
+		frameVistaAnadir.setMinimumSize(new Dimension(330,90));
+		frameVistaAnadir.setResizable(true);
 		frameVistaAnadir.setLocationRelativeTo(null);
 		frameVistaAnadir.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	    JPanel contentPaneAnadir = (JPanel) frameVistaAnadir.getContentPane();
