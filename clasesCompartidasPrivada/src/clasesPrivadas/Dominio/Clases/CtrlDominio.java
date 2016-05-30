@@ -31,7 +31,7 @@ public class CtrlDominio
 		try
 		{
 			LeerObject.verificarObjects();
-			//No es la primera ejecuión
+			//No es la primera ejecuiÃ³n
 			this.gh = (Grafo) LeerObject.LeerObjeto("grafo");
 			this.cr = (ConjuntoResultados) LeerObject.LeerObjeto("conjuntoResultados");
 			this.ch = new CtrlHetesim(gh);
@@ -39,7 +39,7 @@ public class CtrlDominio
 		}
 		catch(NonExistObjectToReadException e)
 		{
-			//Es la primera ejecución
+			//Es la primera ejecuciÃ³n
 			System.out.println("Primera ejecucion en este equipo");
 			this.gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
 			this.cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
@@ -106,7 +106,7 @@ public class CtrlDominio
 	//int a e int indican el tipo de nodo
 	public void anadirnodoD(int tipo1, String nombre1, int tipo2, String nombre2)
 	{
-		//Con esta verificación garantizo que el tipo 1 es paper
+		//Con esta verificaciÃ³n garantizo que el tipo 1 es paper
 		if(tipo1 != 0)//es paper
 		{
 			//Le doy la vuelta
@@ -310,6 +310,7 @@ do{
 			case 2://realizar consulta
 				System.out.print("1.- Elegir camino predeterminado\n" );
 				System.out.print("2.- Crear un camino nuevo\n" );
+				System.out.print("3.- Busqueda con filtros\n" );
 				
 				op3=Integer.parseInt(in.readLine());
 				
@@ -367,7 +368,34 @@ do{
 						int typee=TypePosPath(path1, path1.length()-1);
 						escribir_resultado(cr.getResultadoNodo(path1, pos), gh, typee);
 					break;
-				//default:
+					
+					case 3: //realizar consulta - filtro
+						Set<Integer> v=new HashSet<Integer>();
+						/*v.add(0);
+						v.add(1);
+						v.add(2);*/
+						GrafoPri gp=new GrafoPri(gh, v);
+						HashMap<Integer, ArrayList<Pair<Integer, Double>>> a1=gp.getRelaciones("PA", true);
+						
+						CtrlHetesim cp=new CtrlHetesim(gp);
+						String path11;
+						System.out.println("Introduce path:");
+						path11 = sc.nextLine();
+						int typeb1=TypePosPath(path11,0);
+						System.out.print("4.- Introduce nombre del nodo\n" );
+						String name1 = in.readLine();
+						int pos1=gh.consultarNodo(typeb1, name1);
+						cr.anadirResultado(path11, cp.HeteSim(path11, pos1),pos1);
+						System.out.println("Introduce el extremo menor del intervalo de relevancia" );
+						double x11,x21;
+						x11=Double.parseDouble(in.readLine());
+						System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
+						x21=Double.parseDouble(in.readLine());
+						cr.setIntervalo(x11, x21);
+						System.out.println("Relevancia de "+ name1 +" en el camino "+ path11 +":");
+						int typee1=TypePosPath(path11, path11.length()-1);
+						escribir_resultado(cr.getResultadoNodo(path11, pos1), gp, typee1);
+					break;
 				}
 			
 			break;
