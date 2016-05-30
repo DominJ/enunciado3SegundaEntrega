@@ -23,18 +23,20 @@ public class VistaCCN {
 	private JPanel panelCCN2 = new JPanel();
 	private JPanel panelCCN3 = new JPanel();
 	private JPanel panelCCN4 = new JPanel();
+	private JPanel panelCCN5 = new JPanel();
 	private JPanel panelBotones = new JPanel();
     private CtrlPresentacion iCtrlPresentacion;
 	private JFrame frameVistaCCN = new JFrame("Crear Camino Nuevo");	
-	private static TextField tf1 = new TextField("",10);
-	private static TextField tf2 = new TextField("",10);
-	private static Label Nodo = new Label("Nodo");
-	private static TextField tf3 = new TextField("",10);
-	private static Label Men = new Label("Menor");
-	private static Label May = new Label("Mayor");
-	private static JButton buttonOk = new JButton("Ok");
+	private TextField tf1 = new TextField("",10);
+	private TextField tf2 = new TextField("",10);
+	private Label Nodo = new Label("Nodo");
+	private TextField tf3 = new TextField("",10);
+	private Label Men = new Label("Menor");
+	private Label May = new Label("Mayor");
+	private JButton buttonOk = new JButton("Ok");
+	private static TextField tf4 = new TextField("",10);
+	private static Label Camino = new Label("Camino");
 
-	
 	public void activar() {
 	    frameVistaCCN.setEnabled(true);
 	    hacerVisible();
@@ -61,23 +63,42 @@ public class VistaCCN {
 	
 	public void actionPerformed_buttonOk (ActionEvent event) {
 		Component a = panelCCN.getComponent(0);
+		System.out.println(a.getClass()+"\n");
 		Component b = panelCCN.getComponent(1);
+		System.out.println(b.getClass()+"\n");
 		Component c = panelCCN.getComponent(2);
+		System.out.println(c.getClass()+"\n");
+		Component d = panelCCN.getComponent(3);
+		System.out.println(d.getClass()+"\n");
 		JPanel a1 = (JPanel) a;
 		JPanel b1 = (JPanel) b;
 		JPanel c1 = (JPanel) c;
+		JPanel d1 = (JPanel) d;
 		Component a2 = a1.getComponent(1);
+		System.out.println(a2.getClass()+"\n");
 		Component b2 = b1.getComponent(1);
+		System.out.println(b2.getClass()+"\n");
 		Component c2 = c1.getComponent(1);
+		System.out.println(c2.getClass()+"\n");
+		Component d2 = d1.getComponent(1);
+		System.out.println(d2.getClass()+"\n");
 		TextField a3 = (TextField) a2;
 		TextField b3 = (TextField) b2;
 		TextField c3 = (TextField) c2;
+		TextField d3 = (TextField) d2;
 		String a4 = a3.getText();
 		String b4 = b3.getText();
 		String c4 = c3.getText();
-		int b5 = Integer.parseInt(b4);
-		int c5 = Integer.parseInt(c4);
-		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,b5,c5);
+		String d4 = d3.getText();
+		double c5 = Double.parseDouble(c4);
+		double d5 = Double.parseDouble(d4);
+		String camino = b4;
+		System.out.println(a4);
+		System.out.println(b4);
+		System.out.println(c4);
+		System.out.println(d4);
+
+		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,camino,c5,d5);
 	}
   
   private void asignar_listenersComponentes3() {
@@ -118,7 +139,8 @@ public class VistaCCN {
 	    tf3.setLocation(30, 30); */
 	    panelCCN.setLayout(new BorderLayout());
 	    panelCCN.add(panelCCN1,BorderLayout.NORTH);
-	    panelCCN.add(panelCCN2,BorderLayout.WEST);
+	    panelCCN.add(panelCCN5,BorderLayout.WEST);
+	    panelCCN.add(panelCCN2,BorderLayout.CENTER);
 	    panelCCN.add(panelCCN3,BorderLayout.EAST);
 	    panelCCN.add(panelCCN4,BorderLayout.SOUTH);
 	    panelCCN1.add(Nodo);
@@ -129,9 +151,12 @@ public class VistaCCN {
 	    panelCCN3.add(tf3);
 	    panelCCN4.add(panelBotones,BorderLayout.PAGE_END);
 	    panelBotones.add(buttonOk);
+	    panelCCN5.add(Camino);
+	    panelCCN5.add(tf4);
 
 		
 	    asignar_listenersComponentes3();
 	}
 	
 }
+

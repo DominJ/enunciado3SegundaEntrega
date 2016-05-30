@@ -205,6 +205,7 @@ public class Grafo
 					case 3	:	return this.therms.consultar_nodo(name);
 				}
 				return 0;
+
 	}
 	
 	public void anadirRelacion(int a, int b, int tipo)

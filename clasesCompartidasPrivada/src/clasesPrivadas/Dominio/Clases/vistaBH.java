@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Set;
 
+
 public class vistaBH {
 	private Panel panelBH = new Panel();
 	private Frame frameVistaBH = new Frame("Camino Predeterminado");	
@@ -36,9 +37,12 @@ public class vistaBH {
 	      }); 
 	 }
 
-	public void activar(HashMap<String, Set<Integer>> a) {
-		for (String key : a.keySet()) {
-			camino.add(key);
+	public void activar(HashMap<String, Set<String>> a) {
+		for (String keys : a.keySet()) {
+			Set<String> b = a.get(keys);
+			for(String c:b) {
+				camino.add(keys+""+c);
+			}
 		}
 		frameVistaBH.setEnabled(true);
 	    hacerVisible();
@@ -62,7 +66,6 @@ public class vistaBH {
 	    iCtrlPresentacion = pCtrlPresentacion;
 	    inicializarComponentes();
 	}
-	
 	void inicializarComponentes() {
 		frameVistaBH.setSize(new Dimension(400,400));
 		frameVistaBH.setMinimumSize(new Dimension(700,200));
