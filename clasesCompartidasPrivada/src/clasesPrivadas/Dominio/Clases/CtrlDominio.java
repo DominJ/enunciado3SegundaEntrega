@@ -94,7 +94,6 @@ public class CtrlDominio
 		return c;
 		
 	}
-	
 	public void eliminarnodoD(int a, String b){
 		gh.eliminarNodo(a, gh.consultarNodo(a, b));
 		cr.vaciar_resultados();

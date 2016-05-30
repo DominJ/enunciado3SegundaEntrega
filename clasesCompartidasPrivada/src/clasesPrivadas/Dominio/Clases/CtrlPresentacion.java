@@ -111,7 +111,6 @@ public class CtrlPresentacion {
 		
 		//----------------------CCN-A-BH1--------------------------------------//
 
-		
 		public void sincronizacionCCN_a_BH1(ArrayList<Pair<Double,Integer>> aux) {
 			vistaCCN.desactivar();
 		    if (Consult == null){

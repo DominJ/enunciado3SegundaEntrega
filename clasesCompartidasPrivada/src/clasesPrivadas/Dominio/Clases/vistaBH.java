@@ -65,7 +65,6 @@ public class vistaBH {
 	    iCtrlPresentacion = pCtrlPresentacion;
 	    inicializarComponentes();
 	}
-	
 	void inicializarComponentes() {
 		frameVistaBH.setSize(new Dimension(400,400));
 	    frameVistaBH.setLayout(new GridLayout(3, 1));

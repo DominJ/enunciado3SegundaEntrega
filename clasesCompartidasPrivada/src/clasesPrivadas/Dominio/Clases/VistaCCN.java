@@ -34,7 +34,6 @@ public class VistaCCN {
 	private static Label May = new Label("Mayor");
 	private static JButton buttonOk = new JButton("Ok");
 
-	
 	public void activar() {
 	    frameVistaCCN.setEnabled(true);
 	    hacerVisible();
