@@ -92,8 +92,8 @@ public class VistaCCN {
 	}
 	
 	public void inicializarComponentes() {
-		frameVistaCCN.setMinimumSize(new Dimension(500,200));
-		frameVistaCCN.setResizable(false);
+		frameVistaCCN.setMinimumSize(new Dimension(590,200));
+		frameVistaCCN.setResizable(true);
 		frameVistaCCN.setLocationRelativeTo(null);
 		frameVistaCCN.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	    JPanel contentPaneAnadir = (JPanel) frameVistaCCN.getContentPane();
