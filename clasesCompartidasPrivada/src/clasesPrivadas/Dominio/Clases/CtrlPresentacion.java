@@ -1,7 +1,9 @@
 package clasesPrivadas.Dominio.Clases;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import clasesCompartidas.Pair;
 import clasesPrivadas.Dominio.Clases.CtrlDominio;
 
 public class CtrlPresentacion {
@@ -19,6 +21,8 @@ public class CtrlPresentacion {
 	private vistaBH vistaBH = null;
 	//private vistaGuardar vistaGuardar = null;
 	private FileChooserTest FCT = null;
+	private VistaBH1 Consult = null;
+
 
 
 
@@ -58,6 +62,23 @@ public class CtrlPresentacion {
 		FCT.desactivar();
 	}
 	
+	//----------------------BH-A-BH1--------------------------------------//
+
+	
+	public void sincronizacionBH_a_BH1(ArrayList<Pair<Double,Integer>> aux) {
+		vistaBH.desactivar();
+	    if (Consult == null){
+	    	Consult = new VistaBH1(this);
+	    }
+	    Consult.activar(aux);
+	  }
+	
+
+	public void sincronizacionBH1_a_BH() {
+		Consult.desactivar();
+		sincronizacionBH_a_Principal();
+	}
+	
 	//----------------------Principal-A-BH--------------------------------------//
 
 	
@@ -66,14 +87,20 @@ public class CtrlPresentacion {
 		    if (vistaBH == null){
 		    	vistaBH = new vistaBH(this);
 		    }
-		    HashMap<String, Set<Integer>> a = ctrlDominio.actualizarhistorial();
+		    HashMap<String, Set<String>> a = ctrlDominio.actualizarhistorial();
 		    vistaBH.activar(a);
 		    System.out.println("Hola!\n");
 		  }
 		
 		public void sincronizacionBH_a_Principal1(String s) {
-			//ctrlDominio.caminopredeterminado(s);
-			sincronizacionBH_a_Principal();
+			int i = 0;
+			while(!(Character.isWhitespace(s.charAt(i)))) {
+	    		++i;
+	    	}
+			String a1 = s.substring(0,i);
+			String a2 = s.substring(i+1, s.length());
+			ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(a1,a2);
+			sincronizacionBH_a_BH1(aux);
 		}
 
 		public void sincronizacionBH_a_Principal() {
@@ -82,7 +109,25 @@ public class CtrlPresentacion {
 			
 		}
 		
-	
+		//----------------------CCN-A-BH1--------------------------------------//
+
+		
+		public void sincronizacionCCN_a_BH1(ArrayList<Pair<Double,Integer>> aux) {
+			vistaCCN.desactivar();
+		    if (Consult == null){
+		    	Consult = new VistaBH1(this);
+		    }
+		    Consult.activar(aux);
+		  }
+		
+
+		public void sincronizacionBH1_a_CCN() {
+			Consult.desactivar();
+			sincronizacionCCN_a_RC();
+		}
+		
+		
+		
 	//----------------------RC-A-CCN--------------------------------------//
 
 	
@@ -95,9 +140,10 @@ public class CtrlPresentacion {
 	    vistaCCN.activar();
 	  }
 	
-	public void sincronizacionCCN_a_RC1(String a, int b, int c) {
-		//CtrlDominio.crearcaminonuevo(a,b,c);
-		sincronizacionCCN_a_RC();	
+	public void sincronizacionCCN_a_RC1(String nodo, String camino,double b,double c) {
+		ctrlDominio.crearcaminonuevo(nodo,camino,b,c);
+		ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
+		sincronizacionCCN_a_BH1(aux);
 	}
 	
 	public void sincronizacionCCN_a_RC() {
@@ -118,7 +164,7 @@ public class CtrlPresentacion {
 	  }
 	
 	public void sincronizacionCP_a_RC1(String s) {
-		ctrlDominio.caminopredeterminado(s);
+		//ctrlDominio.caminopredeterminado(s);
 		sincronizacionCP_a_RC();
 	}
 

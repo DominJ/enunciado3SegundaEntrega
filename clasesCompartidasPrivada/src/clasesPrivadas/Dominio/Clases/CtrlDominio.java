@@ -3,6 +3,7 @@ import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
@@ -22,6 +23,7 @@ public class CtrlDominio
 	//ConjuntoResultados cr = new ConjuntoResultados();
 	Grafo gh;
 	ConjuntoResultados cr;
+	CtrlHetesim ch;
 	
 	public void inicializarCtrlDominio()
 	{
@@ -32,6 +34,8 @@ public class CtrlDominio
 			//No es la primera ejecuión
 			this.gh = (Grafo) LeerObject.LeerObjeto("grafo");
 			this.cr = (ConjuntoResultados) LeerObject.LeerObjeto("conjuntoResultados");
+			this.ch = new CtrlHetesim(gh);
+
 		}
 		catch(NonExistObjectToReadException e)
 		{
@@ -39,6 +43,7 @@ public class CtrlDominio
 			System.out.println("Primera ejecucion en este equipo");
 			this.gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
 			this.cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
+			this.ch = new CtrlHetesim(gh);
 		} 
 		catch (ClassNotFoundException e) 
 		{
@@ -52,14 +57,42 @@ public class CtrlDominio
 		}
 	}
 	
-	public HashMap<String, Set<Integer>> actualizarhistorial()
-	{
-		HashMap<String, Set<Integer>> a = cr.consultarResultadosParciales();
-		return a;
+	public HashMap<String, Set<String>> traducirINTaSTRING(HashMap<String, Set<Integer>> a){
+		HashMap<String, Set<String>> b = new HashMap<String,Set<String>>();
+		//Set<String> a2;
+		for (String j: a.keySet() ) {
+			int type1 = TypePosPath(j, 0);
+			Set<Integer> a1 = a.get(j);
+			//PACT//
+			Set<String> a3 = new HashSet<String>();
+			for(int i: a1) {
+				String id = gh.consultarNodo(type1, i);
+				a3.add(id);
+			}
+			b.put(j, a3);
+		}
+		return b;
 	}
 	
-	public void caminopredeterminado (String a )
+	public int traducirSTRINGaINT(String camino, String id1){
+			int type1 = TypePosPath(camino, 0);
+			int id = gh.consultarNodo(type1, id1);
+			return id;
+	}
+	
+	public HashMap<String, Set<String>> actualizarhistorial()
 	{
+		HashMap<String, Set<Integer>> a = cr.consultarResultadosParciales();
+		HashMap<String, Set<String>> b = traducirINTaSTRING(a);
+		return b;
+	}
+	
+	public ArrayList<Pair<Double,Integer>> consultarresultado (String a, String b)
+	{
+		int i = traducirSTRINGaINT(a,b);
+		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(a, i);
+		return c;
+		
 	}
 	
 	public void eliminarnodoD(int a, String b){
@@ -84,6 +117,15 @@ public class CtrlDominio
 		gh.anadirNodo(tipo1, nombre1);
 		gh.anadirNodo(tipo2, nombre2);
 		gh.anadirRelacion(gh.consultarNodo(tipo1, nombre1),gh.consultarNodo(tipo2, nombre2),tipo2);
+	}
+	
+	public void crearcaminonuevo(String nodo,String camino, double men, double may) {
+
+	
+	int typeb=TypePosPath(camino,0);
+	int pos=gh.consultarNodo(typeb, nodo);
+	cr.anadirResultado(camino, ch.HeteSim(camino, pos),pos);
+	cr.setIntervalo(men, may);
 	}
 	
 	public void anadirconjuntodatos(String a, int s)

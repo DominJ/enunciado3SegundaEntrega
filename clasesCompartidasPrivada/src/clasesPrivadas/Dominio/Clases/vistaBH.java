@@ -36,9 +36,12 @@ public class vistaBH {
 	      }); 
 	 }
 
-	public void activar(HashMap<String, Set<Integer>> a) {
-		for (String key : a.keySet()) {
-			camino.add(key);
+	public void activar(HashMap<String, Set<String>> a) {
+		for (String keys : a.keySet()) {
+			Set<String> b = a.get(keys);
+			for(String c:b) {
+				camino.add(keys+""+c);
+			}
 		}
 		frameVistaBH.setEnabled(true);
 	    hacerVisible();

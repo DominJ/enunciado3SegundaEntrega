@@ -75,9 +75,10 @@ public class VistaCCN {
 		String a4 = a3.getText();
 		String b4 = b3.getText();
 		String c4 = c3.getText();
-		int b5 = Integer.parseInt(b4);
-		int c5 = Integer.parseInt(c4);
-		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,b5,c5);
+		double b5 = Integer.parseInt(b4);
+		double c5 = Integer.parseInt(c4);
+		String camino = "camino";
+		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,camino,b5,c5);
 	}
   
   private void asignar_listenersComponentes3() {
