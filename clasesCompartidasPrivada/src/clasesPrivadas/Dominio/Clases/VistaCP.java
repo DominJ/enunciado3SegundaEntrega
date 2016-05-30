@@ -35,9 +35,6 @@ public class VistaCP {
 	      }); 
 	 }
 
-
-	
-
 	public void activar() {
 	    frameVistaCP.setEnabled(true);
 	    hacerVisible();
@@ -63,15 +60,12 @@ public class VistaCP {
 	}
 	
 	void inicializarComponentes() {
-		frameVistaCP.setSize(new Dimension(400,400));
-
-	    
-		
+		frameVistaCP.setMinimumSize(new Dimension(400,400));
+		frameVistaCP.setResizable(true);
+		frameVistaCP.setLocationRelativeTo(null);
 	    frameVistaCP.setLayout(new GridLayout(3, 1));
 	    panelCP.setLayout(new FlowLayout());
 		
-	    
-	    
 	    frameVistaCP.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
 	        	 iCtrlPresentacion.sincronizacionCP_a_RC();
