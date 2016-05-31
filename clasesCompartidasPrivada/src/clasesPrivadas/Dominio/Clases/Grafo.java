@@ -257,11 +257,13 @@ public class Grafo
 	{
 		//(0 = P, 1 = A, 2 = C, 3 = T)
 		ArrayList<Pair<Integer,Double>> conjunto;
+		ArrayList<Pair<Integer,Double>> conjunto2;
 		int tam;
 		switch(type)
 		{
 			case 0	:	//--------------------
 						conjunto = this.PAF.consultar_RelacionPaper(id);
+						conjunto2 = this.PAC.consultar_RelacionPaper(id);
 						//System.out.println("papers" + conjunto);
 						if(conjunto != null)
 						{
@@ -269,7 +271,7 @@ public class Grafo
 							for(int i=0; i< tam; i++)
 							{
 								this.PAF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
-								this.PAC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PAC.eliminar_PaperOther(id, conjunto2.get(0).getFirst());
 								this.PAF.normFilas();
 								this.PAC.normColumnas();
 								
@@ -279,26 +281,28 @@ public class Grafo
 						//TODO
 						//REVISAR
 						conjunto = this.PCF.consultar_RelacionPaper(id);
+						conjunto2 = this.PCC.consultar_RelacionPaper(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PCF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
-								this.PCC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PCC.eliminar_PaperOther(id, conjunto2.get(0).getFirst());
 								this.PCF.normFilas();
 								this.PCC.normColumnas();
 							}
 						}
 						
 						conjunto = this.PTF.consultar_RelacionPaper(id);
+						conjunto2 = this.PTC.consultar_RelacionPaper(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PTF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
-								this.PTC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PTC.eliminar_PaperOther(id, conjunto2.get(0).getFirst());
 								this.PTF.normFilas();
 								this.PTC.normColumnas();
 							}
@@ -311,14 +315,16 @@ public class Grafo
 						break;
 			
 			case 1	:	//--------------------
+						System.out.println("elimiando autor");
 						conjunto = this.PAF.consultar_RelacionOther(id);
+						conjunto2 = this.PAC.consultar_RelacionOther(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PAF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
-								this.PAC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PAC.eliminar_PaperOther(conjunto2.get(0).getFirst(), id);
 								this.PAF.normFilas();
 								this.PAC.normColumnas();
 							}
@@ -329,13 +335,14 @@ public class Grafo
 			 
 			case 2	:	//--------------------
 						conjunto = this.PCF.consultar_RelacionOther(id);
+						conjunto2 = this.PCC.consultar_RelacionOther(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PCF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
-								this.PCC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PCC.eliminar_PaperOther(conjunto2.get(0).getFirst(), id);
 								this.PCF.normFilas();
 								this.PCC.normColumnas();
 							}
@@ -347,13 +354,14 @@ public class Grafo
 			
 			default	:	//--------------------
 						conjunto = this.PTF.consultar_RelacionOther(id);
+						conjunto2 = this.PTC.consultar_RelacionOther(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PTF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
-								this.PTC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PTC.eliminar_PaperOther(conjunto2.get(0).getFirst(), id);
 								this.PTF.normFilas();
 								this.PTC.normColumnas();
 							}
