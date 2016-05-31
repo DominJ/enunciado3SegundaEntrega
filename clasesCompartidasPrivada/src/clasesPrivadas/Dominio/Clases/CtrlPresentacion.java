@@ -22,6 +22,8 @@ public class CtrlPresentacion {
 	//private vistaGuardar vistaGuardar = null;
 	private FileChooserTest FCT = null;
 	private VistaBH1 Consult = null;
+	private VistaF F = null;
+	
 
 
 
@@ -39,7 +41,36 @@ public class CtrlPresentacion {
 		vistaPrincipal.activar();
 	}
 	
-	
+	//----------------------RC-A-Filtros--------------------------------------//
+
+	public void sincronizacionF_a_CCN(Set<Integer >c) {
+		System.out.println("Hola10");
+		ctrlDominio.consultarcaminofiltros(c);
+		System.out.println("Hola11");
+		F.desactivar();
+		System.out.println("Hola12");
+		if (vistaCCN == null){
+	    	vistaCCN = new VistaCCN(this);
+		}
+		vistaCCN.activar(false);
+		System.out.println("Hola13");
+	}
+
+
+	//----------------------RC-A-Filtros--------------------------------------//
+
+		
+	public void sincronizacionRC_a_F() {
+		vistaRC.desactivar();
+	    if (F == null){
+	    	F = new VistaF(this);
+	    }
+	    F.activar();
+	}
+	public void sincronizacionF_a_RC() {
+		F.desactivar();
+		vistaRC.activar();
+	}
 
 	
 	//----------------------Principal-A-Guardar--------------------------------------//
@@ -124,10 +155,11 @@ public class CtrlPresentacion {
 		  } 
 		
 
-		public void sincronizacionBH1_a_CCN() {
+		public void sincronizacionBH1_a_Principal() {
 			Consult.desactivar();
-			vistaCCN.activar();
+			vistaPrincipal.activar();
 		}
+		
 		
 		
 		
@@ -140,13 +172,13 @@ public class CtrlPresentacion {
 	    if (vistaCCN == null){
 	    	vistaCCN = new VistaCCN(this);
 	    }
-	    vistaCCN.activar();
+	    vistaCCN.activar(true);
 	  }
 	
-	public void sincronizacionCCN_a_RC1(String nodo, String camino,double b,double c) {
+	public void sincronizacionCCN_a_RC1(String nodo, String camino,double b,double c,Boolean as) {
 		//System.out.println("Hola");
 		//System.out.println(" "+camino);
-		ctrlDominio.crearcaminonuevo(nodo,camino,b,c);
+		ctrlDominio.crearcaminonuevo(nodo,camino,b,c,as);
 		//System.out.println("Hola3");
 		ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
 		System.out.println("Hola4");

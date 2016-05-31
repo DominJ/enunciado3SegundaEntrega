@@ -24,6 +24,8 @@ public class CtrlDominio
 	Grafo gh;
 	ConjuntoResultados cr;
 	CtrlHetesim ch;
+	CtrlHetesim chf;
+
 	
 	public void inicializarCtrlDominio()
 	{
@@ -139,18 +141,14 @@ public class CtrlDominio
 		gh.anadirRelacion(gh.consultarNodo(tipo1, nombre1),gh.consultarNodo(tipo2, nombre2),tipo2);
 	}
 	
-	public void crearcaminonuevo(String nodo,String camino, double men, double may) {
-
-	//System.out.println("Hola2 ");
-	//System.out.println(camino+" ");
+	public void crearcaminonuevo(String nodo,String camino, double men, double may,Boolean b) {
+	//B = true Normal
+	//B = false Vengo de filtros
 	int typeb=TypePosPath(camino,0);
-	//System.out.println(" Hola21");
 	int pos=gh.consultarNodo(typeb, nodo);
-	//System.out.println("Hola22");
-	cr.anadirResultado(camino, ch.HeteSim(camino, pos),pos);
-	//System.out.println("Hola23");
+	if (b) cr.anadirResultado(camino, ch.HeteSim(camino, pos),pos);
+	else cr.anadirResultado(camino, chf.HeteSim(camino, pos),pos);
 	cr.setIntervalo(men, may);
-	//System.out.println("Hola24");
 	}
 	
 	public void anadirconjuntodatos(String a, int s)
@@ -188,6 +186,15 @@ public class CtrlDominio
 			return 3;
 		}
 	}
+	
+	public void consultarcaminofiltros(Set<Integer>c) {
+		System.out.println("Hola");
+		GrafoPri gp=new GrafoPri(gh, c);	
+		System.out.println("Hola1");
+		chf = new CtrlHetesim(gp);
+		System.out.println("Hola2");
+	}
+
 	
 	public static void main(String args[] )throws IOException
 	{ 

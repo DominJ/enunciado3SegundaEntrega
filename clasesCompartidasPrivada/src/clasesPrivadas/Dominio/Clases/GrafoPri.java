@@ -131,9 +131,14 @@ public class GrafoPri extends Grafo {
 						Set<Integer> aut= new HashSet<Integer>();
 						HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux=g.getRelaciones("PT",true);
 						for(int j: this.papers.devolver_conjunto().keySet()){
+							System.out.println(j);
 							ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-							for (int k=0; k<ar.size(); ++k) aut.add(ar.get(k).getFirst());
+							for (int k=0; k<ar.size(); ++k){
+								System.out.println("jaja " + k);
+								aut.add(ar.get(k).getFirst());
+							}
 						}
+						System.out.println("lol");
 						HashMap<Integer, String> h1 = new HashMap<Integer, String>();
 						HashMap<String, Integer> h2 = new HashMap<String, Integer>();
 						for (int k:aut){

@@ -270,6 +270,9 @@ public class Grafo
 							{
 								this.PAF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
 								this.PAC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PAF.normFilas();
+								this.PAC.normColumnas();
+								
 							}
 						}
 						
@@ -283,6 +286,8 @@ public class Grafo
 							{
 								this.PCF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
 								this.PCC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PCF.normFilas();
+								this.PCC.normColumnas();
 							}
 						}
 						
@@ -294,6 +299,8 @@ public class Grafo
 							{
 								this.PTF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
 								this.PTC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PTF.normFilas();
+								this.PTC.normColumnas();
 							}
 						}
 						//TODO
@@ -312,6 +319,8 @@ public class Grafo
 							{
 								this.PAF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
 								this.PAC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PAF.normFilas();
+								this.PAC.normColumnas();
 							}
 						}
 						this.authors.eliminar_nodo(Integer.toString(id));
@@ -327,6 +336,8 @@ public class Grafo
 							{
 								this.PCF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
 								this.PCC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PCF.normFilas();
+								this.PCC.normColumnas();
 							}
 						}
 						this.conferences.eliminar_nodo(Integer.toString(id));
@@ -343,6 +354,8 @@ public class Grafo
 							{
 								this.PTF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
 								this.PTC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PTF.normFilas();
+								this.PTC.normColumnas();
 							}
 						}
 						this.therms.eliminar_nodo(Integer.toString(id));

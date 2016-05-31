@@ -44,6 +44,7 @@ public class ConjuntoResultados {
 	
 	public void vaciar_resultados(){
 		resultados.clear();
+		resultados_parciales.clear();
 	}
 	
 	public boolean existeResultado(String path){

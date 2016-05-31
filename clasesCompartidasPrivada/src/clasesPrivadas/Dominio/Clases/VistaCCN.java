@@ -36,10 +36,15 @@ public class VistaCCN {
 	private JButton buttonOk = new JButton("Ok");
 	private static TextField tf4 = new TextField("",10);
 	private static Label Camino = new Label("Camino");
+	private Boolean cj;
 
-	public void activar() {
+	public void activar(Boolean b) {
+		System.out.println("Hola14");
+		cj = b;
 	    frameVistaCCN.setEnabled(true);
+		System.out.println("Hola15");
 	    hacerVisible();
+		System.out.println("Hola16");
 	  }
 
 	  public void desactivar() {
@@ -89,7 +94,7 @@ public class VistaCCN {
 		System.out.println(c4);
 		System.out.println(d4);
 
-		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,b4,c5,d5);
+		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,b4,c5,d5,cj);
 	}
   
   private void asignar_listenersComponentes3() {

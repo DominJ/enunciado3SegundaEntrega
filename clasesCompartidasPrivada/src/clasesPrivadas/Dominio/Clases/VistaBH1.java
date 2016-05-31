@@ -70,7 +70,7 @@ public class VistaBH1 {
 			    panelBH.setLayout(new FlowLayout());
 			    frameVistaBH1.addWindowListener(new WindowAdapter() {
 			         public void windowClosing(WindowEvent windowEvent){
-			        	 iCtrlPresentacion.sincronizacionBH1_a_CCN();
+			        	 iCtrlPresentacion.sincronizacionBH1_a_Principal();
 			         }        
 			      });
 		    }

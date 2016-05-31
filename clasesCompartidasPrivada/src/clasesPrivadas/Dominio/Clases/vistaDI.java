@@ -75,7 +75,7 @@ public class vistaDI {
 				    	n = c.getText();
 				    }
 				}
-				System.out.println("Se ha aÃ±adido un paper:"+j+"\n");
+				System.out.println("Se ha anadido un paper:"+j+"\n");
 				System.out.println("relacionado con un tipo de nodo:"+s+"\n");
 				System.out.println("con el valor:"+n+"\n");
 				
