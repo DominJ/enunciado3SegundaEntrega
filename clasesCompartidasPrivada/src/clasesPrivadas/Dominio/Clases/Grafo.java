@@ -1,6 +1,7 @@
 package clasesPrivadas.Dominio.Clases;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 author: 
 */
 import clasesCompartidas.ConjuntoNodos;
+import clasesCompartidas.ConjuntoNodosPri;
 import clasesCompartidas.EscribirFichero;
 import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
@@ -17,16 +19,19 @@ import clasesCompartidas.Pair;
  * @author Domingo Jes�s de la Mata Garcia
  *
  */
-public class Grafo 
+public class Grafo implements Serializable
 {
+
+	//private static final long serialVersionUID = -8219161298749272356L;
+	
 	static final String RUTA_INICIAL = "Set1";
 	static final String RUTA_ADD = "AddData";
 	static final String FILTROS = "Filtros";
 	
-	ConjuntoNodos authors;
-	ConjuntoNodos therms;
-	ConjuntoNodos conferences;
-	ConjuntoNodos papers;
+	ConjuntoNodosPri authors;
+	ConjuntoNodosPri therms;
+	ConjuntoNodosPri conferences;
+	ConjuntoNodosPri papers;
 	
 	RelacionesPri PAF;
 	RelacionesPri PAC;
@@ -48,22 +53,22 @@ public class Grafo
 			//Instanciamos papers
 			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 0);
 			
-			this.papers = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
+			this.papers = new ConjuntoNodosPri(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos autor
 			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 1);
 			
-			this.authors = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
+			this.authors = new ConjuntoNodosPri(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos conferences
 			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 2);
 			
-			this.conferences = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
+			this.conferences = new ConjuntoNodosPri(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos terms
 			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 3);
 			
-			this.therms = new ConjuntoNodos(conjunto.getFirst(),conjunto.getSecond());
+			this.therms = new ConjuntoNodosPri(conjunto.getFirst(),conjunto.getSecond());
 			
 			//Instanciamos Relacion PA
 			relacion = LeerFichero.crear_relacion(RUTA_INICIAL, 1);

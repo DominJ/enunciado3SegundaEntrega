@@ -2,11 +2,11 @@ package clasesCompartidas;
 
 import java.util.*;
 
-public class ConjuntoNodos 
+public class ConjuntoNodos
 {
-	private int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.
-	private HashMap<Integer, String > nodos;
-	private HashMap<String, Integer> nombres_nodos;
+	protected int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.
+	protected HashMap<Integer, String > nodos;
+	protected HashMap<String, Integer> nombres_nodos;
 	
 	/*PRE: Cierto*/
 	/*POST: Se crea un conjunto de nodos vacio*/
@@ -132,12 +132,5 @@ public class ConjuntoNodos
 	{
 		return nodos;
 	}	
-	
-	//NO ESTOY MUY SEGURO DE SI ES COMPARTIDO PROBABLEMENTE TENGA QUE HEREDAR
-		public void joinHashMap(Pair<HashMap<Integer,String>,HashMap<String,Integer>> n)
-		{
-			this.nodos.putAll(n.getFirst());
-			this.nombres_nodos.putAll(n.getSecond());
-		}
 }
 

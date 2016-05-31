@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import clasesCompartidas.ConjuntoNodos;
+import clasesCompartidas.ConjuntoNodosPri;
 import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
 
@@ -46,10 +47,10 @@ public class GrafoPri extends Grafo {
 						h2.put(n, consultarNodo(i, n));
 					}
 					if (i==0) {
-						this.papers=new ConjuntoNodos(h1, h2);
+						this.papers=new ConjuntoNodosPri(h1, h2);
 					}
 					else if (i==1){
-						this.authors=new ConjuntoNodos(h1,h2);
+						this.authors=new ConjuntoNodosPri(h1,h2);
 						if (!r.contains(0)){
 							HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("AP", true);
 							for (int j: h1.keySet()){
@@ -59,7 +60,7 @@ public class GrafoPri extends Grafo {
 						}
 					}
 					else if (i==2){
-						this.conferences=new ConjuntoNodos(h1,h2);
+						this.conferences=new ConjuntoNodosPri(h1,h2);
 						if (!r.contains(0)){
 							HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("CP", true);
 							for (int j: h1.keySet()){
@@ -69,7 +70,7 @@ public class GrafoPri extends Grafo {
 						}
 					}
 					else{
-						this.therms=new ConjuntoNodos(h1,h2);
+						this.therms=new ConjuntoNodosPri(h1,h2);
 						if (!r.contains(0)){
 							HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("TP", true);
 							for (int j: h1.keySet()){
@@ -87,7 +88,7 @@ public class GrafoPri extends Grafo {
 					for (int i:p){
 						hp1.put(i,g.consultarNodo(0,i));
 						hp2.put(g.consultarNodo(0,i), i);
-						this.papers=new ConjuntoNodos(hp1, hp2);
+						this.papers=new ConjuntoNodosPri(hp1, hp2);
 					}
 					a.remove(0);
 				}
@@ -109,7 +110,7 @@ public class GrafoPri extends Grafo {
 						for (int k:aut){
 							h1.put(k,g.consultarNodo(1,k));
 							h2.put(g.consultarNodo(1,k), k);
-							this.authors=new ConjuntoNodos(h1, h2);
+							this.authors=new ConjuntoNodosPri(h1, h2);
 						}
 					}
 					else if (i==2){
@@ -124,7 +125,7 @@ public class GrafoPri extends Grafo {
 						for (int k:aut){
 							h1.put(k,g.consultarNodo(2,k));
 							h2.put(g.consultarNodo(2,k), k);
-							this.conferences=new ConjuntoNodos(h1, h2);
+							this.conferences=new ConjuntoNodosPri(h1, h2);
 						}
 					}
 					else{
@@ -144,7 +145,7 @@ public class GrafoPri extends Grafo {
 						for (int k:aut){
 							h1.put(k,g.consultarNodo(3,k));
 							h2.put(g.consultarNodo(3,k), k);
-							this.therms=new ConjuntoNodos(h1, h2);
+							this.therms=new ConjuntoNodosPri(h1, h2);
 						}
 					}
 				}

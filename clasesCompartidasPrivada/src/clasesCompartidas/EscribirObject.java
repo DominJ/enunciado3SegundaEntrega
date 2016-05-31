@@ -1,21 +1,18 @@
 package clasesCompartidas;
 
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
-import java.io.Serializable;
 
 
 
-public class EscribirObject implements Serializable {
+public class EscribirObject {
 
 	public static void ReescribirObject(Object a,String s) 
 	{
 		try
 		{
-			System.out.println(s);
-			FileOutputStream fos = new FileOutputStream(s,false);
+			FileOutputStream fos = new FileOutputStream(s);
 			BufferedOutputStream z = new BufferedOutputStream(fos);
 			ObjectOutputStream oos = new ObjectOutputStream(z);
 			oos.writeObject(a);
@@ -36,11 +33,11 @@ public class EscribirObject implements Serializable {
 		ooos.close();
 	} */
 	
-	public void main(String [] args) throws IOException {
-		/*Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> a = new Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
+	/*public void main(String [] args) throws IOException {
+		Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> a = new Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>>();
 		a = LeerFichero.crear_relacion("Set1", 1);
 		ReescribirObject1(a);
 		Pair<HashMap<Integer,String>,HashMap<String,Integer>> m = LeerFichero.crear_nodo_primitivo("Set1", 1);
-		ReescribirNodosPrimitivosObject(m); */
-	}
+		ReescribirNodosPrimitivosObject(m); 
+	}*/
 }
