@@ -5,32 +5,44 @@ import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Panel;
-import java.awt.TextArea;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import clasesCompartidas.Pair;
 
 public class VistaBH1 {
 	private CtrlPresentacion iCtrlPresentacion;
 	private Frame frameVistaBH1 = new Frame("Resultados");	
-	private TextArea a = new TextArea();
 	private Panel panelBH = new Panel();
+	private DefaultTableModel model = new DefaultTableModel(); 
+	private JTable table = new JTable(model); 
 
-	public void activar(ArrayList<Pair<Double,Integer>> aux) {
-		a.setText("Ranking " + " Nodo " + " Relevancia ");
+
+	public void activar(ArrayList<Pair<Double,String>> aux) {
+		inicializarComponentes(); 
+		model.addRow(new Object[]{"Ranking","Nodo","Relevancia"});
 		for(int i = 0; i < aux.size(); i++){
-			Pair<Double,Integer> aux1 = aux.get(i);
+			Pair<Double,String> aux1 = aux.get(i);
 			Double aux2 = aux1.getFirst();
-			Integer aux3 = aux1.getSecond();
-			a.setText(i+ " " + aux2+" "+aux3 + "\n");
+			String aux3 = aux1.getSecond();
+			model.addRow(new Object[]{i+1, aux3,aux2});
 		}
-	    hacerVisible();
-	  }
-
+	    frameVistaBH1.add(table);
+	    frameVistaBH1.setEnabled(true);
+		hacerVisible();
+	}
+	
 	  public void desactivar() {
+		  if (model.getRowCount() > 0) {
+			    for (int i = model.getRowCount() - 1; i > -1; i--) {
+			        model.removeRow(i);
+			    }
+			}
+		  table.removeAll();
 	    frameVistaBH1.setEnabled(false);
 	    hacerInvisible();
 	  }
@@ -44,7 +56,10 @@ public class VistaBH1 {
 		  }
 			public VistaBH1(CtrlPresentacion pCtrlPresentacion) {
 			    iCtrlPresentacion = pCtrlPresentacion;
-			    inicializarComponentes();
+			    model.addColumn("Ranking"); 
+				model.addColumn("Nodo"); 
+				model.addColumn("Relevancia"); 
+			   // inicializarComponentes();
 			}
 		    public void inicializarComponentes() {
 		    	frameVistaBH1.setSize(new Dimension(400,400));
@@ -55,10 +70,9 @@ public class VistaBH1 {
 			    panelBH.setLayout(new FlowLayout());
 			    frameVistaBH1.addWindowListener(new WindowAdapter() {
 			         public void windowClosing(WindowEvent windowEvent){
-			        	 iCtrlPresentacion.sincronizacionBH1_a_BH();
+			        	 iCtrlPresentacion.sincronizacionBH1_a_CCN();
 			         }        
-			      });  
-			    frameVistaBH1.add(a);
+			      });
 		    }
 
 }

@@ -48,6 +48,10 @@ public class vistaBH {
 	    hacerVisible();
 	  }
 
+	public void activar1(){
+		frameVistaBH.setEnabled(true);
+	    hacerVisible();
+	}
 	  public void desactivar() {
 	    frameVistaBH.setEnabled(false);
 	    hacerInvisible();

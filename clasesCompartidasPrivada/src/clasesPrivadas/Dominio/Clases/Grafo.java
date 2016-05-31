@@ -191,22 +191,6 @@ public class Grafo
 		}
 	}
 	
-	public int consultarNodo(String name, int type)
-	{
-		//(0 = P, 1 = A, 2 = C, 3 = T)
-				switch(type)
-				{
-					case 0	:	return this.papers.consultar_nodo(name);
-					
-					case 1	:	return this.authors.consultar_nodo(name);
-					
-					case 2	:	return this.conferences.consultar_nodo(name);
-					
-					case 3	:	return this.therms.consultar_nodo(name);
-				}
-				return 0;
-
-	}
 	
 	public void anadirRelacion(int a, int b, int tipo)
 	{

@@ -45,7 +45,7 @@ public class FileChooserTest extends JFrame {
   public void inicializarComponentes() {
 	  frame.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
-	       	  iCtrlPresentacion.sincronizacionGuardar_a_Principal();
+	        	 System.exit(0);
 	         }        
 	      });
     frame.setSize(250, 100);
@@ -61,7 +61,7 @@ public class FileChooserTest extends JFrame {
     }
     if (rVal == JFileChooser.CANCEL_OPTION) {
       System.out.println("You pressed cancel\n");
-  	  iCtrlPresentacion.sincronizacionGuardar_a_Principal();
+      	System.exit(0);
     }
    
   }

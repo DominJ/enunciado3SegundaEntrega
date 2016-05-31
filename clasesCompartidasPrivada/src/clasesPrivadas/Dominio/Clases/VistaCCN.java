@@ -63,25 +63,17 @@ public class VistaCCN {
 	
 	public void actionPerformed_buttonOk (ActionEvent event) {
 		Component a = panelCCN.getComponent(0);
-		System.out.println(a.getClass()+"\n");
 		Component b = panelCCN.getComponent(1);
-		System.out.println(b.getClass()+"\n");
 		Component c = panelCCN.getComponent(2);
-		System.out.println(c.getClass()+"\n");
 		Component d = panelCCN.getComponent(3);
-		System.out.println(d.getClass()+"\n");
 		JPanel a1 = (JPanel) a;
 		JPanel b1 = (JPanel) b;
 		JPanel c1 = (JPanel) c;
 		JPanel d1 = (JPanel) d;
 		Component a2 = a1.getComponent(1);
-		System.out.println(a2.getClass()+"\n");
 		Component b2 = b1.getComponent(1);
-		System.out.println(b2.getClass()+"\n");
 		Component c2 = c1.getComponent(1);
-		System.out.println(c2.getClass()+"\n");
 		Component d2 = d1.getComponent(1);
-		System.out.println(d2.getClass()+"\n");
 		TextField a3 = (TextField) a2;
 		TextField b3 = (TextField) b2;
 		TextField c3 = (TextField) c2;
@@ -92,13 +84,12 @@ public class VistaCCN {
 		String d4 = d3.getText();
 		double c5 = Double.parseDouble(c4);
 		double d5 = Double.parseDouble(d4);
-		String camino = b4;
 		System.out.println(a4);
 		System.out.println(b4);
 		System.out.println(c4);
 		System.out.println(d4);
 
-		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,camino,c5,d5);
+		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,b4,c5,d5);
 	}
   
   private void asignar_listenersComponentes3() {

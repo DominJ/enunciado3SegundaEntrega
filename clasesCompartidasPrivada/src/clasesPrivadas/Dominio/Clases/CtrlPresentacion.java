@@ -40,6 +40,7 @@ public class CtrlPresentacion {
 	}
 	
 	
+
 	
 	//----------------------Principal-A-Guardar--------------------------------------//
 
@@ -65,7 +66,7 @@ public class CtrlPresentacion {
 	//----------------------BH-A-BH1--------------------------------------//
 
 	
-	public void sincronizacionBH_a_BH1(ArrayList<Pair<Double,Integer>> aux) {
+	public void sincronizacionBH_a_BH1(ArrayList<Pair<Double,String>> aux) {
 		vistaBH.desactivar();
 	    if (Consult == null){
 	    	Consult = new VistaBH1(this);
@@ -76,8 +77,7 @@ public class CtrlPresentacion {
 
 	public void sincronizacionBH1_a_BH() {
 		Consult.desactivar();
-		System.out.println("Hola9\n");
-		sincronizacionBH_a_Principal();
+		vistaBH.activar1();
 	}
 	
 	//----------------------Principal-A-BH--------------------------------------//
@@ -98,33 +98,35 @@ public class CtrlPresentacion {
 			while(!(Character.isWhitespace(s.charAt(i)))) {
 	    		++i;
 	    	}
-			String a1 = s.substring(0,i);
-			String a2 = s.substring(i+1, s.length());
-			ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(a1,a2);
-			sincronizacionBH_a_BH1(aux);
+			String nodo = s.substring(0,i);
+			String camino = s.substring(i+1, s.length());
+			ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
+			ArrayList<Pair<Double,String>> aux1 = ctrlDominio.traducir(aux,camino);
+			sincronizacionBH_a_BH1(aux1);
 		}
 
 		public void sincronizacionBH_a_Principal() {
 			System.out.println("Hola10");
-			 //vistaBH.desactivar();
+			 vistaBH.desactivar();
 			 vistaPrincipal.activar();
 			
 		}
 		
 		//----------------------CCN-A-BH1--------------------------------------//
 
-		public void sincronizacionCCN_a_BH1(ArrayList<Pair<Double,Integer>> aux) {
+		public void sincronizacionCCN_a_BH1(ArrayList<Pair<Double,Integer>> aux,String camino) {
 			vistaCCN.desactivar();
 		    if (Consult == null){
 		    	Consult = new VistaBH1(this);
 		    }
-		    Consult.activar(aux);
-		  }
+		    ArrayList<Pair<Double,String>> a = ctrlDominio.traducir(aux, camino);
+		    Consult.activar(a);
+		  } 
 		
 
 		public void sincronizacionBH1_a_CCN() {
 			Consult.desactivar();
-			sincronizacionCCN_a_RC();
+			vistaCCN.activar();
 		}
 		
 		
@@ -142,13 +144,13 @@ public class CtrlPresentacion {
 	  }
 	
 	public void sincronizacionCCN_a_RC1(String nodo, String camino,double b,double c) {
-		System.out.println("Hola");
-		System.out.println(" "+camino);
+		//System.out.println("Hola");
+		//System.out.println(" "+camino);
 		ctrlDominio.crearcaminonuevo(nodo,camino,b,c);
-		System.out.println("Hola3");
+		//System.out.println("Hola3");
 		ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
 		System.out.println("Hola4");
-		sincronizacionCCN_a_BH1(aux);
+		sincronizacionCCN_a_BH1(aux,camino);
 		System.out.println("Hola5");
 	}
 	

@@ -42,6 +42,7 @@ public class CtrlDominio
 			//Es la primera ejecución
 			System.out.println("Primera ejecucion en este equipo");
 			this.gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
+			System.out.println("Inicializando conjunto resultados\n");
 			this.cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
 			this.ch = new CtrlHetesim(gh);
 		} 
@@ -55,6 +56,22 @@ public class CtrlDominio
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public ArrayList<Pair<Double,String>> traducir(ArrayList<Pair<Double,Integer>> a,String camino){
+		ArrayList<Pair<Double,String>> b = new ArrayList<Pair<Double,String>>();
+		for(int i = 0; i < a.size(); i++){
+			Pair<Double,Integer> aux = a.get(i);
+			Pair<Double,String> aux1 = new Pair<Double,String>();
+			int type1 = TypePosPath(camino, camino.length()-1);
+			System.out.println("Tipo:" + type1+" ");
+			String aux2 = gh.consultarNodo(type1, aux.getSecond());
+			aux1.setFirst(aux.getFirst());
+			aux1.setSecond(aux2);
+			b.add(aux1);
+		}
+			return b;
 	}
 	
 	public HashMap<String, Set<String>> traducirINTaSTRING(HashMap<String, Set<Integer>> a){
@@ -90,11 +107,11 @@ public class CtrlDominio
 		return b;
 	}
 	
-	public ArrayList<Pair<Double,Integer>> consultarresultado (String a, String b)
+	public ArrayList<Pair<Double,Integer>> consultarresultado (String nodo, String camino)
 	{
-		int i = traducirSTRINGaINT(a,b);
-		System.out.println("ResultadoNodo "+a + "" + b + "\n");
-		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(a, i);
+		int i = traducirSTRINGaINT(nodo,camino);
+		System.out.println("ResultadoNodo "+nodo + " " + camino + " \n");
+		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(camino, i);
 		return c;
 		
 	}
@@ -124,16 +141,16 @@ public class CtrlDominio
 	
 	public void crearcaminonuevo(String nodo,String camino, double men, double may) {
 
-	System.out.println("Hola2 ");
-	System.out.println(camino+" ");
+	//System.out.println("Hola2 ");
+	//System.out.println(camino+" ");
 	int typeb=TypePosPath(camino,0);
-	System.out.println(" Hola21");
+	//System.out.println(" Hola21");
 	int pos=gh.consultarNodo(typeb, nodo);
-	System.out.println("Hola22");
+	//System.out.println("Hola22");
 	cr.anadirResultado(camino, ch.HeteSim(camino, pos),pos);
-	System.out.println("Hola23");
+	//System.out.println("Hola23");
 	cr.setIntervalo(men, may);
-	System.out.println("Hola24");
+	//System.out.println("Hola24");
 	}
 	
 	public void anadirconjuntodatos(String a, int s)
@@ -155,24 +172,19 @@ public class CtrlDominio
 	}
 	
 	private static int TypePosPath(String path, int pos) {
-		String s = path.substring(0,1);
+		String s = path.substring(pos,pos+1);
 		System.out.println("Path: "+path+"\n");
-		System.out.println(s);
 
 		if (s.equals("P")) {
-			System.out.println("P");
 			return 0;
 		}
 		else if (s.equals("A")) {
-			System.out.println("A");
 			return 1;
 		}
 		else if (s.equals("C")) {
-			System.out.println("C");
 			return 2;
 		}
 		else  {
-			System.out.println("T");
 			return 3;
 		}
 	}

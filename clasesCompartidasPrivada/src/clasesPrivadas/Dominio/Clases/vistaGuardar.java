@@ -61,7 +61,7 @@ public void activar() {
 	    contentPaneAnadir.add(panelContenidos);
 	    frameVista.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
-	        	 iCtrlPresentacion.sincronizacionGuardar_a_Principal();
+	        	 System.exit(0);
 	         }        
 	      });
 		GridBagLayout layout = new GridBagLayout();
