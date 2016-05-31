@@ -243,6 +243,12 @@ public class CtrlPresentacion {
 		 vistaRC.activar();
 	}
 	
+	public void sincronizacionCP1_a_RC() {
+		vistaCP1.desactivar();
+		vistaRC.activar();
+		
+	}
+	
 	//----------------------RC-A-CP--------------------------------------//
 
 	
@@ -387,5 +393,6 @@ public class CtrlPresentacion {
 	    vistaMBD.desactivar();
 	    vistaPrincipal.activar();
 	  }
+
 	
 }

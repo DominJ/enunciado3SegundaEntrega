@@ -106,7 +106,7 @@ public class vistaCP1 {
 	    
 	    frameVistaCCN.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
-	        	 iCtrlPresentacion.sincronizacionCCN_a_RC();
+	        	 iCtrlPresentacion.sincronizacionCP1_a_RC();
 	         }        
 	      });  
 	    
