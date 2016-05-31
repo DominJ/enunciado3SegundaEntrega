@@ -30,7 +30,7 @@ public class VistaCP {
 	            String data = "Camino Seleccionado: " 
 	            + camino.getItem(camino.getSelectedIndex());
 	            statusLabel.setText(data);
-	        	 iCtrlPresentacion.sincronizacionCP_a_RC1(camino.getItem(camino.getSelectedIndex()));
+	        	 iCtrlPresentacion.sincronizacionCP_a_CP1(camino.getItem(camino.getSelectedIndex()));
 	         }
 	      }); 
 	 }

@@ -50,7 +50,7 @@ public void activar() {
 
 public void actionPerformed_buttonCD (ActionEvent event) {
 	
-	iCtrlPresentacion.sincronizacionAnadir1_a_CD();
+  	 iCtrlPresentacion.sincronizacionCD_a_Anadir1();
 }
 
 public void actionPerformed_buttonDI (ActionEvent event) {

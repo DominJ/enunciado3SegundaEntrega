@@ -116,6 +116,14 @@ public class CtrlDominio
 		return b;
 	}
 	
+	public ArrayList<Pair<Double,Integer>> consultarresultadop(String nodo, String camino,double a, double b)
+	{
+		int i = traducirSTRINGaINT(nodo,camino);
+		cr.setIntervalo(a, b);
+		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(camino, i);
+		return c;
+		
+	}
 	public ArrayList<Pair<Double,Integer>> consultarresultado (String nodo, String camino)
 	{
 		int i = traducirSTRINGaINT(nodo,camino);
@@ -176,10 +184,9 @@ public class CtrlDominio
 	cr.setIntervalo(men, may);
 	}
 	
-	public void anadirconjuntodatos(String a, int s)
+	public void anadirconjuntodatos()
 	{
-		//0 = P, 1 = A, 2 = C, 3 = T, 4 = PA, 5 = PC, 6 = PT, 7 = AP, 8 = AC,
-		//9 = AT, 10 = CP, 11 = CA, 12 = CT, 13 = TP, 14 = TA, 15 = TC
+		
 		gh.addDataGraph();
 		cr.vaciar_resultados();
 		cr.anadirResultado("AP", ch.HeteSim("AP"));

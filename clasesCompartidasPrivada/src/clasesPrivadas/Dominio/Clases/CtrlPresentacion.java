@@ -19,7 +19,6 @@ public class CtrlPresentacion {
 	private VistaRC vistaRC = null;
 	private VistaCP vistaCP = null;
 	private VistaCCN vistaCCN = null;
-	private FileSamplePanel a = null;
 	private vistaBH vistaBH = null;
 	//private vistaGuardar vistaGuardar = null;
 	private FileChooserTest FCT = null;
@@ -52,6 +51,17 @@ public class CtrlPresentacion {
 	}
 	
 	
+	//------------------------------------------------------------//
+
+	public void sincronizacionCP1_a_BH1(String nodo, String camino,double b,double c) {
+		vistaCP1.desactivar();
+		ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultadop(nodo,camino,b,c);
+	    ArrayList<Pair<Double,String>> a = ctrlDominio.traducir(aux, camino);
+	    if (Consult == null) {  // innecesario
+			 Consult = new VistaBH1(this);
+		 }
+	    Consult.activar(a);
+	}
 	
 	//------------------------------------------------------------//
 	public void  sincronizacionA_a_Principal() throws ClassNotFoundException, NonExistObjectToReadException, IOException{
@@ -306,24 +316,12 @@ public class CtrlPresentacion {
 	}
 
 	//----------------------Anadir1-A-CD--------------------------------------//
-	 public void sincronizacionAnadir1_a_CD() {
-		 vistaAnadir.desactivar();
-		   if(a == null){
-			   a = new FileSamplePanel(this);
-		   }
-		    a.activar();
-	 }
-	 
-	 public void sincronizacionCD_a_Anadir11(String a) {
-		 //iCtrlDominio.anadirconjunto(a);
-		 sincronizacionCD_a_Anadir1();
-	 }
 
 	 public void sincronizacionCD_a_Anadir1() {
-		 a.desactivar();
-		 vistaAnadir.activar();
-		 
+		 ctrlDominio.anadirconjuntodatos();
 	 }
+
+	
 	
 		//----------------------Anadir1-A-DI--------------------------------------//
 

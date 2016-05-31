@@ -23,7 +23,6 @@ public class vistaCP1 {
 	private JPanel panelCCN2 = new JPanel();
 	private JPanel panelCCN3 = new JPanel();
 	private JPanel panelCCN4 = new JPanel();
-	private JPanel panelCCN5 = new JPanel();
 	private JPanel panelBotones = new JPanel();
     private CtrlPresentacion iCtrlPresentacion;
 	private JFrame frameVistaCCN = new JFrame("Crear Camino Nuevo");	
@@ -63,8 +62,8 @@ public class vistaCP1 {
 	
 	public void actionPerformed_buttonOk (ActionEvent event) {
 		Component a = panelCCN.getComponent(0);
-		Component c = panelCCN.getComponent(2);
-		Component d = panelCCN.getComponent(3);
+		Component c = panelCCN.getComponent(1);
+		Component d = panelCCN.getComponent(2);
 		JPanel a1 = (JPanel) a;
 		JPanel c1 = (JPanel) c;
 		JPanel d1 = (JPanel) d;
@@ -83,7 +82,7 @@ public class vistaCP1 {
 		System.out.println(c4);
 		System.out.println(d4);
 
-		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,camino,c5,d5);
+		iCtrlPresentacion.sincronizacionCP1_a_BH1(a4,camino,c5,d5);
 	}
   
   private void asignar_listenersComponentes3() {
