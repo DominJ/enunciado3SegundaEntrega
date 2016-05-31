@@ -29,7 +29,8 @@ public class VistaBH1 {
 			Pair<Double,String> aux1 = aux.get(i);
 			Double aux2 = aux1.getFirst();
 			String aux3 = aux1.getSecond();
-			model.addRow(new Object[]{i+1, aux3,aux2});
+			System.out.println(i+1 + " "+aux2+" "+aux3+"\n");
+			model.addRow(new Object[]{i+1,aux3,aux2});
 		}
 	    frameVistaBH1.add(table);
 	    frameVistaBH1.setEnabled(true);

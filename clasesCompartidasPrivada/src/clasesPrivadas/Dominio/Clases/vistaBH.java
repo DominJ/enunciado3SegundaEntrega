@@ -33,6 +33,7 @@ public class vistaBH {
 	            + camino.getItem(camino.getSelectedIndex());
 	            statusLabel.setText(data);
 	        	 iCtrlPresentacion.sincronizacionBH_a_Principal1(camino.getItem(camino.getSelectedIndex()));
+	        	 camino.removeAll();
 	         }
 	      }); 
 	 }
@@ -41,7 +42,7 @@ public class vistaBH {
 		for (String keys : a.keySet()) {
 			Set<String> b = a.get(keys);
 			for(String c:b) {
-				camino.add(keys+""+c);
+				camino.add(keys+" "+c);
 			}
 		}
 		frameVistaBH.setEnabled(true);
@@ -94,9 +95,6 @@ public class vistaBH {
 	      frameVistaBH.setVisible(true);
 
 	      headerLabel.setText("Control in action: Choice"); 
-
-		camino.add("haha");
-
 	      panelBH.add(camino);
 	      panelBH.add(OKButton);
 

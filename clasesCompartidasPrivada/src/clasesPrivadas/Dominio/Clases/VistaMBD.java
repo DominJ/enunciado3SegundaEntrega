@@ -96,7 +96,7 @@ public void activar() {
 		}
 		
 		public void actionPerformed_buttonLH (ActionEvent event) {
-			//iCtrlPresentacion.limpiarhistorial();
+			iCtrlPresentacion.limpiarhistorial();
 		}
 		
 		public void actionPerformed_buttonE (ActionEvent event) {

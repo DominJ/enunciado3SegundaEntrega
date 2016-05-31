@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 public class LeerObject implements Serializable{
 
-	public static Object LeerObjeto(String b) throws IOException, ClassNotFoundException 
+	public static Object LeerObjeto(String ruta) throws IOException, ClassNotFoundException 
 	{
 		FileInputStream fis = new FileInputStream("");
 		BufferedInputStream z = new BufferedInputStream(fis);

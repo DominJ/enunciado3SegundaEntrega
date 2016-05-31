@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import clasesCompartidas.EscribirObject;
 import clasesCompartidas.LeerObject;
 import clasesCompartidas.Pair;
 import excepciones.NonExistObjectToReadException;
@@ -26,16 +27,19 @@ public class CtrlDominio
 	CtrlHetesim ch;
 	CtrlHetesim chf;
 
+	public void limpiarhistorialD(){
+		cr.vaciar_resultados();
+	}
 	
-	public void inicializarCtrlDominio()
+	public void inicializarCtrlDominio(String ruta) throws NonExistObjectToReadException, ClassNotFoundException, IOException
 	{
 		//Debe verificar la correcta ejecuccion.
-		try
-		{
+		if(ruta != null) {
+		
 			LeerObject.verificarObjects();
 			//No es la primera ejecuión
-			this.gh = (Grafo) LeerObject.LeerObjeto("grafo");
-			this.cr = (ConjuntoResultados) LeerObject.LeerObjeto("conjuntoResultados");
+			this.gh = (Grafo) LeerObject.LeerObjeto(ruta);
+			this.cr = new ConjuntoResultados();
 			this.ch = new CtrlHetesim(gh);
 			cr.anadirResultado("AP", ch.HeteSim("AP"));
 			cr.anadirResultado("PA", ch.HeteSim("PA"));
@@ -45,7 +49,7 @@ public class CtrlDominio
 			cr.anadirResultado("PT", ch.HeteSim("PT"));
 
 		}
-		catch(NonExistObjectToReadException e)
+		else
 		{
 			//Es la primera ejecución
 			System.out.println("Primera ejecucion en este equipo");
@@ -60,16 +64,7 @@ public class CtrlDominio
 			cr.anadirResultado("TP", ch.HeteSim("TP"));
 			cr.anadirResultado("PT", ch.HeteSim("PT"));
 		} 
-		catch (ClassNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
 	
@@ -128,6 +123,11 @@ public class CtrlDominio
 		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(camino, i);
 		return c;
 		
+	}
+	
+	public void guardar(String s) throws IOException{
+		Object a = (Object)gh;
+		 EscribirObject.ReescribirObject(a,s);
 	}
 	public void eliminarnodoD(int a, String b){
 		gh.eliminarNodo(a, gh.consultarNodo(a, b));

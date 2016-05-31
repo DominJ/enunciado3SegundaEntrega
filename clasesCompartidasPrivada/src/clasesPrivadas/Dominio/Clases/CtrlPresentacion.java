@@ -1,10 +1,12 @@
 package clasesPrivadas.Dominio.Clases;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 import clasesCompartidas.Pair;
 import clasesPrivadas.Dominio.Clases.CtrlDominio;
+import excepciones.NonExistObjectToReadException;
 
 public class CtrlPresentacion {
 	private CtrlDominio ctrlDominio;
@@ -23,23 +25,60 @@ public class CtrlPresentacion {
 	private FileChooserTest FCT = null;
 	private VistaBH1 Consult = null;
 	private VistaF F = null;
+	private vistaA vistaA = null;
+	private vistaCP1 vistaCP1 = null;
+
+
 	
 
 
-
+	public void limpiarhistorial(){
+		ctrlDominio.limpiarhistorialD();
+	}
 
 	
 	public CtrlPresentacion() {
 		 ctrlDominio = new CtrlDominio();
-		 if (vistaPrincipal == null) {  // innecesario
-			 vistaPrincipal = new VistaPrincipal(this);
+		 if (vistaA == null) {  // innecesario
+			 vistaA = new vistaA(this);
 		 }
+		 vistaA.activar();
 	}
 	
-	public void inicializarPresentacion() {
-		ctrlDominio.inicializarCtrlDominio();
+	public void inicializarPresentacion(String ruta) throws ClassNotFoundException, NonExistObjectToReadException, IOException {
+		ctrlDominio.inicializarCtrlDominio(ruta);
+		System.out.println("CHIVATO");
 		vistaPrincipal.activar();
 	}
+	
+	
+	
+	//------------------------------------------------------------//
+	public void  sincronizacionA_a_Principal() throws ClassNotFoundException, NonExistObjectToReadException, IOException{
+		if (vistaPrincipal == null) {  // innecesario
+			 vistaPrincipal = new VistaPrincipal(this);
+		 }
+		vistaA.desactivar();
+		String ruta = null;
+		inicializarPresentacion(ruta);
+	}
+	
+	public void  sincronizacionFCT_a_Principal1(String ruta) throws ClassNotFoundException, NonExistObjectToReadException, IOException{
+		if (vistaPrincipal == null) {  // innecesario
+			 vistaPrincipal = new VistaPrincipal(this);
+		 }
+		FCT.desactivar();
+		inicializarPresentacion(ruta);
+	}
+	
+	public void sincronizacionA_a_FCT() throws ClassNotFoundException, NonExistObjectToReadException {
+		vistaA.desactivar();
+	    if (FCT == null){
+	    	FCT = new FileChooserTest(this,false);
+	    }
+	    FCT.activar();
+	}
+	
 	
 	//----------------------RC-A-Filtros--------------------------------------//
 
@@ -76,16 +115,16 @@ public class CtrlPresentacion {
 	//----------------------Principal-A-Guardar--------------------------------------//
 
 	
-	public void sincronizacionPrincipal_a_Guardar() {
+	public void sincronizacionPrincipal_a_Guardar() throws ClassNotFoundException, NonExistObjectToReadException {
 		vistaPrincipal.desactivar();
 	    if (FCT == null){
-	    	FCT = new FileChooserTest(this);
+	    	FCT = new FileChooserTest(this,true);
 	    }
 	    FCT.activar();
 	  }
 	
-	public void sincronizacionGuardar_a_Principal1(String s) {
-		//CtrlDominio.guardar(s);
+	public void sincronizacionGuardar_a_Principal1(String s) throws IOException {
+		ctrlDominio.guardar(s);
 		System.exit(0);
 	}
 
@@ -129,15 +168,17 @@ public class CtrlPresentacion {
 			while(!(Character.isWhitespace(s.charAt(i)))) {
 	    		++i;
 	    	}
+			System.out.println(s);
 			String nodo = s.substring(0,i);
 			String camino = s.substring(i+1, s.length());
-			ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
-			ArrayList<Pair<Double,String>> aux1 = ctrlDominio.traducir(aux,camino);
+			System.out.println("CTRLPRESENTACION:"+nodo);
+			System.out.println(camino);
+			ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(camino,nodo);
+			ArrayList<Pair<Double,String>> aux1 = ctrlDominio.traducir(aux,nodo);
 			sincronizacionBH_a_BH1(aux1);
 		}
 
 		public void sincronizacionBH_a_Principal() {
-			System.out.println("Hola10");
 			 vistaBH.desactivar();
 			 vistaPrincipal.activar();
 			
@@ -203,9 +244,19 @@ public class CtrlPresentacion {
 	    vistaCP.activar();
 	  }
 	
-	public void sincronizacionCP_a_RC1(String s) {
-		//ctrlDominio.caminopredeterminado(s);
-		sincronizacionCP_a_RC();
+	public void sincronizacionCP1_a_BH1(String nodo, String camino){
+		ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
+		System.out.println("Hola4");
+		sincronizacionCCN_a_BH1(aux,camino);
+	}
+	
+	public void sincronizacionCP_a_CP1(String s) {
+		vistaCP.desactivar();
+	    // Solo se crea una vista secundaria (podria crearse una nueva cada vez)
+	    if (vistaCP1 == null){
+	    	vistaCP1 = new vistaCP1(this);
+	    }
+	    vistaCP1.activar(s);
 	}
 
 	
