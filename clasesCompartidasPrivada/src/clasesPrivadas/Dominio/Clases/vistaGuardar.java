@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -54,14 +55,14 @@ public void activar() {
 
 	private void inicializarComponentes() {
 		frameVista.setMinimumSize(new Dimension(350,250));
-		frameVista.setResizable(false);
+		frameVista.setResizable(true);
 		frameVista.setLocationRelativeTo(null);
 		frameVista.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	    JPanel contentPaneAnadir = (JPanel) frameVista.getContentPane();
 	    contentPaneAnadir.add(panelContenidos);
 	    frameVista.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
-	        	 iCtrlPresentacion.sincronizacionGuardar_a_Principal();
+	        	 System.exit(0);
 	         }        
 	      });
 		GridBagLayout layout = new GridBagLayout();
@@ -84,7 +85,12 @@ public void activar() {
 	        public void actionPerformed (ActionEvent event) {
 	          String texto = ((JButton) event.getSource()).getText();
 	          System.out.println("Has clickado el boton con texto: " + texto + "\n");
-	          actionPerformed_buttonG(event);
+	          try {
+				actionPerformed_buttonG(event);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        }
 	      });
 
@@ -98,7 +104,7 @@ public void activar() {
 	      });
 
 }
-	public void actionPerformed_buttonG (ActionEvent event) {
+	public void actionPerformed_buttonG (ActionEvent event) throws IOException {
 		String b = a.getText();
 		System.out.println(b);
 		iCtrlPresentacion.sincronizacionGuardar_a_Principal1(b);

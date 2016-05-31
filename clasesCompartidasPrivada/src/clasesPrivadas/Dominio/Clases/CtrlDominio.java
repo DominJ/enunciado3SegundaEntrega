@@ -3,10 +3,12 @@ import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import clasesCompartidas.EscribirObject;
 import clasesCompartidas.LeerObject;
 import clasesCompartidas.Pair;
 import excepciones.NonExistObjectToReadException;
@@ -22,55 +24,134 @@ public class CtrlDominio
 	//ConjuntoResultados cr = new ConjuntoResultados();
 	Grafo gh;
 	ConjuntoResultados cr;
+	CtrlHetesim ch;
+	CtrlHetesim chf;
+
+	public void limpiarhistorialD(){
+		cr.vaciar_resultados();
+	}
 	
-	public void inicializarCtrlDominio()
+	public void inicializarCtrlDominio(String ruta) throws NonExistObjectToReadException, ClassNotFoundException, IOException
 	{
 		//Debe verificar la correcta ejecuccion.
-		try
-		{
+		if(ruta != null) {
+		
 			LeerObject.verificarObjects();
-			//No es la primera ejecuión
-			this.gh = (Grafo) LeerObject.LeerObjeto("grafo");
-			this.cr = (ConjuntoResultados) LeerObject.LeerObjeto("conjuntoResultados");
+			//No es la primera ejecuiÃ³n
+			this.gh = (Grafo) LeerObject.LeerObjeto(ruta);
+			this.cr = new ConjuntoResultados();
+			this.ch = new CtrlHetesim(gh);
+			cr.anadirResultado("AP", ch.HeteSim("AP"));
+			cr.anadirResultado("PA", ch.HeteSim("PA"));
+			cr.anadirResultado("PC", ch.HeteSim("PC"));
+			cr.anadirResultado("CP", ch.HeteSim("CP"));
+			cr.anadirResultado("TP", ch.HeteSim("TP"));
+			cr.anadirResultado("PT", ch.HeteSim("PT"));
+
 		}
-		catch(NonExistObjectToReadException e)
+		else
 		{
-			//Es la primera ejecución
+			//Es la primera ejecuciÃ³n
 			System.out.println("Primera ejecucion en este equipo");
 			this.gh = new Grafo(); //grafo heterogeneo que contiene todos los datos en memoria
+			System.out.println("Inicializando conjunto resultados\n");
 			this.cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
+			this.ch = new CtrlHetesim(gh);
+			cr.anadirResultado("AP", ch.HeteSim("AP"));
+			cr.anadirResultado("PA", ch.HeteSim("PA"));
+			cr.anadirResultado("PC", ch.HeteSim("PC"));
+			cr.anadirResultado("CP", ch.HeteSim("CP"));
+			cr.anadirResultado("TP", ch.HeteSim("TP"));
+			cr.anadirResultado("PT", ch.HeteSim("PT"));
 		} 
-		catch (ClassNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
-	public HashMap<String, Set<Integer>> actualizarhistorial()
+	
+	public ArrayList<Pair<Double,String>> traducir(ArrayList<Pair<Double,Integer>> a,String camino){
+		ArrayList<Pair<Double,String>> b = new ArrayList<Pair<Double,String>>();
+		for(int i = 0; i < a.size(); i++){
+			Pair<Double,Integer> aux = a.get(i);
+			Pair<Double,String> aux1 = new Pair<Double,String>();
+			int type1 = TypePosPath(camino, camino.length()-1);
+			System.out.println("Tipo:" + type1+" ");
+			String aux2 = gh.consultarNodo(type1, aux.getSecond());
+			aux1.setFirst(aux.getFirst());
+			aux1.setSecond(aux2);
+			b.add(aux1);
+		}
+			return b;
+	}
+	
+	public HashMap<String, Set<String>> traducirINTaSTRING(HashMap<String, Set<Integer>> a){
+		HashMap<String, Set<String>> b = new HashMap<String,Set<String>>();
+		//Set<String> a2;
+		for (String j: a.keySet() ) {
+			int type1 = TypePosPath(j, 0);
+			Set<Integer> a1 = a.get(j);
+			//PACT//
+			Set<String> a3 = new HashSet<String>();
+			for(int i: a1) {
+				String id = gh.consultarNodo(type1, i);
+				a3.add(id);
+			}
+			b.put(j, a3);
+		}
+		return b;
+	}
+	
+	public int traducirSTRINGaINT(String id1, String camino){
+			System.out.println("Camino:"+camino+"\n");
+			System.out.println("IDstring:"+id1+"\n");
+			int type1 = TypePosPath(camino, 0);
+			System.out.println("Tipo:"+type1+"\n");
+			int id = gh.consultarNodo(type1, id1);
+			return id;
+	}
+	
+	public HashMap<String, Set<String>> actualizarhistorial()
 	{
 		HashMap<String, Set<Integer>> a = cr.consultarResultadosParciales();
-		return a;
+		HashMap<String, Set<String>> b = traducirINTaSTRING(a);
+		return b;
 	}
 	
-	public void caminopredeterminado (String a )
+	public ArrayList<Pair<Double,Integer>> consultarresultadop(String nodo, String camino,double a, double b)
 	{
+		int i = traducirSTRINGaINT(nodo,camino);
+		cr.setIntervalo(a, b);
+		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(camino, i);
+		return c;
+		
+	}
+	public ArrayList<Pair<Double,Integer>> consultarresultado (String nodo, String camino)
+	{
+		int i = traducirSTRINGaINT(nodo,camino);
+		System.out.println("ResultadoNodo "+nodo + " " + camino + " \n");
+		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(camino, i);
+		return c;
+		
 	}
 	
+	public void guardar(String s) throws IOException{
+		Object a = (Object)gh;
+		 EscribirObject.ReescribirObject(a,s);
+	}
 	public void eliminarnodoD(int a, String b){
 		gh.eliminarNodo(a, gh.consultarNodo(a, b));
 		cr.vaciar_resultados();
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 	}
 	
 	//int a e int indican el tipo de nodo
 	public void anadirnodoD(int tipo1, String nombre1, int tipo2, String nombre2)
 	{
-		//Con esta verificación garantizo que el tipo 1 es paper
+		//Con esta verificaciÃ³n garantizo que el tipo 1 es paper
 		if(tipo1 != 0)//es paper
 		{
 			//Le doy la vuelta
@@ -84,13 +165,36 @@ public class CtrlDominio
 		gh.anadirNodo(tipo1, nombre1);
 		gh.anadirNodo(tipo2, nombre2);
 		gh.anadirRelacion(gh.consultarNodo(tipo1, nombre1),gh.consultarNodo(tipo2, nombre2),tipo2);
+		cr.vaciar_resultados();
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 	}
 	
-	public void anadirconjuntodatos(String a, int s)
+	public void crearcaminonuevo(String nodo,String camino, double men, double may,Boolean b) {
+	//B = true Normal
+	//B = false Vengo de filtros
+	int typeb=TypePosPath(camino,0);
+	int pos=gh.consultarNodo(typeb, nodo);
+	if (b) cr.anadirResultado(camino, ch.HeteSim(camino, pos),pos);
+	else cr.anadirResultado(camino, chf.HeteSim(camino, pos),pos);
+	cr.setIntervalo(men, may);
+	}
+	
+	public void anadirconjuntodatos()
 	{
-		//0 = P, 1 = A, 2 = C, 3 = T, 4 = PA, 5 = PC, 6 = PT, 7 = AP, 8 = AC,
-		//9 = AT, 10 = CP, 11 = CA, 12 = CT, 13 = TP, 14 = TA, 15 = TC
+		
 		gh.addDataGraph();
+		cr.vaciar_resultados();
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 	}
 	
 	
@@ -105,11 +209,31 @@ public class CtrlDominio
 	}
 	
 	private static int TypePosPath(String path, int pos) {
-		if (path.charAt(pos)=='P') return 0;
-		else if (path.charAt(pos)=='A') return 1;
-		else if (path.charAt(pos)=='C') return 2;
-		else  return 3;
+		String s = path.substring(pos,pos+1);
+		System.out.println("Path: "+path+"\n");
+
+		if (s.equals("P")) {
+			return 0;
+		}
+		else if (s.equals("A")) {
+			return 1;
+		}
+		else if (s.equals("C")) {
+			return 2;
+		}
+		else  {
+			return 3;
+		}
 	}
+	
+	public void consultarcaminofiltros(Set<Integer>c) {
+		System.out.println("Hola");
+		GrafoPri gp=new GrafoPri(gh, c);	
+		System.out.println("Hola1");
+		chf = new CtrlHetesim(gp);
+		System.out.println("Hola2");
+	}
+
 	
 	public static void main(String args[] )throws IOException
 	{ 
@@ -244,6 +368,7 @@ do{
 			case 2://realizar consulta
 				System.out.print("1.- Elegir camino predeterminado\n" );
 				System.out.print("2.- Crear un camino nuevo\n" );
+				System.out.print("3.- Busqueda con filtros\n" );
 				
 				op3=Integer.parseInt(in.readLine());
 				
@@ -301,7 +426,34 @@ do{
 						int typee=TypePosPath(path1, path1.length()-1);
 						escribir_resultado(cr.getResultadoNodo(path1, pos), gh, typee);
 					break;
-				//default:
+					
+					case 3: //realizar consulta - filtro
+						Set<Integer> v=new HashSet<Integer>();
+						/*v.add(0);
+						v.add(1);
+						v.add(2);*/
+						GrafoPri gp=new GrafoPri(gh, v);
+						HashMap<Integer, ArrayList<Pair<Integer, Double>>> a1=gp.getRelaciones("PA", true);
+						
+						CtrlHetesim cp=new CtrlHetesim(gp);
+						String path11;
+						System.out.println("Introduce path:");
+						path11 = sc.nextLine();
+						int typeb1=TypePosPath(path11,0);
+						System.out.print("4.- Introduce nombre del nodo\n" );
+						String name1 = in.readLine();
+						int pos1=gh.consultarNodo(typeb1, name1);
+						cr.anadirResultado(path11, cp.HeteSim(path11, pos1),pos1);
+						System.out.println("Introduce el extremo menor del intervalo de relevancia" );
+						double x11,x21;
+						x11=Double.parseDouble(in.readLine());
+						System.out.println("Introduce el extremo mayor del intervalo de relevancia" );
+						x21=Double.parseDouble(in.readLine());
+						cr.setIntervalo(x11, x21);
+						System.out.println("Relevancia de "+ name1 +" en el camino "+ path11 +":");
+						int typee1=TypePosPath(path11, path11.length()-1);
+						escribir_resultado(cr.getResultadoNodo(path11, pos1), gp, typee1);
+					break;
 				}
 			
 			break;

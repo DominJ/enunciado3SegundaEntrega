@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import excepciones.NonExistObjectToReadException;
+
 
 public class VistaPrincipal {
 	
@@ -36,25 +38,30 @@ public void activar() {
 	  }
 
 private void inicializar_frameVista() {
-    frameVista.setMinimumSize(new Dimension(900,400));
+    frameVista.setMinimumSize(new Dimension(710,200));
     frameVista.setPreferredSize(frameVista.getMinimumSize());
-    frameVista.setResizable(false);
+    frameVista.setResizable(true);
     frameVista.setLocationRelativeTo(null);
-    JPanel contentPane = (JPanel) frameVista.getContentPane();
-    contentPane.add(panelContenidos);
-    frameVista.addWindowListener(new WindowAdapter() {
-        public void windowClosing(WindowEvent windowEvent){
-        	iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();        
-        	}        
-     });
-	FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
+    
+    FlowLayout layout = new FlowLayout(FlowLayout.LEFT, 5, 15);
     frameVista.setLayout(layout);
     JLabel etiqueta = new JLabel("MENU PRINCIPAL");
     etiqueta.setForeground(Color.RED);
     frameVista.add(etiqueta);
     
+    JPanel contentPane = (JPanel) frameVista.getContentPane();
+    contentPane.add(panelContenidos);
+    frameVista.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent windowEvent){
+        	try {
+				iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();
+			} catch (ClassNotFoundException | NonExistObjectToReadException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}        
+        	}        
+     });
   }
-
 
 private void inicializar_panelContenidos() {
     // Layout
@@ -94,7 +101,7 @@ public void actionPerformed_buttonBH (ActionEvent event) {
 	iCtrlPresentacion.sincronizacionPrincipal_a_BH();
   }
 
-public void actionPerformed_buttonSalir (ActionEvent event) {
+public void actionPerformed_buttonSalir (ActionEvent event) throws ClassNotFoundException, NonExistObjectToReadException {
 iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();	  
   }
 
@@ -131,7 +138,12 @@ private void asignar_listenersComponentes() {
         public void actionPerformed (ActionEvent event) {
           String texto = ((JButton) event.getSource()).getText();
           System.out.println("Has clickado el boton con texto: " + texto);
-          actionPerformed_buttonSalir(event);
+          try {
+			actionPerformed_buttonSalir(event);
+		} catch (ClassNotFoundException | NonExistObjectToReadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         }
       });
 

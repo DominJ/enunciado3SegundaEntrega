@@ -3,8 +3,6 @@ package clasesPrivadas.Dominio.Clases;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /*
 author: 
@@ -122,269 +120,6 @@ public class Grafo
 		}
 	}
 	
-	public Grafo(Grafo g, Set<Integer> s) {
-		/*s es un set que determina los filtros que se han seleccionado.
-		  Contiene un conjunto de numeros entre 0 y 3 donde :
-			0 - papers
-			1 - authors
-			2 - conferences
-			3 - therms 
-			*/
-		try{
-			//Instanciamos los nodos
-			
-			Set<Integer> a=new HashSet<Integer>();
-			//Generamos un set con los numeros de 0 a 3
-			for (int i=0; i<4; ++i){
-				a.add(i);
-			}
-			//Tratamos primero el set de flitros
-			Set<Integer> p= new HashSet<Integer>();
-			for (int i:s){
-				Set<String> r=LeerFichero.LeerFiltro(FILTROS, i);
-				HashMap<Integer, String> h1 = new HashMap<Integer, String>();
-				HashMap<String, Integer> h2 = new HashMap<String, Integer>();
-				for (String n:r){
-					h1.put(consultarNodo(i, n), n);
-					h2.put(n, consultarNodo(i, n));
-				}
-				if (i==0) {
-					this.papers=new ConjuntoNodos(h1, h2);
-				}
-				else if (i==1){
-					this.authors=new ConjuntoNodos(h1,h2);
-					if (!r.contains(0)){
-						HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("AP", true);
-						for (int j: h1.keySet()){
-							ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-							for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
-						}
-					}
-				}
-				else if (i==2){
-					this.conferences=new ConjuntoNodos(h1,h2);
-					if (!r.contains(0)){
-						HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("CP", true);
-						for (int j: h1.keySet()){
-							ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-							for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
-						}
-					}
-				}
-				else{
-					this.therms=new ConjuntoNodos(h1,h2);
-					if (!r.contains(0)){
-						HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("TP", true);
-						for (int j: h1.keySet()){
-							ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-							for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
-						}
-					}
-				}
-				//Quitamos del set los casos tratados
-				a.remove(i);
-			}
-			if (!s.contains(0)) {
-				HashMap<Integer, String> hp1 = new HashMap<Integer, String>();
-				HashMap<String, Integer> hp2 = new HashMap<String, Integer>();
-				for (int i:p){
-					hp1.put(i,consultarNodo(i,0));
-					hp2.put(consultarNodo(i,0), i);
-					this.papers=new ConjuntoNodos(hp1, hp2);
-				}
-			}
-			//El resto de casos sin tratar, los cogemos del grafo g
-			for(int i:a){
-				if (i==1){
-					Set<Integer> aut= new HashSet<Integer>();
-					HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux=g.getRelaciones("PA",true);
-					for(int j: p){
-						ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-						for (int k=0; k<ar.size(); ++k) aut.add(ar.get(k).getFirst());
-					}
-					HashMap<Integer, String> h1 = new HashMap<Integer, String>();
-					HashMap<String, Integer> h2 = new HashMap<String, Integer>();
-					for (int k:aut){
-						h1.put(i,consultarNodo(k,0));
-						h2.put(consultarNodo(k,0), k);
-						this.authors=new ConjuntoNodos(h1, h2);
-					}
-				}
-				else if (i==2){
-					Set<Integer> aut= new HashSet<Integer>();
-					HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux=g.getRelaciones("PC",true);
-					for(int j: p){
-						ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-						for (int k=0; k<ar.size(); ++k) aut.add(ar.get(k).getFirst());
-					}
-					HashMap<Integer, String> h1 = new HashMap<Integer, String>();
-					HashMap<String, Integer> h2 = new HashMap<String, Integer>();
-					for (int k:aut){
-						h1.put(i,consultarNodo(k,0));
-						h2.put(consultarNodo(k,0), k);
-						this.conferences=new ConjuntoNodos(h1, h2);
-					}
-				}
-				else{
-					Set<Integer> aut= new HashSet<Integer>();
-					HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux=g.getRelaciones("PT",true);
-					for(int j: p){
-						ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-						for (int k=0; k<ar.size(); ++k) aut.add(ar.get(k).getFirst());
-					}
-					HashMap<Integer, String> h1 = new HashMap<Integer, String>();
-					HashMap<String, Integer> h2 = new HashMap<String, Integer>();
-					for (int k:aut){
-						h1.put(i,consultarNodo(k,0));
-						h2.put(consultarNodo(k,0), k);
-						this.therms=new ConjuntoNodos(h1, h2);
-					}
-				}
-			}
-			//Queda instanciar las relaciones. To be continued.
-			
-			{
-				//CP
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux1=g.getRelaciones("AP",true);
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> h1=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
-				for(int i: authors.devolver_conjunto().keySet()){
-					ArrayList<Pair<Integer,Double>> aa=aux1.get(i);
-					ArrayList<Pair<Integer,Double>> ar=aux1.get(i);
-					for (int k=0; k<aa.size(); ++k) {
-						Pair<Integer,Double> pa=aa.get(k);
-						Pair<Integer,Double> pr=new Pair<Integer,Double>();
-						if (papers.devolver_conjunto().containsKey(pa.getFirst())){
-							pr.setFirst(pa.getFirst());
-							pr.setSecond((double) 1);
-							ar.add(pr);
-						}
-					}
-					h1.put(i, ar);
-				}
-				//PA
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux2=g.getRelaciones("PA",true);
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> h2=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
-				for(int i: papers.devolver_conjunto().keySet()){
-					ArrayList<Pair<Integer,Double>> aa=aux2.get(i);
-					ArrayList<Pair<Integer,Double>> ar=aux2.get(i);
-					for (int k=0; k<aa.size(); ++k) {
-						Pair<Integer,Double> pa=aa.get(k);
-						Pair<Integer,Double> pr=new Pair<Integer,Double>();
-						if (authors.devolver_conjunto().containsKey(pa.getFirst())){
-							pr.setFirst(pa.getFirst());
-							pr.setSecond((double) 1);
-							ar.add(pr);
-						}
-					}
-					h2.put(i, ar);
-				}
-				this.PAF=new RelacionesPri(h1, h2);
-				this.PAC=new RelacionesPri(h1, h2);
-				
-				this.PAF.ordenarArray();
-				this.PAC.ordenarArray();
-				
-				this.PAF.normFilas();
-				this.PAC.normColumnas();
-			}
-			
-			{
-				//CP
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux1=g.getRelaciones("CP",true);
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> h1=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
-				for(int i: conferences.devolver_conjunto().keySet()){
-					ArrayList<Pair<Integer,Double>> aa=aux1.get(i);
-					ArrayList<Pair<Integer,Double>> ar=aux1.get(i);
-					for (int k=0; k<aa.size(); ++k) {
-						Pair<Integer,Double> pa=aa.get(k);
-						Pair<Integer,Double> pr=new Pair<Integer,Double>();
-						if (papers.devolver_conjunto().containsKey(pa.getFirst())){
-							pr.setFirst(pa.getFirst());
-							pr.setSecond((double) 1);
-							ar.add(pr);
-						}
-					}
-					h1.put(i, ar);
-				}
-				//PC
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux2=g.getRelaciones("PC",true);
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> h2=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
-				for(int i: papers.devolver_conjunto().keySet()){
-					ArrayList<Pair<Integer,Double>> aa=aux2.get(i);
-					ArrayList<Pair<Integer,Double>> ar=aux2.get(i);
-					for (int k=0; k<aa.size(); ++k) {
-						Pair<Integer,Double> pa=aa.get(k);
-						Pair<Integer,Double> pr=new Pair<Integer,Double>();
-						if (conferences.devolver_conjunto().containsKey(pa.getFirst())){
-							pr.setFirst(pa.getFirst());
-							pr.setSecond((double) 1);
-							ar.add(pr);
-						}
-					}
-					h2.put(i, ar);
-				}
-				this.PCF=new RelacionesPri(h1, h2);
-				this.PCC=new RelacionesPri(h1, h2);
-				
-				this.PCF.ordenarArray();
-				this.PCC.ordenarArray();
-				
-				this.PCF.normFilas();
-				this.PCC.normColumnas();
-			}
-			
-			{
-				//TP
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux1=g.getRelaciones("TP",true);
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> h1=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
-				for(int i: therms.devolver_conjunto().keySet()){
-					ArrayList<Pair<Integer,Double>> aa=aux1.get(i);
-					ArrayList<Pair<Integer,Double>> ar=aux1.get(i);
-					for (int k=0; k<aa.size(); ++k) {
-						Pair<Integer,Double> pa=aa.get(k);
-						Pair<Integer,Double> pr=new Pair<Integer,Double>();
-						if (papers.devolver_conjunto().containsKey(pa.getFirst())){
-							pr.setFirst(pa.getFirst());
-							pr.setSecond((double) 1);
-							ar.add(pr);
-						}
-					}
-					h1.put(i, ar);
-				}
-				//PT
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux2=g.getRelaciones("PT",true);
-				HashMap<Integer, ArrayList<Pair<Integer,Double>>> h2=new HashMap<Integer, ArrayList<Pair<Integer,Double>>>();
-				for(int i: papers.devolver_conjunto().keySet()){
-					ArrayList<Pair<Integer,Double>> aa=aux2.get(i);
-					ArrayList<Pair<Integer,Double>> ar=aux2.get(i);
-					for (int k=0; k<aa.size(); ++k) {
-						Pair<Integer,Double> pa=aa.get(k);
-						Pair<Integer,Double> pr=new Pair<Integer,Double>();
-						if (therms.devolver_conjunto().containsKey(pa.getFirst())){
-							pr.setFirst(pa.getFirst());
-							pr.setSecond((double) 1);
-							ar.add(pr);
-						}
-					}
-					h2.put(i, ar);
-				}
-				this.PTF=new RelacionesPri(h1, h2);
-				this.PTC=new RelacionesPri(h1, h2);
-				
-				this.PTF.ordenarArray();
-				this.PTC.ordenarArray();
-				
-				this.PTF.normFilas();
-				this.PTC.normColumnas();
-			}
-			
-		}
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	private void escribirDataSet()
 	{
@@ -456,21 +191,6 @@ public class Grafo
 		}
 	}
 	
-	public int consultarNodo(String name, int type)
-	{
-		//(0 = P, 1 = A, 2 = C, 3 = T)
-				switch(type)
-				{
-					case 0	:	return this.papers.consultar_nodo(name);
-					
-					case 1	:	return this.authors.consultar_nodo(name);
-					
-					case 2	:	return this.conferences.consultar_nodo(name);
-					
-					case 3	:	return this.therms.consultar_nodo(name);
-				}
-				return 0;
-	}
 	
 	public void anadirRelacion(int a, int b, int tipo)
 	{
@@ -537,11 +257,13 @@ public class Grafo
 	{
 		//(0 = P, 1 = A, 2 = C, 3 = T)
 		ArrayList<Pair<Integer,Double>> conjunto;
+		ArrayList<Pair<Integer,Double>> conjunto2;
 		int tam;
 		switch(type)
 		{
 			case 0	:	//--------------------
 						conjunto = this.PAF.consultar_RelacionPaper(id);
+						conjunto2 = this.PAC.consultar_RelacionPaper(id);
 						//System.out.println("papers" + conjunto);
 						if(conjunto != null)
 						{
@@ -549,31 +271,40 @@ public class Grafo
 							for(int i=0; i< tam; i++)
 							{
 								this.PAF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
-								this.PAC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PAC.eliminar_PaperOther(id, conjunto2.get(0).getFirst());
+								this.PAF.normFilas();
+								this.PAC.normColumnas();
+								
 							}
 						}
 						
 						//TODO
 						//REVISAR
 						conjunto = this.PCF.consultar_RelacionPaper(id);
+						conjunto2 = this.PCC.consultar_RelacionPaper(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PCF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
-								this.PCC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PCC.eliminar_PaperOther(id, conjunto2.get(0).getFirst());
+								this.PCF.normFilas();
+								this.PCC.normColumnas();
 							}
 						}
 						
 						conjunto = this.PTF.consultar_RelacionPaper(id);
+						conjunto2 = this.PTC.consultar_RelacionPaper(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PTF.eliminar_PaperOther(id, conjunto.get(0).getFirst());
-								this.PTC.eliminar_PaperOther(id, conjunto.get(0).getFirst());
+								this.PTC.eliminar_PaperOther(id, conjunto2.get(0).getFirst());
+								this.PTF.normFilas();
+								this.PTC.normColumnas();
 							}
 						}
 						//TODO
@@ -584,14 +315,18 @@ public class Grafo
 						break;
 			
 			case 1	:	//--------------------
+						System.out.println("elimiando autor");
 						conjunto = this.PAF.consultar_RelacionOther(id);
+						conjunto2 = this.PAC.consultar_RelacionOther(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PAF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
-								this.PAC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PAC.eliminar_PaperOther(conjunto2.get(0).getFirst(), id);
+								this.PAF.normFilas();
+								this.PAC.normColumnas();
 							}
 						}
 						this.authors.eliminar_nodo(Integer.toString(id));
@@ -600,13 +335,16 @@ public class Grafo
 			 
 			case 2	:	//--------------------
 						conjunto = this.PCF.consultar_RelacionOther(id);
+						conjunto2 = this.PCC.consultar_RelacionOther(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PCF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
-								this.PCC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PCC.eliminar_PaperOther(conjunto2.get(0).getFirst(), id);
+								this.PCF.normFilas();
+								this.PCC.normColumnas();
 							}
 						}
 						this.conferences.eliminar_nodo(Integer.toString(id));
@@ -616,13 +354,16 @@ public class Grafo
 			
 			default	:	//--------------------
 						conjunto = this.PTF.consultar_RelacionOther(id);
+						conjunto2 = this.PTC.consultar_RelacionOther(id);
 						if(conjunto != null)
 						{
 							tam = conjunto.size();
 							for(int i=0; i< tam; i++)
 							{
 								this.PTF.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
-								this.PTC.eliminar_PaperOther(conjunto.get(0).getFirst(), id);
+								this.PTC.eliminar_PaperOther(conjunto2.get(0).getFirst(), id);
+								this.PTF.normFilas();
+								this.PTC.normColumnas();
 							}
 						}
 						this.therms.eliminar_nodo(Integer.toString(id));

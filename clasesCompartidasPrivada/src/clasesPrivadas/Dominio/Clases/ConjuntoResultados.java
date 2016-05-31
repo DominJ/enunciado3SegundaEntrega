@@ -44,6 +44,7 @@ public class ConjuntoResultados {
 	
 	public void vaciar_resultados(){
 		resultados.clear();
+		resultados_parciales.clear();
 	}
 	
 	public boolean existeResultado(String path){
@@ -95,8 +96,8 @@ public class ConjuntoResultados {
 		return r;
 	}
 	
-	public void printa_matriz1(String pa) {
-		HashMap<Integer,ArrayList<Pair<Integer,Double>>> a=resultados.get(pa);
+	public void printa_matriz1(/*String pa*/) {
+	/*	HashMap<Integer,ArrayList<Pair<Integer,Double>>> a=resultados.get(pa);
 		for (int i: a.keySet()) {
 			ArrayList<Pair<Integer,Double>> l= a.get(i);
 			System.out.print(i +": ");
@@ -109,7 +110,20 @@ public class ConjuntoResultados {
 			}
 			System.out.print("\n");
 		}
-		System.out.print("\n");
+		System.out.print("\n");*/
+		
+		HashMap<String,Set<Integer>> aa =consultarResultadosParciales();
+		for (String ss: aa.keySet()){
+			Set<Integer> f=aa.get(ss);
+			for (int g:f){
+				System.out.println(ss + " " +f+": ");
+				ArrayList<Pair<Double, Integer>> d=getResultadoNodo(ss, g);
+				for (int y=0; y<d.size(); ++y) {
+					System.out.println(d.get(y).getFirst() + " -> " + d.get(y).getSecond()+" ");
+				}
+				
+			}
+		}
 	}
 	
 	public Set<String> consultarCaminosAlmacenados()

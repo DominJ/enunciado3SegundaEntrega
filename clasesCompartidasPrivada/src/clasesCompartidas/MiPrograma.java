@@ -7,7 +7,6 @@ public class MiPrograma {
 		javax.swing.SwingUtilities.invokeLater (new Runnable() {
 			public void run() {
 					CtrlPresentacion ctrlPresentacion = new CtrlPresentacion();
-					ctrlPresentacion.inicializarPresentacion();
 				
 			} 
 		});

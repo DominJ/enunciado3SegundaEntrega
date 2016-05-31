@@ -19,6 +19,8 @@ public class VistaRC {
 	private CtrlPresentacion iCtrlPresentacion;
 	private JButton buttonCP = new JButton("Camino Predeterminado");
 	private JButton buttonCCN = new JButton("Crear Camino Nuevo");
+	private JButton buttonF = new JButton("Filtros");
+
 
 	
 
@@ -48,7 +50,7 @@ public class VistaRC {
 	
 	void inicializarComponentes() {
 		frameVistaRC.setMinimumSize(new Dimension(330,100));
-		frameVistaRC.setResizable(false);
+		frameVistaRC.setResizable(true);
 		frameVistaRC.setLocationRelativeTo(null);
 		frameVistaRC.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	    JPanel contentPaneAnadir = (JPanel) frameVistaRC.getContentPane();
@@ -68,6 +70,7 @@ public class VistaRC {
 	    
 	    panelRC.add(buttonCP);
 	    panelRC.add(buttonCCN);
+	    panelRC.add(buttonF);
 	    asignar_listenersComponentes2();
 	}
 	
@@ -88,6 +91,14 @@ public class VistaRC {
 	          actionPerformed_buttonCCN(event);
 	        }
 	      });
+		  buttonF.addActionListener
+	      (new ActionListener() {
+	        public void actionPerformed (ActionEvent event) {
+	          String texto = ((JButton) event.getSource()).getText();
+	          System.out.println("Has clickado el boton con texto: " + texto);
+	          actionPerformed_buttonF(event);
+	        }
+	      });
 		}
 	
 	public void actionPerformed_buttonCP (ActionEvent event) {
@@ -96,6 +107,11 @@ public class VistaRC {
 	
 	public void actionPerformed_buttonCCN (ActionEvent event) {
 		iCtrlPresentacion.sincronizacionRC_a_CCN();
+
+	}
+	
+	public void actionPerformed_buttonF (ActionEvent event) {
+		iCtrlPresentacion.sincronizacionRC_a_F();
 
 	}
 	

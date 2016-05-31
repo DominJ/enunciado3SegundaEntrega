@@ -75,7 +75,7 @@ public class vistaDI {
 				    	n = c.getText();
 				    }
 				}
-				System.out.println("Se ha añadido un paper:"+j+"\n");
+				System.out.println("Se ha anadido un paper:"+j+"\n");
 				System.out.println("relacionado con un tipo de nodo:"+s+"\n");
 				System.out.println("con el valor:"+n+"\n");
 				
@@ -96,8 +96,8 @@ public class vistaDI {
 			      });
 			}
 		  public void inicializarComponentes() {
-			  frameVistaAnadir1.setMinimumSize(new Dimension(700,200));
-				frameVistaAnadir1.setResizable(false);
+			    frameVistaAnadir1.setMinimumSize(new Dimension(700,200));
+				frameVistaAnadir1.setResizable(true);
 				frameVistaAnadir1.setLocationRelativeTo(null);
 				frameVistaAnadir1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			    JPanel contentPaneAnadir = (JPanel) frameVistaAnadir1.getContentPane();

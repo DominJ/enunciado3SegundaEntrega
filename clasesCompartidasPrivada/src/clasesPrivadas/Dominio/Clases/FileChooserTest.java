@@ -1,22 +1,21 @@
 package clasesPrivadas.Dominio.Clases;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+
+import excepciones.NonExistObjectToReadException;
+
 
 public class FileChooserTest extends JFrame {
 	private CtrlPresentacion iCtrlPresentacion;
 	private JFrame frame = new JFrame();
+	//ag false abrimos programa ag true guardamos al cerrar programa
+	private Boolean ag;
 
   public void activar() {
 	    frame.setEnabled(true);
@@ -37,15 +36,19 @@ public class FileChooserTest extends JFrame {
 	   frame.setVisible(false);
 	}
 	 
-	public FileChooserTest(CtrlPresentacion pCtrlPresentacion) {
+	public void SetBooleano(Boolean a){
+		ag = a;
+	}
+	public FileChooserTest(CtrlPresentacion pCtrlPresentacion, Boolean x) throws ClassNotFoundException, NonExistObjectToReadException {
 		    iCtrlPresentacion = pCtrlPresentacion;
+		    ag = x;
 		    inicializarComponentes();
 	}
 	
-  public void inicializarComponentes() {
+  public void inicializarComponentes() throws ClassNotFoundException, NonExistObjectToReadException {
 	  frame.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
-	       	  iCtrlPresentacion.sincronizacionGuardar_a_Principal();
+	        	 System.exit(0);
 	         }        
 	      });
     frame.setSize(250, 100);
@@ -54,15 +57,25 @@ public class FileChooserTest extends JFrame {
     int rVal = c.showSaveDialog(FileChooserTest.this);
     if (rVal == JFileChooser.APPROVE_OPTION) {
 	  String s = c.getCurrentDirectory().toString();
-	  s.concat("\"");
+	  s += "\\";
 	  s += c.getSelectedFile().getName();
-	  System.out.println(s);
-	  iCtrlPresentacion.sincronizacionGuardar_a_Principal1(s);
+	  	System.out.println(ag);
+	  try {
+		  if(!ag){
+			  	System.out.println("CHIVATITO\n");
+				iCtrlPresentacion.sincronizacionFCT_a_Principal1(s);
+				ag = true;
+		  }
+		  else iCtrlPresentacion.sincronizacionGuardar_a_Principal1(s);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
     if (rVal == JFileChooser.CANCEL_OPTION) {
       System.out.println("You pressed cancel\n");
-  	  iCtrlPresentacion.sincronizacionGuardar_a_Principal();
+      	System.exit(0);
     }
    
   }
-} ///:~
+} 

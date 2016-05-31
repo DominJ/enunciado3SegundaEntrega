@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Set;
 
+
 public class vistaBH {
 	private Panel panelBH = new Panel();
 	private Frame frameVistaBH = new Frame("Camino Predeterminado");	
@@ -32,18 +33,26 @@ public class vistaBH {
 	            + camino.getItem(camino.getSelectedIndex());
 	            statusLabel.setText(data);
 	        	 iCtrlPresentacion.sincronizacionBH_a_Principal1(camino.getItem(camino.getSelectedIndex()));
+	        	 camino.removeAll();
 	         }
 	      }); 
 	 }
 
-	public void activar(HashMap<String, Set<Integer>> a) {
-		for (String key : a.keySet()) {
-			camino.add(key);
+	public void activar(HashMap<String, Set<String>> a) {
+		for (String keys : a.keySet()) {
+			Set<String> b = a.get(keys);
+			for(String c:b) {
+				camino.add(keys+" "+c);
+			}
 		}
 		frameVistaBH.setEnabled(true);
 	    hacerVisible();
 	  }
 
+	public void activar1(){
+		frameVistaBH.setEnabled(true);
+	    hacerVisible();
+	}
 	  public void desactivar() {
 	    frameVistaBH.setEnabled(false);
 	    hacerInvisible();
@@ -62,9 +71,11 @@ public class vistaBH {
 	    iCtrlPresentacion = pCtrlPresentacion;
 	    inicializarComponentes();
 	}
-	
 	void inicializarComponentes() {
 		frameVistaBH.setSize(new Dimension(400,400));
+		frameVistaBH.setMinimumSize(new Dimension(700,200));
+		frameVistaBH.setResizable(true);
+		frameVistaBH.setLocationRelativeTo(null);
 	    frameVistaBH.setLayout(new GridLayout(3, 1));
 	    panelBH.setLayout(new FlowLayout());
 	    frameVistaBH.addWindowListener(new WindowAdapter() {
@@ -84,9 +95,6 @@ public class vistaBH {
 	      frameVistaBH.setVisible(true);
 
 	      headerLabel.setText("Control in action: Choice"); 
-
-		camino.add("haha");
-
 	      panelBH.add(camino);
 	      panelBH.add(OKButton);
 

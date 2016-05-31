@@ -136,11 +136,7 @@ public class LeerFichero
 		while(((cadena = b.readLine())!=null)){
 	    	int i = 0;
 	    	String copy = cadena;
-	    	while(!(Character.isWhitespace(cadena.charAt(i)))) {
-	    		++i;
-	    	}
-	    	String s = copy.substring(0,i);
-	    	r.add(s);
+	    	r.add(copy);
 		}
 		//Tanquem el buffer
 		b.close();

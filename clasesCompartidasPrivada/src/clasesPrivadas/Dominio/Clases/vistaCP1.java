@@ -1,10 +1,10 @@
 package clasesPrivadas.Dominio.Clases;
 
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
@@ -17,13 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class VistaCCN {
+public class vistaCP1 {
 	private JPanel panelCCN = new JPanel();
 	private JPanel panelCCN1 = new JPanel();
 	private JPanel panelCCN2 = new JPanel();
 	private JPanel panelCCN3 = new JPanel();
 	private JPanel panelCCN4 = new JPanel();
-	private JPanel panelCCN5 = new JPanel();
 	private JPanel panelBotones = new JPanel();
     private CtrlPresentacion iCtrlPresentacion;
 	private JFrame frameVistaCCN = new JFrame("Crear Camino Nuevo");	
@@ -34,17 +33,12 @@ public class VistaCCN {
 	private Label Men = new Label("Menor");
 	private Label May = new Label("Mayor");
 	private JButton buttonOk = new JButton("Ok");
-	private static TextField tf4 = new TextField("",10);
-	private static Label Camino = new Label("Camino");
-	private Boolean cj;
+	private String camino;
 
-	public void activar(Boolean b) {
-		System.out.println("Hola14");
-		cj = b;
+	public void activar(String camino1) {
+		camino = camino1;
 	    frameVistaCCN.setEnabled(true);
-		System.out.println("Hola15");
 	    hacerVisible();
-		System.out.println("Hola16");
 	  }
 
 	  public void desactivar() {
@@ -61,40 +55,34 @@ public class VistaCCN {
 		  }
 		  
 	
-	public VistaCCN(CtrlPresentacion pCtrlPresentacion) {
+	public vistaCP1(CtrlPresentacion pCtrlPresentacion) {
 	    iCtrlPresentacion = pCtrlPresentacion;
 	    inicializarComponentes();
 	}
 	
 	public void actionPerformed_buttonOk (ActionEvent event) {
 		Component a = panelCCN.getComponent(0);
-		Component b = panelCCN.getComponent(1);
-		Component c = panelCCN.getComponent(2);
-		Component d = panelCCN.getComponent(3);
+		Component c = panelCCN.getComponent(1);
+		Component d = panelCCN.getComponent(2);
 		JPanel a1 = (JPanel) a;
-		JPanel b1 = (JPanel) b;
 		JPanel c1 = (JPanel) c;
 		JPanel d1 = (JPanel) d;
 		Component a2 = a1.getComponent(1);
-		Component b2 = b1.getComponent(1);
 		Component c2 = c1.getComponent(1);
 		Component d2 = d1.getComponent(1);
 		TextField a3 = (TextField) a2;
-		TextField b3 = (TextField) b2;
 		TextField c3 = (TextField) c2;
 		TextField d3 = (TextField) d2;
 		String a4 = a3.getText();
-		String b4 = b3.getText();
 		String c4 = c3.getText();
 		String d4 = d3.getText();
 		double c5 = Double.parseDouble(c4);
 		double d5 = Double.parseDouble(d4);
 		System.out.println(a4);
-		System.out.println(b4);
 		System.out.println(c4);
 		System.out.println(d4);
 
-		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,b4,c5,d5,cj);
+		iCtrlPresentacion.sincronizacionCP1_a_BH1(a4,camino,c5,d5);
 	}
   
   private void asignar_listenersComponentes3() {
@@ -130,13 +118,9 @@ public class VistaCCN {
 	    Nodo.setText("Nodo");
 	    Men.setText("Extremo menor de relevancia");
 	    May.setText("Extremo mayor de relevancia");
-	   /* tf1.setLocation(30, 30);
-	    tf2.setLocation(30, 30);
-	    tf3.setLocation(30, 30); */
 	    panelCCN.setLayout(new BorderLayout());
 	    panelCCN.add(panelCCN1,BorderLayout.NORTH);
-	    panelCCN.add(panelCCN5,BorderLayout.WEST);
-	    panelCCN.add(panelCCN2,BorderLayout.CENTER);
+	    panelCCN.add(panelCCN2,BorderLayout.WEST);
 	    panelCCN.add(panelCCN3,BorderLayout.EAST);
 	    panelCCN.add(panelCCN4,BorderLayout.SOUTH);
 	    panelCCN1.add(Nodo);
@@ -147,8 +131,6 @@ public class VistaCCN {
 	    panelCCN3.add(tf3);
 	    panelCCN4.add(panelBotones,BorderLayout.PAGE_END);
 	    panelBotones.add(buttonOk);
-	    panelCCN5.add(Camino);
-	    panelCCN5.add(tf4);
 
 		
 	    asignar_listenersComponentes3();
