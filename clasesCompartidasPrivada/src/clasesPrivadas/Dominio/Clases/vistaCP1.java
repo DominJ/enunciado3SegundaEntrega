@@ -25,7 +25,7 @@ public class vistaCP1 {
 	private JPanel panelCCN4 = new JPanel();
 	private JPanel panelBotones = new JPanel();
     private CtrlPresentacion iCtrlPresentacion;
-	private JFrame frameVistaCCN = new JFrame("Crear Camino Nuevo");	
+	private JFrame frameVistaCCN = new JFrame("Camino Predeterminado");	
 	private TextField tf1 = new TextField("",10);
 	private TextField tf2 = new TextField("",10);
 	private Label Nodo = new Label("Nodo");

@@ -84,7 +84,7 @@ public class VistaCP {
 
 	      
 
-	      headerLabel.setText("Control in action: Choice"); 
+	      headerLabel.setText("Selecciona el camino predeterminado:"); 
 
 
 	      camino.add("PA");
