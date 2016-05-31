@@ -244,7 +244,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void sincronizacionEliminar_a_MBD1(int options, String n) {
-		//ctrlDominio.eliminarnodoD(options,n);
+		ctrlDominio.eliminarnodoD(options,n);
 		sincronizacionEliminar_a_MBD();
 	}
 

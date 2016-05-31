@@ -37,6 +37,12 @@ public class CtrlDominio
 			this.gh = (Grafo) LeerObject.LeerObjeto("grafo");
 			this.cr = (ConjuntoResultados) LeerObject.LeerObjeto("conjuntoResultados");
 			this.ch = new CtrlHetesim(gh);
+			cr.anadirResultado("AP", ch.HeteSim("AP"));
+			cr.anadirResultado("PA", ch.HeteSim("PA"));
+			cr.anadirResultado("PC", ch.HeteSim("PC"));
+			cr.anadirResultado("CP", ch.HeteSim("CP"));
+			cr.anadirResultado("TP", ch.HeteSim("TP"));
+			cr.anadirResultado("PT", ch.HeteSim("PT"));
 
 		}
 		catch(NonExistObjectToReadException e)
@@ -47,6 +53,12 @@ public class CtrlDominio
 			System.out.println("Inicializando conjunto resultados\n");
 			this.cr = new ConjuntoResultados(); //Guarda los resultados del algoritmo HeteSim
 			this.ch = new CtrlHetesim(gh);
+			cr.anadirResultado("AP", ch.HeteSim("AP"));
+			cr.anadirResultado("PA", ch.HeteSim("PA"));
+			cr.anadirResultado("PC", ch.HeteSim("PC"));
+			cr.anadirResultado("CP", ch.HeteSim("CP"));
+			cr.anadirResultado("TP", ch.HeteSim("TP"));
+			cr.anadirResultado("PT", ch.HeteSim("PT"));
 		} 
 		catch (ClassNotFoundException e) 
 		{
@@ -120,6 +132,12 @@ public class CtrlDominio
 	public void eliminarnodoD(int a, String b){
 		gh.eliminarNodo(a, gh.consultarNodo(a, b));
 		cr.vaciar_resultados();
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 	}
 	
 	//int a e int indican el tipo de nodo
@@ -139,6 +157,13 @@ public class CtrlDominio
 		gh.anadirNodo(tipo1, nombre1);
 		gh.anadirNodo(tipo2, nombre2);
 		gh.anadirRelacion(gh.consultarNodo(tipo1, nombre1),gh.consultarNodo(tipo2, nombre2),tipo2);
+		cr.vaciar_resultados();
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 	}
 	
 	public void crearcaminonuevo(String nodo,String camino, double men, double may,Boolean b) {
@@ -156,6 +181,13 @@ public class CtrlDominio
 		//0 = P, 1 = A, 2 = C, 3 = T, 4 = PA, 5 = PC, 6 = PT, 7 = AP, 8 = AC,
 		//9 = AT, 10 = CP, 11 = CA, 12 = CT, 13 = TP, 14 = TA, 15 = TC
 		gh.addDataGraph();
+		cr.vaciar_resultados();
+		cr.anadirResultado("AP", ch.HeteSim("AP"));
+		cr.anadirResultado("PA", ch.HeteSim("PA"));
+		cr.anadirResultado("PC", ch.HeteSim("PC"));
+		cr.anadirResultado("CP", ch.HeteSim("CP"));
+		cr.anadirResultado("TP", ch.HeteSim("TP"));
+		cr.anadirResultado("PT", ch.HeteSim("PT"));
 	}
 	
 	
