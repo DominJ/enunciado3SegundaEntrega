@@ -1,8 +1,9 @@
 package clasesCompartidas;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class ConjuntoNodos
+public class ConjuntoNodos implements Serializable
 {
 	protected int ID_libre; //tengo que sacar este dato del fichero inicial. //inicializar a 1 al comienzo.
 	protected HashMap<Integer, String > nodos;
@@ -132,5 +133,11 @@ public class ConjuntoNodos
 	{
 		return nodos;
 	}	
+	
+	public void joinHashMap(Pair<HashMap<Integer,String>,HashMap<String,Integer>> n)
+	{
+		this.nodos.putAll(n.getFirst());
+		this.nombres_nodos.putAll(n.getSecond());
+	}
 }
 

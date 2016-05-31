@@ -45,6 +45,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void inicializarPresentacion(String ruta) throws ClassNotFoundException, NonExistObjectToReadException, IOException {
+		System.out.println("ruta;"+ruta);
 		ctrlDominio.inicializarCtrlDominio(ruta);
 		System.out.println("CHIVATO");
 		vistaPrincipal.activar();
@@ -77,7 +78,7 @@ public class CtrlPresentacion {
 		if (vistaPrincipal == null) {  // innecesario
 			 vistaPrincipal = new VistaPrincipal(this);
 		 }
-		FCT.desactivar();
+		//FCT.desactivar();
 		inicializarPresentacion(ruta);
 	}
 	

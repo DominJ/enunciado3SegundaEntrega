@@ -63,6 +63,7 @@ public class FileChooserTest extends JFrame {
 	  try {
 		  if(!ag){
 			  	System.out.println("CHIVATITO\n");
+			  	System.out.println("justo despues de chivatito: "+s);
 				iCtrlPresentacion.sincronizacionFCT_a_Principal1(s);
 				ag = true;
 		  }

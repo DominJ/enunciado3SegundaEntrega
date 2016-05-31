@@ -13,8 +13,8 @@ public class EscribirObject {
 		try
 		{
 			FileOutputStream fos = new FileOutputStream(s);
-			BufferedOutputStream z = new BufferedOutputStream(fos);
-			ObjectOutputStream oos = new ObjectOutputStream(z);
+			//BufferedOutputStream z = new BufferedOutputStream(fos);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(a);
 			oos.close();
 		}

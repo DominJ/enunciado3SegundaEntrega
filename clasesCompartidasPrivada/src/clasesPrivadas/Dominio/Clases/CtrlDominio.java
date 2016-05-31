@@ -36,8 +36,10 @@ public class CtrlDominio
 		//Debe verificar la correcta ejecuccion.
 		if(ruta != null) {
 		
-			LeerObject.verificarObjects();
+			//LeerObject.verificarObjects();
 			//No es la primera ejecuión
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			System.out.println("ruta ctrlDominio:" +ruta);
 			this.gh = (Grafo) LeerObject.LeerObjeto(ruta);
 			this.cr = new ConjuntoResultados();
 			this.ch = new CtrlHetesim(gh);

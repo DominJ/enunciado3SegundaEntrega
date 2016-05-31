@@ -1,12 +1,13 @@
 package clasesCompartidas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 
 
-public class Relaciones 
+public class Relaciones implements Serializable
 {
 	protected HashMap<Integer, ArrayList<Pair<Integer,Double>>> paperOther;
 	protected HashMap<Integer, ArrayList<Pair<Integer,Double>>> otherPaper;
