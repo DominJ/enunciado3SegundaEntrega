@@ -21,7 +21,7 @@ public class Grafo implements Serializable
 
 	//private static final long serialVersionUID = -8219161298749272356L;
 	
-	static final String RUTA_INICIAL = "Data/Set1";
+	static final String RUTA_INICIAL = "Data"+System.getProperty("file.separator")+"Set1";
 	static final String RUTA_ADD = "AddData";
 	static final String FILTROS = "Filtros";
 	
@@ -46,7 +46,7 @@ public class Grafo implements Serializable
 		{
 			Pair<HashMap<Integer,String>,HashMap<String,Integer>> conjunto;
 			Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> relacion;
-			
+			System.out.println("RUTAINICIAL: "+RUTA_INICIAL);
 			//Instanciamos papers
 			conjunto = LeerFichero.crear_nodo_primitivo(RUTA_INICIAL, 0);
 			
