@@ -18,18 +18,14 @@ public class CtrlPresentacion {
 	private VistaMBD vistaMBD = null;
 	private VistaAnadir1 vistaAnadir = null;
 	private vistaDI vistaDI = null;
-	//private vistaCD vistaCD = null;
 	private VistaEliminar vistaEliminar = null;
 	private VistaRC vistaRC = null;
 	private VistaCP vistaCP = null;
 	private VistaCCN vistaCCN = null;
 	private vistaBH vistaBH = null;
-	//private vistaGuardar vistaGuardar = null;
 	private FileChooserTest FCT = null;
-	private FileChooserTest FCT1 = null;
 	private VistaBH1 Consult = null;
 	private VistaF F = null;
-	private vistaA vistaA = null;
 	private vistaCP1 vistaCP1 = null;
 
 
@@ -38,22 +34,20 @@ public class CtrlPresentacion {
 
 	public CtrlPresentacion() {
 		 ctrlDominio = new CtrlDominio();
-		 if (vistaA == null) {  // innecesario
-			 vistaA = new vistaA(this);
+		 if (vistaPrincipal == null) {  // innecesario
+			 vistaPrincipal = new VistaPrincipal(this);
 		 }
-		 vistaA.activar();
 	}
-
-
+	
+	public void inicializarPresentacion() throws ClassNotFoundException, NonExistObjectToReadException, IOException {
+		ctrlDominio.inicializarCtrlDominio();
+		vistaPrincipal.activar();
+	}
+	
 	public void limpiarhistorial(){
 		ctrlDominio.limpiarhistorialD();
 	}
 
-	
-	public void inicializarPresentacion(String ruta) throws ClassNotFoundException, NonExistObjectToReadException, IOException {
-		ctrlDominio.inicializarCtrlDominio(ruta);
-		vistaPrincipal.activar();
-	}
 	
 	
 	//------------------------------------------------------------//
@@ -66,38 +60,7 @@ public class CtrlPresentacion {
 			 Consult = new VistaBH1(this);
 		 }
 	    Consult.activar(a);
-	}
-	
-	//------------------------------------------------------------//
-	public void  sincronizacionA_a_Principal() throws ClassNotFoundException, NonExistObjectToReadException, IOException{
-		if (vistaPrincipal == null) {  // innecesario
-			 vistaPrincipal = new VistaPrincipal(this);
-		 }
-		vistaA.desactivar();
-		String ruta = null;
-		inicializarPresentacion(ruta);
-	}
-	
-	public void sincronizacionA_a_FCT() throws ClassNotFoundException, NonExistObjectToReadException {
-		vistaA.desactivar();
-	    if (FCT == null){
-	    	FCT = new FileChooserTest(this,false);
-	    }
-	    FCT.activar();
-	}
-
-
-	public void  sincronizacionFCT_a_Principal1(String ruta) throws ClassNotFoundException, NonExistObjectToReadException, IOException{
-		if (vistaPrincipal == null) {  // innecesario
-			 vistaPrincipal = new VistaPrincipal(this);
-		 }
-		//FCT.desactivar();
-		inicializarPresentacion(ruta);
-	}
-	
-	
-	
-	
+	}	
 	//----------------------RC-A-Filtros--------------------------------------//
 
 	public void sincronizacionF_a_CCN(Set<Integer >c) {
@@ -132,10 +95,10 @@ public class CtrlPresentacion {
 	
 	public void sincronizacionPrincipal_a_Guardar() throws ClassNotFoundException, NonExistObjectToReadException {
 		vistaPrincipal.desactivar();
-	    if (FCT1 == null){
-	    	FCT1 = new FileChooserTest(this,true);
+	    if (FCT == null){
+	    	FCT = new FileChooserTest(this);
 	    }
-	    FCT1.activar();
+	    FCT.activar();
 	  }
 	
 	public void sincronizacionGuardar_a_Principal1(String s) throws IOException {
@@ -145,7 +108,7 @@ public class CtrlPresentacion {
 
 	public void sincronizacionGuardar_a_Principal() {
 		vistaPrincipal.activar();
-		FCT1.desactivar();
+		FCT.desactivar();
 	}
 	
 	//----------------------BH-A-BH1--------------------------------------//

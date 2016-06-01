@@ -29,13 +29,13 @@ public class CtrlDominio
 		cr.vaciar_resultados();
 	}
 	
-	public void inicializarCtrlDominio(String ruta) throws NonExistObjectToReadException, ClassNotFoundException, IOException
+	public void inicializarCtrlDominio() throws NonExistObjectToReadException, ClassNotFoundException, IOException
 	{
 		//Debe verificar la correcta ejecuccion.
-		if(ruta != null) {
-		
-			//LeerObject.verificarObjects();
+		try{
+			LeerObject.verificarObjects();
 			//No es la primera ejecuion
+			String ruta=null;
 			this.gh = (Grafo) LeerObject.LeerObjeto(ruta);
 			this.cr = new ConjuntoResultados();
 			this.ch = new CtrlHetesim(gh);
@@ -47,7 +47,7 @@ public class CtrlDominio
 			cr.anadirResultado("PT", ch.HeteSim("PT"));
 
 		}
-		else
+		catch(NonExistObjectToReadException e)
 		{
 			//Es la primera ejecución
 			System.out.println("Primera ejecucion en este equipo");

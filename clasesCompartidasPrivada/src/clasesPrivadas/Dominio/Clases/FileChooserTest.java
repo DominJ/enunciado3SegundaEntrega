@@ -18,7 +18,6 @@ public class FileChooserTest extends JFrame {
 	private CtrlPresentacion iCtrlPresentacion;
 	private JFrame frame = new JFrame();
 	//ag false abrimos programa ag true guardamos al cerrar programa
-	private Boolean ag;
 	  JFileChooser c = new JFileChooser();
 
 
@@ -41,12 +40,9 @@ public class FileChooserTest extends JFrame {
 	   frame.setVisible(false);
 	}
 	 
-	public void SetBooleano(Boolean a){
-		ag = a;
-	}
-	public FileChooserTest(CtrlPresentacion pCtrlPresentacion, Boolean x) throws ClassNotFoundException, NonExistObjectToReadException {
+	
+	public FileChooserTest(CtrlPresentacion pCtrlPresentacion) throws ClassNotFoundException, NonExistObjectToReadException {
 		    iCtrlPresentacion = pCtrlPresentacion;
-		    ag = x;
 		    inicializarComponentes();
 	}
 	
@@ -63,15 +59,8 @@ public class FileChooserTest extends JFrame {
 	  s += "\\";
 	  s += c.getSelectedFile().getName();
 	  try {
-		  if(!ag){
-			  	desactivar();
-				iCtrlPresentacion.sincronizacionFCT_a_Principal1(s);
-				ag = true;
-		  }
-		  else iCtrlPresentacion.sincronizacionGuardar_a_Principal1(s);
+		 iCtrlPresentacion.sincronizacionGuardar_a_Principal1(s);
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		//e.printStackTrace();
 		System.out.println("Se ha producido un error en la seleccion de fichero.");
 	}
     }
