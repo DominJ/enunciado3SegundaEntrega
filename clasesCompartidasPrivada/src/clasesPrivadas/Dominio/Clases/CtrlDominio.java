@@ -24,7 +24,6 @@ public class CtrlDominio
 	ConjuntoResultados cr;
 	CtrlHetesim ch;
 	CtrlHetesim chf;
-	static final String RUTA_BIN = "Data/binario.dat";
 
 
 	public void limpiarhistorialD(){
@@ -37,7 +36,11 @@ public class CtrlDominio
 		try{
 			LeerObject.verificarObjects();
 			//No es la primera ejecuion
-			this.gh = (Grafo) LeerObject.LeerObjeto(RUTA_BIN);
+			String RUTA = "Data";
+			RUTA += System.getProperty("file.separator");
+			RUTA +="binario.dat";
+			System.out.println(RUTA);
+			this.gh = (Grafo) LeerObject.LeerObjeto(RUTA);
 			this.cr = new ConjuntoResultados();
 			this.ch = new CtrlHetesim(gh);
 			cr.anadirResultado("AP", ch.HeteSim("AP"));

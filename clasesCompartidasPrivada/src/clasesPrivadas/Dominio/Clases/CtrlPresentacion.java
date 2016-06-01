@@ -92,7 +92,11 @@ public class CtrlPresentacion {
 	
 	//----------------------Principal-A-Salir--------------------------------------//
 	public void sincronizacionSalir_a_Principal1() throws IOException {
-		ctrlDominio.guardar("Data/binario.dat");
+		String RUTA = "Data";
+		RUTA += System.getProperty("file.separator");
+		RUTA +="binario.dat";
+		System.out.println(RUTA);
+		ctrlDominio.guardar(RUTA);
 		System.exit(0);
 	}
 	
