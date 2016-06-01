@@ -154,7 +154,7 @@ public class LeerFichero
 	    File f = new File(directorioBase);
 	    File[] ficheros = f.listFiles();
 	    //Boolean comp = true;
-	    String aux = sDirectorio + "/";
+	    String aux = sDirectorio + System.getProperty("file.separator");
 	    String cadena;
 	    
 	    for(int i = 0; i < ficheros.length; i++) {
