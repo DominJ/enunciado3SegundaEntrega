@@ -21,7 +21,7 @@ public class Grafo implements Serializable
 
 	//private static final long serialVersionUID = -8219161298749272356L;
 	
-	static final String RUTA_INICIAL = "Set1";
+	static final String RUTA_INICIAL = "Data/Set1";
 	static final String RUTA_ADD = "AddData";
 	static final String FILTROS = "Filtros";
 	

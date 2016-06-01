@@ -24,7 +24,7 @@ public class CtrlDominio
 	ConjuntoResultados cr;
 	CtrlHetesim ch;
 	CtrlHetesim chf;
-	static final String RUTA_BIN = "Binarios";
+	static final String RUTA_BIN = "Data/binario.dat";
 
 
 	public void limpiarhistorialD(){

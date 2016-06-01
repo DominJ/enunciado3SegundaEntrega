@@ -2,6 +2,7 @@ package clasesPrivadas.Dominio.Clases;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,8 +29,10 @@ public class LeerObject implements Serializable{
 	    return a;
 	}
 	
-	public static void verificarObjects() throws NonExistObjectToReadException
+	public static void verificarObjects() throws NonExistObjectToReadException, IOException, ClassNotFoundException
 	{
-		throw new NonExistObjectToReadException("Error en la existencia o lectura del fichero Object");
+	    String sFichero = "Data/binario.dat";
+	    File fichero = new File(sFichero);
+	    if(!(fichero.exists()))throw new NonExistObjectToReadException("Error en la existencia o lectura del fichero Object");	
 	}
 }
