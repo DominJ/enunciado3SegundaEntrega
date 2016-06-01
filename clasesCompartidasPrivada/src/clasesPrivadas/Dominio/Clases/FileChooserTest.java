@@ -49,7 +49,12 @@ public class FileChooserTest extends JFrame {
   public void inicializarComponentes() throws ClassNotFoundException, NonExistObjectToReadException {
 	  frame.addWindowListener(new WindowAdapter() {
 	         public void windowClosing(WindowEvent windowEvent){
-	        	 System.exit(0);
+	        		try {
+						iCtrlPresentacion.sincronizacionSalir_a_Principal1();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 	         }        
 	      });
     frame.setSize(250, 100);
@@ -65,7 +70,12 @@ public class FileChooserTest extends JFrame {
 	}
     }
     if (rVal == JFileChooser.CANCEL_OPTION) {
-      	System.exit(0);
+    	try {
+			iCtrlPresentacion.sincronizacionSalir_a_Principal1();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
    
   }

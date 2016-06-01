@@ -109,7 +109,7 @@ public class CtrlPresentacion {
 	
 	public void sincronizacionExportar_a_Principal1(String s) throws IOException {
 		ctrlDominio.guardar(s);
-		System.exit(0);
+		sincronizacionSalir_a_Principal1();
 	}
 	
 	//----------------------BH-A-BH1--------------------------------------//
