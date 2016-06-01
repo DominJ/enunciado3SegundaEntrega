@@ -1,6 +1,8 @@
 package clasesPrivadas.Dominio.Clases;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.*;
 
 import excepciones.NonExistObjectToReadException;
@@ -20,6 +22,7 @@ private JPanel panelBotones = new JPanel();
 private JButton buttonMBD = new JButton("Modificar Base de datos");
 private JButton buttonRC = new JButton("Realizar Consulta");
 private JButton buttonBH = new JButton("Busca Historial");
+private JButton buttonEXP = new JButton("Exportar");
 private JButton buttonSalir = new JButton("Salir");
 
 public VistaPrincipal (CtrlPresentacion pCtrlPresentacion) {
@@ -47,7 +50,7 @@ public void activar() {
 	  }
 
 private void inicializar_frameVista() {
-    frameVista.setMinimumSize(new Dimension(710,200));
+    frameVista.setMinimumSize(new Dimension(910,200));
     frameVista.setPreferredSize(frameVista.getMinimumSize());
     frameVista.setResizable(true);
     frameVista.setLocationRelativeTo(null);
@@ -63,16 +66,14 @@ private void inicializar_frameVista() {
     frameVista.addWindowListener(new WindowAdapter() {
         public void windowClosing(WindowEvent windowEvent){
         	try {
-				iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();
-			} catch (ClassNotFoundException | NonExistObjectToReadException e) {
+				iCtrlPresentacion.sincronizacionSalir_a_Principal1();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				System.out.println("Se ha producido un problema al asignar un listener");
-
-			}        
-        	}        
+				e.printStackTrace();
+			}
+        }        
      });
-  }
+}
 
 private void inicializar_panelContenidos() {
     // Layout
@@ -88,6 +89,7 @@ private void inicializar_panelBotones() {
     panelBotones.add(buttonMBD);
     panelBotones.add(buttonRC);
     panelBotones.add(buttonBH);
+    panelBotones.add(buttonEXP);
     panelBotones.add(buttonSalir);
     // Tooltips
     buttonMBD.setToolTipText("Llama al controlador de dominio con la informacion del ComboBox");
@@ -112,8 +114,12 @@ public void actionPerformed_buttonBH (ActionEvent event) {
 	iCtrlPresentacion.sincronizacionPrincipal_a_BH();
   }
 
-public void actionPerformed_buttonSalir (ActionEvent event) throws ClassNotFoundException, NonExistObjectToReadException {
-iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();	  
+public void actionPerformed_buttonEXP (ActionEvent event) throws ClassNotFoundException, NonExistObjectToReadException {
+iCtrlPresentacion.sincronizacionPrincipal_a_Exportar();	  
+  }
+
+public void actionPerformed_buttonSalir (ActionEvent event) throws ClassNotFoundException, NonExistObjectToReadException, IOException {
+	iCtrlPresentacion.sincronizacionSalir_a_Principal1();
   }
 
 private void asignar_listenersComponentes() {
@@ -144,13 +150,31 @@ private void asignar_listenersComponentes() {
         }
       });
 
+    buttonEXP.addActionListener
+    (new ActionListener() {
+      public void actionPerformed (ActionEvent event) {
+        String texto = ((JButton) event.getSource()).getText();
+        System.out.println("Has clickado el boton con texto: " + texto);
+        try {
+			actionPerformed_buttonEXP(event);
+		} catch (ClassNotFoundException | NonExistObjectToReadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+      }
+    });
     buttonSalir.addActionListener
       (new ActionListener() {
         public void actionPerformed (ActionEvent event) {
           String texto = ((JButton) event.getSource()).getText();
           System.out.println("Has clickado el boton con texto: " + texto);
           try {
-			actionPerformed_buttonSalir(event);
+			try {
+				actionPerformed_buttonSalir(event);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (ClassNotFoundException | NonExistObjectToReadException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();

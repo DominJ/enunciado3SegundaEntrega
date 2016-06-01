@@ -90,10 +90,16 @@ public class CtrlPresentacion {
 	}
 
 	
+	//----------------------Principal-A-Salir--------------------------------------//
+	public void sincronizacionSalir_a_Principal1() throws IOException {
+		ctrlDominio.guardar("Data/binario.dat");
+		System.exit(0);
+	}
+	
 	//----------------------Principal-A-Guardar--------------------------------------//
 
 	
-	public void sincronizacionPrincipal_a_Guardar() throws ClassNotFoundException, NonExistObjectToReadException {
+	public void sincronizacionPrincipal_a_Exportar() throws ClassNotFoundException, NonExistObjectToReadException {
 		vistaPrincipal.desactivar();
 	    if (FCT == null){
 	    	FCT = new FileChooserTest(this);
@@ -101,14 +107,9 @@ public class CtrlPresentacion {
 	    FCT.activar();
 	  }
 	
-	public void sincronizacionGuardar_a_Principal1(String s) throws IOException {
+	public void sincronizacionExportar_a_Principal1(String s) throws IOException {
 		ctrlDominio.guardar(s);
 		System.exit(0);
-	}
-
-	public void sincronizacionGuardar_a_Principal() {
-		vistaPrincipal.activar();
-		FCT.desactivar();
 	}
 	
 	//----------------------BH-A-BH1--------------------------------------//

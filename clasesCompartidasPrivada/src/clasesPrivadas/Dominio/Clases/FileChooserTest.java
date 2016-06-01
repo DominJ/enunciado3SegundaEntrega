@@ -59,7 +59,7 @@ public class FileChooserTest extends JFrame {
 	  s += "\\";
 	  s += c.getSelectedFile().getName();
 	  try {
-		 iCtrlPresentacion.sincronizacionGuardar_a_Principal1(s);
+		 iCtrlPresentacion.sincronizacionExportar_a_Principal1(s);
 	} catch (IOException e) {
 		System.out.println("Se ha producido un error en la seleccion de fichero.");
 	}
