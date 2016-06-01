@@ -81,9 +81,7 @@ public class vistaCP1 {
 		String d4 = d3.getText();
 		double c5 = Double.parseDouble(c4);
 		double d5 = Double.parseDouble(d4);
-		System.out.println(a4);
-		System.out.println(c4);
-		System.out.println(d4);
+
 
 		iCtrlPresentacion.sincronizacionCP1_a_BH1(a4,camino,c5,d5);
 	}

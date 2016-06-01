@@ -318,7 +318,6 @@ public class Grafo implements Serializable
 						break;
 			
 			case 1	:	//--------------------
-						System.out.println("elimiando autor");
 						conjunto = this.PAF.consultar_RelacionOther(id);
 						conjunto2 = this.PAC.consultar_RelacionOther(id);
 						if(conjunto != null)

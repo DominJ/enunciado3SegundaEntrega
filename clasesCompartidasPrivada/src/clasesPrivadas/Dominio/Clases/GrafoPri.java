@@ -56,7 +56,7 @@ public class GrafoPri extends Grafo {
 							HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("AP", true);
 							for (int j: h1.keySet()){
 								ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-								for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
+								if (ar!=null) for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
 							}
 						}
 					}
@@ -66,7 +66,7 @@ public class GrafoPri extends Grafo {
 							HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("CP", true);
 							for (int j: h1.keySet()){
 								ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-								for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
+								if (ar!=null) for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
 							}
 						}
 					}
@@ -76,7 +76,7 @@ public class GrafoPri extends Grafo {
 							HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux= g.getRelaciones("TP", true);
 							for (int j: h1.keySet()){
 								ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-								for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
+								if (ar!=null) for (int k=0; k<ar.size(); ++k) p.add(ar.get(k).getFirst());
 							}
 						}
 					}
@@ -100,7 +100,7 @@ public class GrafoPri extends Grafo {
 						for(int j: this.papers.devolver_conjunto().keySet()){
 							System.out.print(j+ " ");
 							ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-							for (int k=0; k<ar.size(); ++k) {
+							if (ar!=null)for (int k=0; k<ar.size(); ++k) {
 								aut.add(ar.get(k).getFirst());
 								System.out.print(ar.get(k).getFirst() +" ");
 							}
@@ -119,7 +119,7 @@ public class GrafoPri extends Grafo {
 						HashMap<Integer, ArrayList<Pair<Integer,Double>>> aux=g.getRelaciones("PC",true);
 						for(int j: this.papers.devolver_conjunto().keySet()){
 							ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-							for (int k=0; k<ar.size(); ++k) aut.add(ar.get(k).getFirst());
+							if (ar!=null) for (int k=0; k<ar.size(); ++k) aut.add(ar.get(k).getFirst());
 						}
 						HashMap<Integer, String> h1 = new HashMap<Integer, String>();
 						HashMap<String, Integer> h2 = new HashMap<String, Integer>();
@@ -135,12 +135,8 @@ public class GrafoPri extends Grafo {
 						for(int j: this.papers.devolver_conjunto().keySet()){
 							System.out.println(j);
 							ArrayList<Pair<Integer,Double>> ar=aux.get(j);
-							for (int k=0; k<ar.size(); ++k){
-								System.out.println("jaja " + k);
-								aut.add(ar.get(k).getFirst());
-							}
+							if (ar!=null) for (int k=0; k<ar.size(); ++k) aut.add(ar.get(k).getFirst());
 						}
-						System.out.println("lol");
 						HashMap<Integer, String> h1 = new HashMap<Integer, String>();
 						HashMap<String, Integer> h2 = new HashMap<String, Integer>();
 						for (int k:aut){
