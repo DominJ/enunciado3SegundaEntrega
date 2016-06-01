@@ -16,7 +16,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * @author Xavi Campos Navarro
+ *
+ */
 public class VistaCCN {
 	private JPanel panelCCN = new JPanel();
 	private JPanel panelCCN1 = new JPanel();
@@ -38,14 +41,15 @@ public class VistaCCN {
 	private static Label Camino = new Label("Camino");
 	private Boolean cj;
 
+	public VistaCCN(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	}
+
 	public void activar(Boolean b) {
-		System.out.println("Hola14");
 		cj = b;
 	    frameVistaCCN.setEnabled(true);
-		System.out.println("Hola15");
-	    hacerVisible();
-		System.out.println("Hola16");
-	  }
+	    hacerVisible();	  }
 
 	  public void desactivar() {
 	    frameVistaCCN.setEnabled(false);
@@ -60,11 +64,6 @@ public class VistaCCN {
 		    frameVistaCCN.setVisible(false);
 		  }
 		  
-	
-	public VistaCCN(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
 	
 	public void actionPerformed_buttonOk (ActionEvent event) {
 		Component a = panelCCN.getComponent(0);
@@ -89,10 +88,6 @@ public class VistaCCN {
 		String d4 = d3.getText();
 		double c5 = Double.parseDouble(c4);
 		double d5 = Double.parseDouble(d4);
-		System.out.println(a4);
-		System.out.println(b4);
-		System.out.println(c4);
-		System.out.println(d4);
 
 		iCtrlPresentacion.sincronizacionCCN_a_RC1(a4,b4,c5,d5,cj);
 	}

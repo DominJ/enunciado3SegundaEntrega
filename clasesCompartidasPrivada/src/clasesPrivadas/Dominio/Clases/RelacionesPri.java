@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import clasesCompartidas.Pair;
-import clasesCompartidas.Relaciones;
 
 public class RelacionesPri extends Relaciones implements Serializable
 {
@@ -140,7 +139,25 @@ public class RelacionesPri extends Relaciones implements Serializable
 	
 	public void joinHashMap(Pair<HashMap<Integer,ArrayList<Pair<Integer,Double>>>,HashMap<Integer,ArrayList<Pair<Integer,Double>>>> r)
 	{
-		this.paperOther.putAll(r.getFirst());
-		this.otherPaper.putAll(r.getSecond());
+		for (int k: r.getFirst().keySet()){
+			if (paperOther.containsKey(k)){
+				ArrayList<Pair<Integer,Double>>a=paperOther.get(k);
+				ArrayList<Pair<Integer,Double>>b=r.getFirst().get(k);
+				a.addAll(b);
+			}
+			else{
+				paperOther.put(k, r.getFirst().get(k));
+			}
+		}
+		for (int k: r.getSecond().keySet()){
+			if (otherPaper.containsKey(k)){
+				ArrayList<Pair<Integer,Double>>a=otherPaper.get(k);
+				ArrayList<Pair<Integer,Double>>b=r.getSecond().get(k);
+				a.addAll(b);
+			}
+			else{
+				otherPaper.put(k, r.getSecond().get(k));
+			}
+		}
 	}
 }

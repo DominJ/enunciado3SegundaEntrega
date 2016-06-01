@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import clasesCompartidas.ConjuntoNodos;
-import clasesCompartidas.ConjuntoNodosPri;
-import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
 
+/**
+ * @author Domingo Jesus de la Mata
+ *
+ */
 public class GrafoPri extends Grafo {
 	
 	public GrafoPri(Grafo g, Set<Integer> s) {
@@ -160,7 +161,8 @@ public class GrafoPri extends Grafo {
 		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Se ha producido un error en la creacion de GrafoPri.");
 		}
 	}
 	

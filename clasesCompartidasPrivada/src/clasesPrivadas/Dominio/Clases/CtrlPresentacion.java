@@ -8,6 +8,10 @@ import clasesCompartidas.Pair;
 import clasesPrivadas.Dominio.Clases.CtrlDominio;
 import excepciones.NonExistObjectToReadException;
 
+/**
+ * @author Daniel Pulido
+ *
+ */
 public class CtrlPresentacion {
 	private CtrlDominio ctrlDominio;
 	private VistaPrincipal vistaPrincipal = null;
@@ -22,6 +26,7 @@ public class CtrlPresentacion {
 	private vistaBH vistaBH = null;
 	//private vistaGuardar vistaGuardar = null;
 	private FileChooserTest FCT = null;
+	private FileChooserTest FCT1 = null;
 	private VistaBH1 Consult = null;
 	private VistaF F = null;
 	private vistaA vistaA = null;
@@ -31,11 +36,6 @@ public class CtrlPresentacion {
 	
 
 
-	public void limpiarhistorial(){
-		ctrlDominio.limpiarhistorialD();
-	}
-
-	
 	public CtrlPresentacion() {
 		 ctrlDominio = new CtrlDominio();
 		 if (vistaA == null) {  // innecesario
@@ -43,11 +43,15 @@ public class CtrlPresentacion {
 		 }
 		 vistaA.activar();
 	}
+
+
+	public void limpiarhistorial(){
+		ctrlDominio.limpiarhistorialD();
+	}
+
 	
 	public void inicializarPresentacion(String ruta) throws ClassNotFoundException, NonExistObjectToReadException, IOException {
-		System.out.println("ruta;"+ruta);
 		ctrlDominio.inicializarCtrlDominio(ruta);
-		System.out.println("CHIVATO");
 		vistaPrincipal.activar();
 	}
 	
@@ -74,6 +78,15 @@ public class CtrlPresentacion {
 		inicializarPresentacion(ruta);
 	}
 	
+	public void sincronizacionA_a_FCT() throws ClassNotFoundException, NonExistObjectToReadException {
+		vistaA.desactivar();
+	    if (FCT == null){
+	    	FCT = new FileChooserTest(this,false);
+	    }
+	    FCT.activar();
+	}
+
+
 	public void  sincronizacionFCT_a_Principal1(String ruta) throws ClassNotFoundException, NonExistObjectToReadException, IOException{
 		if (vistaPrincipal == null) {  // innecesario
 			 vistaPrincipal = new VistaPrincipal(this);
@@ -82,28 +95,19 @@ public class CtrlPresentacion {
 		inicializarPresentacion(ruta);
 	}
 	
-	public void sincronizacionA_a_FCT() throws ClassNotFoundException, NonExistObjectToReadException {
-		vistaA.desactivar();
-	    if (FCT == null){
-	    	FCT = new FileChooserTest(this,false);
-	    }
-	    FCT.activar();
-	}
+	
 	
 	
 	//----------------------RC-A-Filtros--------------------------------------//
 
 	public void sincronizacionF_a_CCN(Set<Integer >c) {
-		System.out.println("Hola10");
+
 		ctrlDominio.consultarcaminofiltros(c);
-		System.out.println("Hola11");
 		F.desactivar();
-		System.out.println("Hola12");
 		if (vistaCCN == null){
 	    	vistaCCN = new VistaCCN(this);
 		}
 		vistaCCN.activar(false);
-		System.out.println("Hola13");
 	}
 
 
@@ -128,10 +132,10 @@ public class CtrlPresentacion {
 	
 	public void sincronizacionPrincipal_a_Guardar() throws ClassNotFoundException, NonExistObjectToReadException {
 		vistaPrincipal.desactivar();
-	    if (FCT == null){
-	    	FCT = new FileChooserTest(this,true);
+	    if (FCT1 == null){
+	    	FCT1 = new FileChooserTest(this,true);
 	    }
-	    FCT.activar();
+	    FCT1.activar();
 	  }
 	
 	public void sincronizacionGuardar_a_Principal1(String s) throws IOException {
@@ -141,7 +145,7 @@ public class CtrlPresentacion {
 
 	public void sincronizacionGuardar_a_Principal() {
 		vistaPrincipal.activar();
-		FCT.desactivar();
+		FCT1.desactivar();
 	}
 	
 	//----------------------BH-A-BH1--------------------------------------//
@@ -171,7 +175,6 @@ public class CtrlPresentacion {
 		    }
 		    HashMap<String, Set<String>> a = ctrlDominio.actualizarhistorial();
 		    vistaBH.activar(a);
-		    System.out.println("Hola!\n");
 		  }
 		
 		public void sincronizacionBH_a_Principal1(String s) {
@@ -179,11 +182,8 @@ public class CtrlPresentacion {
 			while(!(Character.isWhitespace(s.charAt(i)))) {
 	    		++i;
 	    	}
-			System.out.println(s);
 			String nodo = s.substring(0,i);
 			String camino = s.substring(i+1, s.length());
-			System.out.println("CTRLPRESENTACION:"+nodo);
-			System.out.println(camino);
 			ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(camino,nodo);
 			ArrayList<Pair<Double,String>> aux1 = ctrlDominio.traducir(aux,nodo);
 			sincronizacionBH_a_BH1(aux1);
@@ -228,14 +228,9 @@ public class CtrlPresentacion {
 	  }
 	
 	public void sincronizacionCCN_a_RC1(String nodo, String camino,double b,double c,Boolean as) {
-		//System.out.println("Hola");
-		//System.out.println(" "+camino);
 		ctrlDominio.crearcaminonuevo(nodo,camino,b,c,as);
-		//System.out.println("Hola3");
 		ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
-		System.out.println("Hola4");
 		sincronizacionCCN_a_BH1(aux,camino);
-		System.out.println("Hola5");
 	}
 	
 	public void sincronizacionCCN_a_RC() {
@@ -263,7 +258,6 @@ public class CtrlPresentacion {
 	
 	public void sincronizacionCP1_a_BH1(String nodo, String camino){
 		ArrayList<Pair<Double,Integer>> aux = ctrlDominio.consultarresultado(nodo,camino);
-		System.out.println("Hola4");
 		sincronizacionCCN_a_BH1(aux,camino);
 	}
 	

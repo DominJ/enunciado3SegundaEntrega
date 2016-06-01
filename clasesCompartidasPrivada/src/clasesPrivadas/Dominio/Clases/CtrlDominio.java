@@ -8,8 +8,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-import clasesCompartidas.EscribirObject;
-import clasesCompartidas.LeerObject;
 import clasesCompartidas.Pair;
 import excepciones.NonExistObjectToReadException;
 /**
@@ -37,9 +35,7 @@ public class CtrlDominio
 		if(ruta != null) {
 		
 			//LeerObject.verificarObjects();
-			//No es la primera ejecuión
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-			System.out.println("ruta ctrlDominio:" +ruta);
+			//No es la primera ejecuion
 			this.gh = (Grafo) LeerObject.LeerObjeto(ruta);
 			this.cr = new ConjuntoResultados();
 			this.ch = new CtrlHetesim(gh);
@@ -76,7 +72,6 @@ public class CtrlDominio
 			Pair<Double,Integer> aux = a.get(i);
 			Pair<Double,String> aux1 = new Pair<Double,String>();
 			int type1 = TypePosPath(camino, camino.length()-1);
-			System.out.println("Tipo:" + type1+" ");
 			String aux2 = gh.consultarNodo(type1, aux.getSecond());
 			aux1.setFirst(aux.getFirst());
 			aux1.setSecond(aux2);
@@ -103,10 +98,7 @@ public class CtrlDominio
 	}
 	
 	public int traducirSTRINGaINT(String id1, String camino){
-			System.out.println("Camino:"+camino+"\n");
-			System.out.println("IDstring:"+id1+"\n");
 			int type1 = TypePosPath(camino, 0);
-			System.out.println("Tipo:"+type1+"\n");
 			int id = gh.consultarNodo(type1, id1);
 			return id;
 	}
@@ -129,7 +121,6 @@ public class CtrlDominio
 	public ArrayList<Pair<Double,Integer>> consultarresultado (String nodo, String camino)
 	{
 		int i = traducirSTRINGaINT(nodo,camino);
-		System.out.println("ResultadoNodo "+nodo + " " + camino + " \n");
 		ArrayList<Pair<Double,Integer>> c = cr.getResultadoNodo(camino, i);
 		return c;
 		
@@ -212,7 +203,6 @@ public class CtrlDominio
 	
 	private static int TypePosPath(String path, int pos) {
 		String s = path.substring(pos,pos+1);
-		System.out.println("Path: "+path+"\n");
 
 		if (s.equals("P")) {
 			return 0;
@@ -229,11 +219,8 @@ public class CtrlDominio
 	}
 	
 	public void consultarcaminofiltros(Set<Integer>c) {
-		System.out.println("Hola");
 		GrafoPri gp=new GrafoPri(gh, c);	
-		System.out.println("Hola1");
 		chf = new CtrlHetesim(gp);
-		System.out.println("Hola2");
 	}
 
 	

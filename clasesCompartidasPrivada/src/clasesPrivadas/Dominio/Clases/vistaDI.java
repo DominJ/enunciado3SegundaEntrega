@@ -15,7 +15,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 public class vistaDI {
 	  private CtrlPresentacion iCtrlPresentacion;
 		private static JPanel panelAnadir1 = new JPanel();;
@@ -28,6 +31,11 @@ public class vistaDI {
 		private static TextField tf2 = new TextField("",20);
 		private static Label PaperL = new Label("Paper");
 		private static JButton buttonOk = new JButton("Ok");
+
+	public vistaDI(CtrlPresentacion pCtrlPresentacion) {
+		    iCtrlPresentacion = pCtrlPresentacion;
+		    inicializarComponentes();
+		}
 
 	public void activar() {
 	    frameVistaAnadir1.setEnabled(true);
@@ -47,14 +55,8 @@ public class vistaDI {
 		    frameVistaAnadir1.setVisible(false);
 		  }
 		  
-		  public vistaDI(CtrlPresentacion pCtrlPresentacion) {
-			    iCtrlPresentacion = pCtrlPresentacion;
-			    inicializarComponentes();
-			}
-		  
 		  public void actionPerformed_buttonOk (ActionEvent event) {
 				int a = panelAnadir1.getComponentCount();
-				System.out.println("Numberargs:"+a+"\n");
 				//List<JTextField> list = new ArrayLists<JTextField>();
 				Component[] components = panelAnadir1.getComponents();
 				String s = "";
@@ -75,9 +77,7 @@ public class vistaDI {
 				    	n = c.getText();
 				    }
 				}
-				System.out.println("Se ha anadido un paper:"+j+"\n");
-				System.out.println("relacionado con un tipo de nodo:"+s+"\n");
-				System.out.println("con el valor:"+n+"\n");
+				
 				
 				String s1 = "Paper";
 				iCtrlPresentacion.sincronizacionDI_a_Anadir11(s1, j, s, n);

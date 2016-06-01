@@ -17,6 +17,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * @author Daniel Pulido
+ *
+ */
 public class VistaF {
 	  private JPanel panelF = new JPanel();
 		private JFrame frameVistaF = new JFrame("Filtros");	
@@ -27,6 +31,11 @@ public class VistaF {
 		private Checkbox chkPaper = new Checkbox("Paper",false);
 		private JButton buttonOk = new JButton("Ok");
 		private Label s = new Label("Selecciona los filtros que quieres aplicar");
+
+	public VistaF(CtrlPresentacion pCtrlPresentacion) {
+		    iCtrlPresentacion = pCtrlPresentacion;
+		    inicializarComponentes();
+		}
 
 	public void activar() {
 	    frameVistaF.setEnabled(true);
@@ -47,12 +56,7 @@ public class VistaF {
 		  }
 		  
 	
-	public VistaF(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
-	
-	 public void inicializarComponentes() {
+	public void inicializarComponentes() {
 		    frameVistaF.setMinimumSize(new Dimension(700,200));
 			frameVistaF.setResizable(true);
 			frameVistaF.setLocationRelativeTo(null);
@@ -101,7 +105,6 @@ public class VistaF {
 		}
 	  public void actionPerformed_buttonOk (ActionEvent event) {
 			int a = panelF.getComponentCount();
-			System.out.println("Numberargs:"+a+"\n");
 			//List<JTextField> list = new ArrayLists<JTextField>();
 			Component z = panelF.getComponent(1);
 			Checkbox x = (Checkbox) z;
@@ -118,9 +121,6 @@ public class VistaF {
 			if(x3.getState()) c.add(3);
 			
 			
-			System.out.println("Marcados: ");
-			System.out.println(x.getState());
-			System.out.println(c.toString());
 			iCtrlPresentacion.sincronizacionF_a_CCN(c);
 			
 

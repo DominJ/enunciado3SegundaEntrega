@@ -12,6 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * @author Xavi Campos Navarro
+ *
+ */
 
 public class VistaAnadir1 {
 
@@ -21,6 +25,11 @@ public class VistaAnadir1 {
 	private JButton buttonDI = new JButton("Dato Independiente");
 	private JButton buttonCD = new JButton("Conjunto de Datos");
 
+
+public VistaAnadir1(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	  }
 
 public void activar() {
     frameVistaAnadir.setEnabled(true);
@@ -41,14 +50,7 @@ public void activar() {
 		    frameVistaAnadir.setVisible(false);
 		  }
 	
-	public VistaAnadir1(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	  }
-
-
-
-public void actionPerformed_buttonCD (ActionEvent event) {
+	public void actionPerformed_buttonCD (ActionEvent event) {
 	
   	 iCtrlPresentacion.sincronizacionCD_a_Anadir1();
 }

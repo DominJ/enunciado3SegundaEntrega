@@ -14,6 +14,11 @@ import javax.swing.JPanel;
 
 import excepciones.NonExistObjectToReadException;
 
+/**
+ * @author Daniel Pulido
+ *
+ */
+
 public class vistaA {
 	  private CtrlPresentacion iCtrlPresentacion;
 	  private JFrame frameVista1 = new JFrame("Abrir");
@@ -22,6 +27,11 @@ public class vistaA {
 	  private JButton buttonR = new JButton("Ruta");
 	  
 
+
+public vistaA(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	}
 
 public void activar() {
     frameVista1.setEnabled(true);
@@ -82,7 +92,8 @@ public void activar() {
 					actionPerformed_buttonP(event);
 				} catch (ClassNotFoundException | NonExistObjectToReadException | IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					//e.printStackTrace();
+					System.out.println("Se ha producido un problema al asignar un listener");
 				}
 		        }
 		      });
@@ -96,7 +107,9 @@ public void activar() {
 					actionPerformed_buttonR(event);
 				} catch (ClassNotFoundException | NonExistObjectToReadException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					//e.printStackTrace();
+					System.out.println("Se ha producido un problema al asignar un listener");
+
 				}
 		        }
 		      });
@@ -107,11 +120,6 @@ public void activar() {
 		    frameVista1.add(buttonR);
 		    
 	  }
-	  
-	public vistaA(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
 }
 
 

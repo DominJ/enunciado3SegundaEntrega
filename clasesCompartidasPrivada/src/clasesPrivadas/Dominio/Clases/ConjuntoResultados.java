@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.HashSet;
 
 import clasesCompartidas.Pair;
 
@@ -68,12 +67,12 @@ public class ConjuntoResultados {
 		if (existeResultado(path)){
 			HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados.get(path);
 			m1= m.get(id);
-			System.out.println("path");
+			//System.out.println("path");
 		}
 		else if (existeResultado(path, id)){
 			HashMap<Integer,ArrayList<Pair<Integer,Double>>> m=resultados_parciales.get(path);
 			m1= m.get(id);
-			System.out.println("Parcial");
+			//System.out.println("Parcial");
 		}
 		else {m1=new ArrayList<Pair<Integer,Double>>();System.out.println("vacio");}
 		ArrayList <Pair<Double, Integer>> r = new ArrayList<Pair<Double, Integer>>();

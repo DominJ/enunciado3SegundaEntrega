@@ -10,7 +10,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 public class VistaRC {
 	
 	
@@ -23,6 +26,11 @@ public class VistaRC {
 
 
 	
+
+	public VistaRC(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	}
 
 	public void activar() {
 	    frameVistaRC.setEnabled(true);
@@ -42,11 +50,6 @@ public class VistaRC {
 		    frameVistaRC.setVisible(false);
 		  }
 		  
-	
-	public VistaRC(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
 	
 	void inicializarComponentes() {
 		frameVistaRC.setMinimumSize(new Dimension(330,100));

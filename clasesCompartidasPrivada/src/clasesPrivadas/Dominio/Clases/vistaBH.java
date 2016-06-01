@@ -15,6 +15,10 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * @author Xavi Campos Navarro
+ *
+ */
 
 public class vistaBH {
 	private Panel panelBH = new Panel();
@@ -26,7 +30,12 @@ public class vistaBH {
     private Choice camino = new Choice();
 
 	
-	 void asignar_listenersComponentes2() {
+	 public vistaBH(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	}
+
+	void asignar_listenersComponentes2() {
 		 OKButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {     
 	            String data = "Camino Seleccionado: " 
@@ -67,10 +76,6 @@ public class vistaBH {
 		  }
 		  
 	
-	public vistaBH(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
 	void inicializarComponentes() {
 		frameVistaBH.setSize(new Dimension(400,400));
 		frameVistaBH.setMinimumSize(new Dimension(700,200));

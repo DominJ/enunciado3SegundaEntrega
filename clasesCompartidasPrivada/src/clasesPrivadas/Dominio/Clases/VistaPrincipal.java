@@ -5,6 +5,10 @@ import javax.swing.*;
 
 import excepciones.NonExistObjectToReadException;
 
+/**
+ * @author Xavi Campos Navarro
+ *
+ */
 
 public class VistaPrincipal {
 	
@@ -17,6 +21,11 @@ private JButton buttonMBD = new JButton("Modificar Base de datos");
 private JButton buttonRC = new JButton("Realizar Consulta");
 private JButton buttonBH = new JButton("Busca Historial");
 private JButton buttonSalir = new JButton("Salir");
+
+public VistaPrincipal (CtrlPresentacion pCtrlPresentacion) {
+    iCtrlPresentacion = pCtrlPresentacion;
+    inicializarComponentes();
+  }
 
 public void activar() {
     frameVista.setEnabled(true);
@@ -57,7 +66,9 @@ private void inicializar_frameVista() {
 				iCtrlPresentacion.sincronizacionPrincipal_a_Guardar();
 			} catch (ClassNotFoundException | NonExistObjectToReadException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Se ha producido un problema al asignar un listener");
+
 			}        
         	}        
      });
@@ -142,7 +153,9 @@ private void asignar_listenersComponentes() {
 			actionPerformed_buttonSalir(event);
 		} catch (ClassNotFoundException | NonExistObjectToReadException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Se ha producido un problema al asignar un listener");
+
 		}
         }
       });
@@ -157,13 +170,6 @@ private void inicializarComponentes() {
     activar();
 	hacerVisible();
  }
-
-public VistaPrincipal (CtrlPresentacion pCtrlPresentacion) {
-    System.out.println
-      ("isEventDispatchThread: " + SwingUtilities.isEventDispatchThread());
-    iCtrlPresentacion = pCtrlPresentacion;
-    inicializarComponentes();
-  }
 }
 
 

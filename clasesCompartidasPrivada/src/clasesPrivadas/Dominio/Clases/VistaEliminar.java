@@ -15,7 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 
 public class VistaEliminar {
 	  private CtrlPresentacion iCtrlPresentacion;
@@ -59,7 +62,6 @@ public class VistaEliminar {
 	
 	public  void actionPerformed_buttonOk (ActionEvent event) {
 		int a = panelEliminar.getComponentCount();
-		System.out.println("Numberargs:"+a+"\n");
 		//List<JTextField> list = new ArrayLists<JTextField>();
 		Component[] components = panelEliminar.getComponents();
 		String s = "";
@@ -77,8 +79,6 @@ public class VistaEliminar {
 		    	n = c.getText();
 		    }
 		}
-		System.out.println("Check:"+s+"\n");
-		System.out.println("TextField:"+n+"\n");
 		//(0 = P, 1 = A, 2 = C, 3 = T)
 		int options = 0;
 		if(s == "Author") options = 1;

@@ -15,7 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 public class VistaMBD {
 	  private CtrlPresentacion iCtrlPresentacion;
 	  private JFrame frameVista1 = new JFrame("Opcions");
@@ -28,6 +31,11 @@ public class VistaMBD {
 	  
 	  
 
+
+public VistaMBD(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	}
 
 public void activar() {
     frameVista1.setEnabled(true);
@@ -48,7 +56,6 @@ public void activar() {
 	  }
 	  
 	  private void inicializar_frameMBD() {
-			System.out.println("No existeix\n");
 			frameVista1.setMinimumSize(new Dimension(550,150));
 		    //frameVista1.setPreferredSize(frameVista1.getMinimumSize());
 		    frameVista1.setResizable(true);
@@ -140,14 +147,7 @@ public void activar() {
 		    inicializar_panelContenidos1();
 		    inicializar_panelBotones1();
 		    asignar_listenersComponentes1();
-		    System.out.println
-		      ("isEventDispatchThread1: " + SwingUtilities.isEventDispatchThread());
 		   hacerVisible();
 		    
 	  }
-	  
-	public VistaMBD(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
 }

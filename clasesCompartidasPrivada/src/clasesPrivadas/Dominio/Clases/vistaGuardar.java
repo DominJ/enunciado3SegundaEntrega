@@ -1,6 +1,8 @@
 package clasesPrivadas.Dominio.Clases;
 
 import java.awt.BorderLayout;
+
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
@@ -17,7 +19,10 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 public class vistaGuardar {
 	private CtrlPresentacion iCtrlPresentacion;
 	private JFrame frameVista = new JFrame("Camins de cerca de rellevancia");
@@ -28,6 +33,11 @@ public class vistaGuardar {
 	private Label c = new Label("Ins");
 	private TextField a = new TextField("",10);
 	
+
+public vistaGuardar(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	  }
 
 public void activar() {
     frameVista.setEnabled(true);
@@ -48,11 +58,6 @@ public void activar() {
 		    frameVista.setVisible(false);
 		  }
 	
-	public vistaGuardar(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	  }
-
 	private void inicializarComponentes() {
 		frameVista.setMinimumSize(new Dimension(350,250));
 		frameVista.setResizable(true);
@@ -89,7 +94,9 @@ public void activar() {
 				actionPerformed_buttonG(event);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("Se ha producido un problema al asignar un listener");
+
 			}
 	        }
 	      });

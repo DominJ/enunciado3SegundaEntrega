@@ -16,7 +16,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 public class vistaCP1 {
 	private JPanel panelCCN = new JPanel();
 	private JPanel panelCCN1 = new JPanel();
@@ -34,6 +37,11 @@ public class vistaCP1 {
 	private Label May = new Label("Mayor");
 	private JButton buttonOk = new JButton("Ok");
 	private String camino;
+
+	public vistaCP1(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	}
 
 	public void activar(String camino1) {
 		camino = camino1;
@@ -54,11 +62,6 @@ public class vistaCP1 {
 		    frameVistaCCN.setVisible(false);
 		  }
 		  
-	
-	public vistaCP1(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
 	
 	public void actionPerformed_buttonOk (ActionEvent event) {
 		Component a = panelCCN.getComponent(0);

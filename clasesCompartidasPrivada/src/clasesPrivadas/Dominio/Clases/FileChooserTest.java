@@ -1,6 +1,9 @@
 package clasesPrivadas.Dominio.Clases;
 
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -16,6 +19,8 @@ public class FileChooserTest extends JFrame {
 	private JFrame frame = new JFrame();
 	//ag false abrimos programa ag true guardamos al cerrar programa
 	private Boolean ag;
+	  JFileChooser c = new JFileChooser();
+
 
   public void activar() {
 	    frame.setEnabled(true);
@@ -52,29 +57,25 @@ public class FileChooserTest extends JFrame {
 	         }        
 	      });
     frame.setSize(250, 100);
-    System.out.println("part1\n");
-	  JFileChooser c = new JFileChooser();
     int rVal = c.showSaveDialog(FileChooserTest.this);
     if (rVal == JFileChooser.APPROVE_OPTION) {
 	  String s = c.getCurrentDirectory().toString();
 	  s += "\\";
 	  s += c.getSelectedFile().getName();
-	  	System.out.println(ag);
 	  try {
 		  if(!ag){
-			  	System.out.println("CHIVATITO\n");
-			  	System.out.println("justo despues de chivatito: "+s);
+			  	desactivar();
 				iCtrlPresentacion.sincronizacionFCT_a_Principal1(s);
 				ag = true;
 		  }
 		  else iCtrlPresentacion.sincronizacionGuardar_a_Principal1(s);
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		//e.printStackTrace();
+		System.out.println("Se ha producido un error en la seleccion de fichero.");
 	}
     }
     if (rVal == JFileChooser.CANCEL_OPTION) {
-      System.out.println("You pressed cancel\n");
       	System.exit(0);
     }
    

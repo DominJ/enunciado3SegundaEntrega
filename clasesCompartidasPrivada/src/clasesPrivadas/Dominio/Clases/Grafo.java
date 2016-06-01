@@ -9,9 +9,6 @@ import java.util.HashMap;
 author: 
 */
 import clasesCompartidas.ConjuntoNodos;
-import clasesCompartidas.ConjuntoNodosPri;
-import clasesCompartidas.EscribirFichero;
-import clasesCompartidas.LeerFichero;
 import clasesCompartidas.Pair;
 
 
@@ -121,7 +118,8 @@ public class Grafo implements Serializable
 		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Se ha producido un error en la creacion del objeto grafo.");
 		}
 	}
 	
@@ -426,7 +424,7 @@ public class Grafo implements Serializable
 		}
 		catch(Exception e)
 		{
-			System.out.println("Se ha producido un problema ");
+			System.out.println("Se ha producido un problema en la insercion de datos adicionales.");
 		}
 	}
 }

@@ -12,7 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+/**
+ * @author Daniel Pulido
+ *
+ */
 
 public class VistaCP {
 	private Panel panelCP = new Panel();
@@ -24,7 +27,12 @@ public class VistaCP {
     private Choice camino = new Choice();
 
 	
-	 void asignar_listenersComponentes2() {
+	 public VistaCP(CtrlPresentacion pCtrlPresentacion) {
+	    iCtrlPresentacion = pCtrlPresentacion;
+	    inicializarComponentes();
+	}
+
+	void asignar_listenersComponentes2() {
 		 OKButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {     
 	            String data = "Camino Seleccionado: " 
@@ -53,11 +61,6 @@ public class VistaCP {
 		    frameVistaCP.setVisible(false);
 		  }
 		  
-	
-	public VistaCP(CtrlPresentacion pCtrlPresentacion) {
-	    iCtrlPresentacion = pCtrlPresentacion;
-	    inicializarComponentes();
-	}
 	
 	void inicializarComponentes() {
 		frameVistaCP.setMinimumSize(new Dimension(400,400));
