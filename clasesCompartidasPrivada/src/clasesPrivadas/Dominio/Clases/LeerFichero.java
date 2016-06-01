@@ -28,9 +28,11 @@ public class LeerFichero
 		//Aquest metode llegeix el fitxer
 		Integer vb = 0;
 		String archivo = null;
-		if (c == 1) archivo = ruta + "/paper_author.txt";
-		else if (c == 2) archivo = ruta + "/paper_conf.txt";
-		else archivo = ruta + "/paper_term.txt";
+		if (c == 1){
+			archivo = ruta + System.getProperty("file.separator") + "paper_author.txt";
+		}
+		else if (c == 2) archivo = ruta + System.getProperty("file.separator") +"paper_conf.txt";
+		else archivo = ruta + System.getProperty("file.separator") +"paper_term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,ArrayList<Pair<Integer,Double>>> m = new HashMap<Integer,ArrayList<Pair<Integer,Double>>>();
@@ -94,10 +96,10 @@ public class LeerFichero
 		String cadena;
 		//Aquest mÃƒÂ¨tode llegeix el fitxer
 		String archivo = null;
-		if (c == 0) archivo = ruta + "/paper.txt";
-		else if (c == 1) archivo = ruta + "/author.txt";
-		else if (c == 2) archivo = ruta + "/conf.txt";
-		else archivo = ruta + "/term.txt";
+		if (c == 0) archivo = ruta + System.getProperty("file.separator") +"paper.txt";
+		else if (c == 1) archivo = ruta + System.getProperty("file.separator") +"author.txt";
+		else if (c == 2) archivo = ruta + System.getProperty("file.separator") +"conf.txt";
+		else archivo = ruta + System.getProperty("file.separator") +"term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,String> m = new HashMap<Integer,String>();
@@ -129,10 +131,10 @@ public class LeerFichero
 	public static Set<String> LeerFiltro(String ruta, int c)throws IOException {
 		String cadena;
 		String archivo = null;
-		if (c == 0) archivo = ruta + "/paper.txt";
-		else if (c == 1) archivo = ruta + "/author.txt";
-		else if (c == 2) archivo = ruta + "/conf.txt";
-		else archivo = ruta + "/term.txt";
+		if (c == 0) archivo = ruta + System.getProperty("file.separator") +"paper.txt";
+		else if (c == 1) archivo = ruta + System.getProperty("file.separator") +"author.txt";
+		else if (c == 2) archivo = ruta + System.getProperty("file.separator") +"conf.txt";
+		else archivo = ruta + System.getProperty("file.separator") +"term.txt";
 		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		Set<String> r= new HashSet<String>();

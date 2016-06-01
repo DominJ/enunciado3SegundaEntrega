@@ -50,7 +50,7 @@ public void activar() {
 	  }
 
 private void inicializar_frameVista() {
-    frameVista.setMinimumSize(new Dimension(1030,200));
+    frameVista.setMinimumSize(new Dimension(1070,200));
     frameVista.setPreferredSize(frameVista.getMinimumSize());
     frameVista.setResizable(true);
     frameVista.setLocationRelativeTo(null);
