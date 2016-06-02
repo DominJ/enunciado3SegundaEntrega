@@ -2,6 +2,7 @@ package clasesPrivadas.Dominio.Clases;
 
 import java.io.ObjectOutputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 
 /**
@@ -15,7 +16,8 @@ public class EscribirObject {
 	{
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(s);
+			File b = new File(s);
+			FileOutputStream fos = new FileOutputStream(b.getAbsolutePath());
 			//BufferedOutputStream z = new BufferedOutputStream(fos);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(a);

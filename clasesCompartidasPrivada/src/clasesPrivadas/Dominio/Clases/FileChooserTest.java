@@ -61,7 +61,7 @@ public class FileChooserTest extends JFrame {
     int rVal = c.showSaveDialog(FileChooserTest.this);
     if (rVal == JFileChooser.APPROVE_OPTION) {
 	  String s = c.getCurrentDirectory().toString();
-	  s += "\\";
+	  s += System.getProperty("file.separator");
 	  s += c.getSelectedFile().getName();
 	  try {
 		 iCtrlPresentacion.sincronizacionExportar_a_Principal1(s);
