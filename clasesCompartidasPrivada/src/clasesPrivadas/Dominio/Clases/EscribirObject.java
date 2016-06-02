@@ -16,8 +16,8 @@ public class EscribirObject {
 	{
 		try
 		{
-			File b = new File(s);
-			FileOutputStream fos = new FileOutputStream(b.getAbsolutePath());
+			System.out.println("Gu:"+s);
+			FileOutputStream fos = new FileOutputStream(s);
 			//BufferedOutputStream z = new BufferedOutputStream(fos);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(a);
