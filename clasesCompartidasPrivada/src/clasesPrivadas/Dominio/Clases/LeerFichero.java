@@ -100,8 +100,8 @@ public class LeerFichero
 		else if (c == 1) archivo = ruta + System.getProperty("file.separator") +"author.txt";
 		else if (c == 2) archivo = ruta + System.getProperty("file.separator") +"conf.txt";
 		else archivo = ruta + System.getProperty("file.separator") +"term.txt";
-		File zx = new File(archivo);
-		FileReader f = new FileReader(zx.getAbsolutePath()); 
+		System.out.println(archivo);
+		FileReader f = new FileReader(archivo); 
 		BufferedReader b = new BufferedReader(f); 
 		HashMap<Integer,String> m = new HashMap<Integer,String>();
 		HashMap<String,Integer> n = new HashMap<String,Integer>();

@@ -22,9 +22,8 @@ public class LeerObject implements Serializable{
 
 	public static Object LeerObjeto(String ruta) throws IOException, ClassNotFoundException 
 	{
-		File b = new File(ruta);
-		System.out.println(b.getAbsolutePath());
-		FileInputStream fis = new FileInputStream(b.getAbsolutePath());
+		System.out.println(ruta);
+		FileInputStream fis = new FileInputStream(ruta);
 		BufferedInputStream z = new BufferedInputStream(fis);
 		ObjectInputStream ois = new ObjectInputStream(z);
 	    Object a = ois.readObject();
